@@ -11,7 +11,11 @@ export type ListingAgent = {
   name: string;
   /** 4:5 portrait. null until real photography lands → render placeholder. */
   photo: string | null;
+  role?: string;
+  patch?: string;
 };
+
+export type Inspection = { day: string; date: string; time: string; type: string };
 
 /** Shape needed for cards (index, featured grids, similar). */
 export type ListingCard = {
@@ -40,10 +44,20 @@ export type ListingCard = {
 
 /** Detail page needs more than the card. */
 export type Listing = ListingCard & {
+  /** Photo URLs; empty → render striped placeholders. */
   gallery: string[];
-  description: string;
+  /** e.g. "Open · Sat 24 May · 11:00 – 11:30am". */
+  nextOpen?: string;
+  overviewHeading: string;
+  /** Body copy as paragraphs. */
+  description: string[];
   features: string[];
-  inspections: { date: string; time: string }[];
+  inspections: Inspection[];
+  floorArea?: string;
+  /** Listing reference, e.g. "MX-2402-NSV". */
+  ref: string;
+  /** Neighbourhood distances for the location block. */
+  distances: { label: string; value: string }[];
 };
 
 /** Status → feature colour token (PropertyCard pill, map markers). */

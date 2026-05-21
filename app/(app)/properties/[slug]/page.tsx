@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
-import { PagePlaceholder } from "@/components/layout/PagePlaceholder";
-import { getListingBySlug, getListingSlugs } from "@/lib/rex/mock";
+import { notFound } from "next/navigation";
+import { Header } from "@/components/layout/Header";
+import { PropertyDetailView } from "@/components/property/PropertyDetailView";
+import { getListingBySlug, getListingSlugs, getSimilarListings } from "@/lib/rex/mock";
+import { getSiteSettings } from "@/lib/wp/mock";
+import { listingJsonLd } from "@/lib/seo/listing";
 
-// ISR over current listings (§8); on-demand via Rex webhook.
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
+
+// ISR over current listings (§8); on-demand via the Rex webhook.
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
@@ -10,7 +16,6 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-// Next 16: params is async.
 export async function generateMetadata({
   params,
 }: {
@@ -18,7 +23,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const listing = await getListingBySlug(slug);
-  return { title: listing ? `${listing.street}, ${listing.suburb}` : "Property" };
+  if (!listing) return { title: "Property not found" };
+  const locality = listing.suburb.replace(/\s+QLD.*$/, "");
+  const title = `${listing.street}, ${locality}`;
+  return {
+    title,
+    description: `${listing.beds}-bed ${listing.type.toLowerCase()} — ${listing.street}, ${listing.suburb}. ${listing.price}.`,
+    alternates: { canonical: `/properties/${slug}` },
+    openGraph: { title: `${title} — Max Property`, url: `${siteUrl}/properties/${slug}` },
+  };
 }
 
 export default async function PropertyDetailPage({
@@ -27,12 +40,20 @@ export default async function PropertyDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const listing = await getListingBySlug(slug);
+  const [listing, settings] = await Promise.all([getListingBySlug(slug), getSiteSettings()]);
+  if (!listing) notFound();
+
+  const similar = await getSimilarListings(slug, 3);
+  const jsonLd = listingJsonLd(listing, `${siteUrl}/properties/${slug}`);
+
   return (
-    <PagePlaceholder
-      title={listing ? listing.street : "Property"}
-      current="Buy"
-      note="Property detail — gallery + lightbox, key facts, sticky sub-nav, sticky agent panel, similar listings (§8). Built in the Listings stage."
-    />
+    <>
+      <Header current="Buy" nav={settings.nav} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PropertyDetailView listing={listing} similar={similar} />
+    </>
   );
 }
