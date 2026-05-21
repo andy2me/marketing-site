@@ -1,0 +1,428 @@
+/* Sell page — from prototype src/sell.jsx */
+
+/* Hero (fern, transparent header) */
+.hero {
+  position: relative;
+  background: var(--fern);
+  color: #f4ede5;
+  min-height: 720px;
+  overflow: hidden;
+}
+.heroInner {
+  padding-top: 160px;
+  padding-bottom: 120px;
+}
+.heroGrid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 64px;
+  align-items: end;
+}
+.heroH1 {
+  margin-top: 32px;
+  font-size: clamp(64px, 8vw, 132px);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  color: #f4ede5;
+}
+.heroBody {
+  margin-top: 40px;
+  max-width: 520px;
+  font-size: 19px;
+  line-height: 1.55;
+  color: rgba(244, 237, 229, 0.85);
+}
+.heroCtas {
+  display: flex;
+  gap: 12px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+.heroImg {
+  border-radius: 16px;
+  background: repeating-linear-gradient(135deg, #2c331c 0 14px, #364025 14px 28px);
+}
+
+.sec {
+  padding: 120px 0;
+}
+.h2 {
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.lead {
+  margin-top: 32px;
+  max-width: 640px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+}
+.headTitle {
+  margin-top: 24px;
+  font-size: clamp(36px, 4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+
+/* Promise stats */
+.promiseStats {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-border);
+}
+.statNum {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 48px;
+  line-height: 1;
+  color: var(--color-text-strong);
+  letter-spacing: -0.02em;
+}
+.statLabel {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  max-width: 160px;
+}
+
+/* Process */
+.banding {
+  background: var(--color-bg-banding);
+}
+.processList {
+  border-top: 1px solid var(--color-border-strong);
+}
+.procRow {
+  display: grid;
+  grid-template-columns: 80px 1fr 2fr 160px;
+  gap: 32px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--color-border);
+  align-items: start;
+}
+.procNum {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+  padding-top: 8px;
+}
+.procWord {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.procBody {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-text-primary);
+  max-width: 520px;
+}
+.procTime {
+  text-align: right;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  padding-top: 8px;
+}
+
+/* Results */
+.resultsHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  gap: 32px;
+}
+.soldGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.soldCard {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.soldMedia {
+  position: relative;
+}
+.soldTag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 10px;
+  background: var(--mulberry);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+}
+.soldBody {
+  padding: 20px;
+}
+.soldPrice {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 24px;
+  line-height: 1.05;
+  color: var(--color-text-strong);
+}
+.soldAddr {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--color-text-primary);
+}
+.soldSuburb {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+.soldMeta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+/* Included (mulberry) */
+.included {
+  background: var(--mulberry);
+  color: #f4ede5;
+}
+.includedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(244, 237, 229, 0.18);
+}
+.includedItem {
+  padding: 28px 28px 28px 0;
+  border-bottom: 1px solid rgba(244, 237, 229, 0.12);
+  border-right: 1px solid rgba(244, 237, 229, 0.12);
+}
+.includedItem:nth-child(3n) {
+  border-right: none;
+  padding-right: 0;
+}
+.includedItem:not(:nth-child(3n + 1)) {
+  padding-left: 28px;
+}
+.includedLabel {
+  color: var(--sunrise);
+}
+.includedValue {
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(244, 237, 229, 0.92);
+}
+.includedNote {
+  margin-top: 48px;
+  max-width: 640px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(244, 237, 229, 0.65);
+}
+
+/* Advocate */
+.advGrid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+  align-items: center;
+}
+.advQuote {
+  margin: 32px 0 0;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(32px, 3.4vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+}
+.quoteMark {
+  color: var(--color-action);
+}
+.advAuthor {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.advAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  background: var(--white-mist-300);
+  flex: none;
+}
+.advName {
+  font-size: 15px;
+  color: var(--color-text-strong);
+  font-weight: 500;
+}
+.advRole {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+/* Appraisal (dark form) */
+.appraisal {
+  padding: 140px 0;
+  background: var(--color-bg-inverse);
+  color: #f4ede5;
+}
+.apprGrid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 80px;
+}
+.apprH2 {
+  margin-top: 32px;
+  font-size: clamp(48px, 5.5vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: #f4ede5;
+}
+.apprBody {
+  margin-top: 32px;
+  max-width: 380px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(244, 237, 229, 0.7);
+}
+
+/* Dark form */
+.form {
+  background: rgba(244, 237, 229, 0.04);
+  border: 1px solid rgba(244, 237, 229, 0.14);
+  border-radius: 16px;
+  padding: 40px;
+}
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.full {
+  grid-column: 1 / -1;
+}
+.dLabel {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(244, 237, 229, 0.55);
+}
+.dInput,
+.dSelect,
+.dTextarea {
+  margin-top: 8px;
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: var(--radius-md);
+  background: rgba(244, 237, 229, 0.06);
+  border: 1px solid rgba(244, 237, 229, 0.16);
+  color: #f4ede5;
+  font-family: inherit;
+  font-size: 15px;
+}
+.dInput::placeholder {
+  color: rgba(244, 237, 229, 0.4);
+}
+.dSelect {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23F4EDE5' stroke-width='1.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+.dTextarea {
+  height: auto;
+  padding: 14px 16px;
+  resize: none;
+}
+.formFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.formFine {
+  font-size: 12px;
+  color: rgba(244, 237, 229, 0.55);
+  max-width: 360px;
+  line-height: 1.5;
+}
+.formFine a {
+  color: var(--sunrise);
+  text-decoration: underline;
+}
+
+@media (max-width: 1023px) {
+  .soldGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 767px) {
+  .hero {
+    min-height: 0;
+  }
+  .heroInner {
+    padding-top: 128px;
+    padding-bottom: 72px;
+  }
+  .heroGrid,
+  .advGrid,
+  .apprGrid,
+  .split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .sec,
+  .appraisal {
+    padding: 72px 0;
+  }
+  .promiseStats,
+  .soldGrid,
+  .includedGrid,
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .procRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .procTime {
+    text-align: left;
+  }
+  .includedItem,
+  .includedItem:not(:nth-child(3n + 1)) {
+    padding: 24px 0;
+    border-right: none;
+  }
+}

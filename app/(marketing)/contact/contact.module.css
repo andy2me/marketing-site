@@ -1,0 +1,401 @@
+/* Contact page — from prototype src/contact.jsx */
+
+.top {
+  padding: 96px 0 48px;
+}
+.split {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+}
+.topGrid {
+  align-items: end;
+}
+.topH1 {
+  margin-top: 24px;
+  font-size: clamp(48px, 6vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  color: var(--color-text-strong);
+}
+.topIntro {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 560px;
+}
+.topContacts {
+  margin-top: 24px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 15px;
+  align-items: center;
+}
+.topPhone {
+  color: var(--color-text-strong);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.topPhone span {
+  color: var(--color-text-secondary);
+}
+.topEmail {
+  color: var(--color-action);
+}
+
+/* Form section */
+.formSec {
+  padding: 40px 0 120px;
+}
+.formGrid {
+  align-items: start;
+}
+
+/* Sidebar */
+.sideCard {
+  background: var(--color-bg-banding);
+  border-radius: 16px;
+  padding: 32px;
+}
+.sideAgent {
+  margin-top: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.sideAvatar {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-pill);
+  background: var(--white-mist-300);
+  flex: none;
+}
+.sideName {
+  font-size: 17px;
+  color: var(--color-text-strong);
+  font-weight: 500;
+}
+.sideRole {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+.sideNote {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.sideResp {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+.sideRespValue {
+  color: var(--color-text-strong);
+  font-size: 15px;
+}
+.dropIn {
+  margin-top: 24px;
+  padding: 24px 32px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+}
+.dropInAddr {
+  margin-top: 14px;
+  font-size: 15px;
+  color: var(--color-text-primary);
+  line-height: 1.55;
+}
+.dropInHours {
+  margin-top: 8px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+/* Form card */
+.formCard {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 40px;
+}
+.formHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 16px;
+}
+.formTitle {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.formStep {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* Enquiry-type select (ember, the visual lead-in) */
+.enquiryWrap {
+  margin-bottom: 20px;
+  position: relative;
+}
+.enquirySelect {
+  appearance: none;
+  width: 100%;
+  height: 52px;
+  padding: 0 48px 0 18px;
+  border-radius: var(--radius-md);
+  background: var(--soft-linen-800);
+  border: 1.5px solid var(--color-action);
+  color: var(--color-text-strong);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.enquiryChev {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-action);
+  pointer-events: none;
+  display: inline-flex;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.full {
+  grid-column: 1 / -1;
+}
+.lInput,
+.lSelect {
+  margin-top: 8px;
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: var(--radius-md);
+  background: var(--soft-linen-800);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-strong);
+  font-family: inherit;
+  font-size: 15px;
+}
+.lSelect {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23756E69' stroke-width='1.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+.lTextarea {
+  margin-top: 8px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--soft-linen-800);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-strong);
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  resize: none;
+}
+
+/* Preferred contact chips */
+.pref {
+  margin-top: 24px;
+}
+.prefChips {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+.prefChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  font-size: 14px;
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-strong);
+}
+.prefChipActive {
+  background: var(--color-text-strong);
+  color: #f4ede5;
+  border-color: var(--color-text-strong);
+}
+.prefDot {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-strong);
+}
+.prefChipActive .prefDot {
+  background: var(--sunrise);
+  border-color: var(--sunrise);
+}
+
+.formFoot {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.formFine {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  max-width: 340px;
+  line-height: 1.5;
+}
+.formFine a {
+  color: var(--color-action);
+  text-decoration: underline;
+}
+
+/* Office + map */
+.officeSec {
+  padding: 40px 0 120px;
+}
+.officeGrid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 24px;
+}
+.officeCard {
+  background: var(--color-bg-inverse);
+  color: #f4ede5;
+  border-radius: 16px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.officeH2 {
+  margin-top: 24px;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: #f4ede5;
+}
+.officeAddr {
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(244, 237, 229, 0.8);
+}
+.officeStats {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(244, 237, 229, 0.18);
+}
+.officeStatLabel {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(244, 237, 229, 0.5);
+}
+.officeStatValue {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #f4ede5;
+}
+.mapWrap {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e5dace 0%, #d8ccc0 100%);
+  min-height: 420px;
+  border: 1px solid var(--color-border);
+}
+.mapSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.mapPin {
+  position: absolute;
+  left: 42%;
+  top: 45%;
+  transform: translate(-50%, -100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.mapPinCard {
+  background: var(--color-bg-inverse);
+  color: #f4ede5;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+  white-space: nowrap;
+}
+.mapPinSub {
+  font-size: 11px;
+  color: rgba(244, 237, 229, 0.7);
+}
+.mapPinDot {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-pill);
+  background: var(--color-action);
+  border: 3px solid #f4ede5;
+  box-shadow: var(--shadow-sm);
+}
+.mapBtns {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.faqSec {
+  padding: 120px 0;
+  background: var(--color-bg-banding);
+}
+
+@media (max-width: 767px) {
+  .split,
+  .officeGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .fieldGrid {
+    grid-template-columns: 1fr;
+  }
+  .top {
+    padding: 96px 0 40px;
+  }
+  .faqSec {
+    padding: 72px 0;
+  }
+}

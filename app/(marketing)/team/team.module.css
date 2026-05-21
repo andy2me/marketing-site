@@ -1,0 +1,363 @@
+/* Team page — from prototype src/team.jsx */
+
+.split {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+}
+
+.hero {
+  padding: 96px 0 64px;
+}
+.heroGrid {
+  align-items: end;
+}
+.heroH1 {
+  margin-top: 24px;
+  font-size: clamp(48px, 6vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  color: var(--color-text-strong);
+}
+.heroIntro {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 560px;
+}
+
+/* Manifesto */
+.manifesto {
+  padding: 40px 0 96px;
+}
+.manList {
+  border-top: 1px solid var(--color-border-strong);
+  border-bottom: 1px solid var(--color-border-strong);
+}
+.manRow {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  gap: 48px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.manRow:last-child {
+  border-bottom: none;
+}
+.manLabel {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+  padding-top: 6px;
+}
+.manStatement {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+}
+.manBody {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 520px;
+}
+
+/* Leadership */
+.leadership {
+  padding: 96px 0;
+  background: var(--color-bg-banding);
+}
+.leadHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+  gap: 24px;
+}
+.leadTitle {
+  font-size: clamp(32px, 3.4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.leadMeta {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+.leadGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.leadCard {
+  background: var(--color-bg-surface);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+.leadPortrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+}
+.leadPortrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 35%, rgba(0, 0, 0, 0.45) 100%);
+}
+.leadQuote {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--font-heading), Georgia, serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.25;
+  color: #f4ede5;
+}
+.leadBody {
+  padding: 28px;
+}
+.leadName {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.leadRole {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+.leadStats {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.statK {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+.statV {
+  margin-top: 6px;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--color-text-strong);
+  letter-spacing: -0.01em;
+}
+.patches {
+  margin-top: 8px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.patch {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-banding);
+  font-size: 12px;
+  color: var(--color-text-primary);
+}
+.leadBtns {
+  margin-top: 24px;
+  display: flex;
+  gap: 8px;
+}
+.leadBtns > * {
+  flex: 1;
+}
+
+/* Support */
+.support {
+  padding: 96px 0;
+}
+.supportGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.supportCard {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-pill);
+  color: #f4ede5;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+}
+.supName {
+  margin-top: 18px;
+  font-size: 18px;
+  color: var(--color-text-strong);
+  font-weight: 500;
+}
+.supRole {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+/* Culture */
+.culture {
+  background: var(--color-bg-inverse);
+  color: #f4ede5;
+  padding: 120px 0;
+}
+.cultureGrid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 80px;
+  align-items: center;
+}
+.cultureQuote {
+  margin: 32px 0 0;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(36px, 4.6vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #f4ede5;
+}
+.cultureStats {
+  margin-top: 32px;
+  display: flex;
+  gap: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(244, 237, 229, 0.18);
+}
+.cStatK {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(244, 237, 229, 0.5);
+}
+.cStatV {
+  margin-top: 8px;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 36px;
+  line-height: 1;
+  color: #f4ede5;
+  letter-spacing: -0.015em;
+}
+.cultureImg {
+  border-radius: 16px;
+  background: repeating-linear-gradient(135deg, #2c1e15 0 14px, #3a2a1f 14px 28px);
+}
+
+/* Careers */
+.careers {
+  padding: 120px 0;
+}
+.careersH2 {
+  margin-top: 24px;
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.careersIntro {
+  margin-top: 24px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 380px;
+}
+.roleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--color-border);
+  gap: 24px;
+}
+.roleRow:first-child {
+  border-top: 1px solid var(--color-border-strong);
+}
+.roleTitle {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.roleMeta {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.roleArrow {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-strong);
+  display: grid;
+  place-items: center;
+  color: var(--color-action);
+  flex: none;
+}
+.careersNote {
+  margin-top: 32px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+.careersNote a {
+  color: var(--color-action);
+  text-decoration: underline;
+}
+
+@media (max-width: 1023px) {
+  .supportGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 767px) {
+  .split,
+  .heroGrid,
+  .leadGrid,
+  .cultureGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .manRow {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .supportGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .leadHead {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cultureStats {
+    gap: 28px;
+  }
+}

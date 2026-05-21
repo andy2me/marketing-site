@@ -1,0 +1,335 @@
+/* Locations page — from prototype src/locations.jsx */
+
+.split {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+}
+
+.intro {
+  padding: 96px 0 64px;
+}
+.introGrid {
+  align-items: end;
+}
+.introH1 {
+  margin-top: 24px;
+  font-size: clamp(48px, 6vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  color: var(--color-text-strong);
+}
+.introText {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 560px;
+}
+.introStats {
+  margin-top: 32px;
+  display: flex;
+  gap: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+.statN {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 44px;
+  line-height: 1;
+  color: var(--color-text-strong);
+  letter-spacing: -0.02em;
+}
+.statL {
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+/* Map */
+.mapSec {
+  padding: 40px 0 96px;
+}
+.mapBox {
+  position: relative;
+  aspect-ratio: 16 / 8;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e5dace 0%, #d8ccc0 100%);
+  border: 1px solid var(--color-border);
+}
+.mapSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.pin {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.pinLabel {
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--color-border-strong);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+.pinLabelActive {
+  background: var(--color-text-strong);
+  color: #f4ede5;
+}
+.pinDot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-text-strong);
+  border: 2px solid #f4ede5;
+  box-shadow: var(--shadow-sm);
+}
+.pinDotActive {
+  background: var(--color-action);
+}
+.legend {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
+/* Patches */
+.patches {
+  padding: 40px 0 120px;
+}
+.patchesHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  gap: 24px;
+}
+.patchesTitle {
+  font-size: clamp(32px, 3.4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.patchesMeta {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+}
+.patchGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.patchCard {
+  display: block;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.patchMedia {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  background: #d5cfc7;
+}
+.patchOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(26, 18, 12, 0.7) 100%);
+}
+.patchHead {
+  position: absolute;
+  bottom: 18px;
+  left: 20px;
+  right: 20px;
+  color: #f4ede5;
+}
+.patchName {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.patchCount {
+  margin-top: 8px;
+  font-size: 13px;
+  color: rgba(244, 237, 229, 0.85);
+}
+.patchBody {
+  padding: 24px;
+}
+.patchNote {
+  font-family: var(--font-heading), Georgia, serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+.patchStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+.miniK {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+.miniV {
+  margin-top: 6px;
+  font-size: 18px;
+  color: var(--color-text-strong);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.miniVAccent {
+  color: var(--color-success);
+}
+.patchLead {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.patchAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  background: var(--white-mist-300);
+  flex: none;
+}
+.patchLeadName {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+.patchExplore {
+  margin-left: auto;
+  color: var(--color-action);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+/* Featured by area */
+.featured {
+  padding: 120px 0;
+  background: var(--color-bg-banding);
+}
+.featuredHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+  gap: 24px;
+}
+.featuredTitle {
+  margin-top: 24px;
+  font-size: clamp(32px, 3.4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.chip {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-strong);
+}
+.chipActive {
+  background: var(--color-text-strong);
+  color: #f4ede5;
+  border-color: var(--color-text-strong);
+}
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* CTA */
+.cta {
+  background: var(--color-bg-inverse);
+  color: #f4ede5;
+  padding: 120px 0;
+}
+.ctaGrid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 64px;
+  align-items: end;
+}
+.ctaH2 {
+  font-size: clamp(40px, 5vw, 80px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: #f4ede5;
+}
+.ctaText {
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(244, 237, 229, 0.75);
+  max-width: 440px;
+}
+.ctaBtns {
+  margin-top: 32px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1023px) {
+  .patchGrid,
+  .grid3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 767px) {
+  .split,
+  .introGrid,
+  .ctaGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .patchGrid,
+  .grid3 {
+    grid-template-columns: 1fr;
+  }
+  .patchesHead,
+  .featuredHead {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .mapBox {
+    aspect-ratio: 4 / 5;
+  }
+}

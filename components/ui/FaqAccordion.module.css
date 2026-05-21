@@ -1,0 +1,43 @@
+.row {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.row:first-child {
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.head {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: baseline;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+}
+.q {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--color-text-strong);
+  letter-spacing: -0.01em;
+}
+.chev {
+  color: var(--color-action);
+  transition: transform 200ms;
+  flex: none;
+  display: inline-flex;
+}
+.chevOpen {
+  transform: rotate(180deg);
+}
+.a {
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 620px;
+}
