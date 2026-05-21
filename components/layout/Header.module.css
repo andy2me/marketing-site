@@ -1,0 +1,79 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  transition:
+    background 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.transparent {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.solid {
+  background: var(--color-bg-page);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.brand {
+  display: inline-flex;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.link {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 120ms;
+}
+
+.linkOnDark {
+  color: rgba(244, 237, 229, 0.85);
+}
+
+.active {
+  color: var(--color-action);
+  border-bottom-color: var(--color-action);
+}
+
+.cta {
+  margin-left: 8px;
+}
+
+@media (max-width: 1023px) {
+  .nav {
+    gap: 24px;
+  }
+}
+
+/* Foundation slice: hide the text nav below the tablet breakpoint to avoid overflow.
+   The full hamburger drawer is a responsive-pass deliverable (§12). */
+@media (max-width: 767px) {
+  .link {
+    display: none;
+  }
+}

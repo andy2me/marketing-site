@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Max Property — maxproperty.au
 
-## Getting Started
+Website reboot for a boutique Sunshine Coast (Noosa) estate agency. Headless
+**Next.js (App Router)** front-end. See the project's code handoff (Phase 2) for the full
+architecture spec; section references below (e.g. §8) point to it.
 
-First, run the development server:
+## Status — foundation slice
+
+This is the **first build pass**: the stack, design system and shared shell stood up and
+proven against one fully-built reference page (**Home**). The other seven templates are
+routed stubs. Live integrations (Rex, Doorstep, WordPress, brand fonts) are isolated behind
+typed seams with mock data, so wiring them later is a swap, not a rewrite.
+
+| Area | State |
+|---|---|
+| Scaffold, tokens, fonts, shared shell, section primitives | ✅ built |
+| Home (`/`) reference page | ✅ built (mock content) |
+| Sell · Buy · Locations · Insights · Team · Contact · legal | 🔲 routed stubs |
+| `sitemap.ts` · `robots.ts` · `not-found` · `/api/revalidate` | ✅ scaffolded (revalidate is a stub) |
+| Rex listings · WordPress content · Doorstep forms · MapLibre · analytics | ⏳ seams only (mock) |
+
+## Stack
+
+Next.js 16 (App Router, RSC, Turbopack) · TypeScript strict · CSS Modules + `styles/tokens.css`
+· `next/font` · pnpm · Node 20 LTS (Vercel parity; see `.nvmrc`).
+
+> **Next.js 16:** read `AGENTS.md` — bundled version-matched docs live in
+> `node_modules/next/dist/docs/`. Consult them before writing Next-specific code.
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm build      # production build (Turbopack)
+pnpm typecheck  # tsc --noEmit
+pnpm lint       # eslint (next lint was removed in v16)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+app/
+  layout.tsx            # html lang="en-AU", fonts, tokens, base metadata
+  (marketing)/          # editorial register — Footer in layout; Header per-page
+    page.tsx            #   Home (/)  ← the built reference page
+    sell|locations|insights|insights/[slug]|team|contact|privacy|terms
+  (app)/                # app-like register — /buy, /properties/[slug]
+  sitemap.ts robots.ts not-found.tsx api/revalidate/route.ts
+components/  layout/ ui/ property/ forms/ sections/ icons/ home/
+lib/         rex/ (listings) wp/ (content) doorstep/ seo/ — typed seams + mocks
+styles/      tokens.css (ported verbatim) globals.css
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Integration seams — swap paths
 
-## Learn More
+- **Listings (Rex, §8):** `lib/rex/types.ts` is the app-facing contract. `lib/rex/mock.ts`
+  → replace with `client.ts` + `mappers.ts`; call sites (`getActiveListings`,
+  `getFeaturedListings`, `getListingBySlug`) stay identical.
+- **Content (WordPress, §7):** `lib/wp/types.ts` + `lib/wp/mock.ts` → replace with WPGraphQL
+  queries returning the same shapes.
+- **Forms (Doorstep, §9):** all forms go through `components/forms/DoorstepForm.tsx`
+  (`formId` / `prefill` / `onSubmit`). Implement the confirmed method (embed / iframe / API)
+  in that one component.
+- **Fonts (§5):** `lib/fonts.ts` wires the prototype substitutes (Instrument Serif / Geist /
+  Geist Mono) to `--font-heading` / `--font-body` / `--font-mono`. When the Pangram Pangram
+  licence lands, swap to `next/font/local` (PP Migra / PP Neue Montreal) keeping the same
+  variable names — nothing else changes.
+- **Map (§8):** the Locations/Properties schematic becomes MapLibre GL with real `coords`.
 
-To learn more about Next.js, take a look at the following resources:
+## Blocked on external inputs (code handoff §17)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Rex API access · Doorstep integration method + docs · PP web-font licence · real photography
+· old→new 301 redirect map. `.env.example` lists every variable; none are needed for the
+foundation slice (mock data).

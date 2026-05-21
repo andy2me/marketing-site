@@ -1,0 +1,17 @@
+.slot {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: repeating-linear-gradient(135deg, #d8ccc0 0 14px, #dfd4c8 14px 28px);
+}
+
+.label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,128 @@
+// Max Property — MOCK content behind the WordPress seam (code handoff §7).
+// Copy ported from the prototype (src/home.jsx, src/shared.jsx). When the headless WP +
+// WPGraphQL layer lands, replace these with typed queries; call sites stay identical.
+
+import type { HomeContent, SiteSettings } from "./types";
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  return {
+    nav: [
+      { label: "Sell", href: "/sell" },
+      { label: "Buy", href: "/buy" },
+      { label: "Locations", href: "/locations" },
+      { label: "Insights", href: "/insights" },
+      { label: "Team", href: "/team" },
+      { label: "Contact", href: "/contact" },
+    ],
+    office: {
+      addressLines: ["123 Hastings Street", "Noosa Heads QLD 4567"],
+      phone: "07 5447 1000",
+      hours: "Mon–Fri · 9am–5pm",
+    },
+    social: { instagram: "#", facebook: "#", youtube: "#" },
+    footer: {
+      tagline:
+        "Estate agents on the Sunshine Coast. Personalised service, trusted expertise — your outcome drives our approach.",
+      newsletterBlurb: "Quarterly market notes & new listings — no fluff.",
+    },
+  };
+}
+
+export async function getHomeContent(): Promise<HomeContent> {
+  return {
+    hero: {
+      overline: "Estate Agents · Sunshine Coast",
+      headingLead: "Your outcome ",
+      headingEmphasis: "drives",
+      headingTail: " our approach.",
+      body: "Personalised service and trusted expertise. Our team handles every detail — so you can sell or buy with confidence and ease.",
+      primaryCta: { label: "Request an appraisal", href: "/sell#appraisal" },
+      secondaryCta: { label: "Browse properties", href: "/buy" },
+    },
+    audience: {
+      overline: "§ 01 · Two paths",
+      heading: "Maximum outcomes whether you're {buying} or {selling} property.",
+      cards: [
+        {
+          kind: "sell",
+          eyebrow: "For vendors →",
+          title: "Selling",
+          dotColor: "var(--ember)",
+          body: "Max. by name, maximum by outcome. We leave nothing to chance — our work begins long before we list your home. The highest quality campaigns, every time.",
+          cta: { label: "Request an appraisal", href: "/sell" },
+        },
+        {
+          kind: "buy",
+          eyebrow: "For buyers →",
+          title: "Buying",
+          dotColor: "var(--sunrise)",
+          body: "Nothing but predictable — the simple things done reliably well. Our agents are passionate about their local patches, bringing the best properties to market.",
+          cta: { label: "Browse the market", href: "/buy" },
+        },
+      ],
+    },
+    proof: {
+      stats: [
+        { value: "20+", label: "Years combined experience" },
+        { value: "500+", label: "Properties sold" },
+        { value: "4.9", label: "Average vendor rating", sub: "from 180+ reviews" },
+        { value: "100%", label: "Data-led, human-centred" },
+      ],
+    },
+    why: {
+      overline: "§ 02 · Why Max",
+      heading: "Bred from 20+ years of sales & marketing experience.",
+      body: "We're data-led and human-centred — the way we inform our markets and your decisions.",
+      pillars: [
+        { n: "01", word: "Knowledge", body: "That builds confidence to act, whether you're selling or buying. Providing clarity is key.", color: "var(--fern)" },
+        { n: "02", word: "Strategy", body: "Considered, holistic and outcome-led. You'll feel peace of mind from go to woe.", color: "var(--mulberry)" },
+        { n: "03", word: "Service", body: "That'll bring upon a smile, delivered by people obsessed with customer experience.", color: "var(--ember)" },
+      ],
+    },
+    featured: {
+      overline: "§ 03 · Currently on the market",
+      heading: "Featured properties.",
+      cta: { label: "View all properties", href: "/buy" },
+    },
+    locations: {
+      overline: "§ 04 · The patches",
+      headingLead: "Agents who know their patch — ",
+      headingEmphasis: "intimately",
+      cards: [
+        { name: "Noosaville", count: 14, slug: "noosaville" },
+        { name: "Noosa Heads", count: 9, slug: "noosa-heads" },
+        { name: "Sunshine Beach", count: 6, slug: "sunshine-beach" },
+        { name: "Tewantin", count: 8, slug: "tewantin" },
+      ],
+    },
+    insights: {
+      overline: "§ 05 · Insights",
+      heading: "Data led. Human centred.",
+      cta: { label: "All insights", href: "/insights" },
+      articles: [
+        { category: "Market", title: "The state of the Sunshine Coast market in May 2026", date: "12 May 2026", readTime: "6 min", slug: "sunshine-coast-market-may-2026" },
+        { category: "Selling", title: "Auction or private treaty? How we'd decide for you", date: "04 May 2026", readTime: "4 min", slug: "auction-or-private-treaty" },
+        { category: "Buying", title: "Inside Noosaville's quiet supply story", date: "28 Apr 2026", readTime: "5 min", slug: "noosaville-supply-story" },
+      ],
+    },
+    testimonials: {
+      overline: "§ 06 · Vendor stories",
+      heading: "The proof is in the campaigns.",
+      rating: "4.9",
+      ratingMeta: "180+ reviews on RateMyAgent",
+      quote:
+        "From the first appraisal call to the moment we handed over the keys, Max. felt like an extension of our family. They showed up with a strategy, and they delivered every promise.",
+      authorName: "Sarah & Tom Henley",
+      authorDetail: "Sold · 18 Hilltop Crescent, Noosaville · $2.65M",
+      total: 12,
+    },
+    cta: {
+      overline: "§ 07 · Start a conversation today",
+      headingLeadLine: "When you're ready,",
+      headingEmphasis: "we're",
+      headingTail: " ready.",
+      primaryCta: { label: "I'm selling", href: "/sell" },
+      secondaryCta: { label: "I'm buying", href: "/buy" },
+    },
+  };
+}

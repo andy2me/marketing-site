@@ -1,0 +1,22 @@
+.main {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+}
+.inner {
+  text-align: center;
+  padding: 120px 0;
+}
+.title {
+  margin-top: 16px;
+  font-size: clamp(40px, 6vw, 88px);
+  letter-spacing: -0.02em;
+  color: var(--color-text-strong);
+}
+.note {
+  margin-top: 16px;
+  color: var(--color-text-secondary);
+}
+.cta {
+  margin-top: 32px;
+}

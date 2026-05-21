@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // macOS AppleDouble files created by the (non-native) volume this repo lives on.
+    "**/._*",
   ]),
 ]);
 

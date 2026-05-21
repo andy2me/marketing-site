@@ -1,0 +1,20 @@
+.form {
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  flex: 1;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: var(--radius-md);
+  background: rgba(244, 237, 229, 0.06);
+  border: 1px solid rgba(244, 237, 229, 0.18);
+  color: #f4ede5;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.input::placeholder {
+  color: rgba(244, 237, 229, 0.5);
+}

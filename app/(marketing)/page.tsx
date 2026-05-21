@@ -1,0 +1,50 @@
+import type { Metadata } from "next";
+import { Header } from "@/components/layout/Header";
+import {
+  HomeHero,
+  HomeAudienceSplit,
+  HomeProofBar,
+  HomeWhy,
+  HomeFeatured,
+  HomeLocations,
+  HomeInsights,
+  HomeTestimonials,
+  HomeCTABand,
+} from "@/components/home/HomeSections";
+import { getHomeContent, getSiteSettings } from "@/lib/wp/mock";
+import { getFeaturedListings } from "@/lib/rex/mock";
+
+export const metadata: Metadata = {
+  title: { absolute: "Max Property — Estate Agents, Sunshine Coast" },
+  description:
+    "Boutique estate agents on the Sunshine Coast. Maximum outcomes whether you're buying or selling — personalised service, trusted expertise.",
+  alternates: { canonical: "/" },
+};
+
+// ISR (§6): Home revalidates hourly + on-demand via the WP publish webhook.
+export const revalidate = 3600;
+
+export default async function HomePage() {
+  const [content, settings, featured] = await Promise.all([
+    getHomeContent(),
+    getSiteSettings(),
+    getFeaturedListings(3),
+  ]);
+
+  return (
+    <>
+      <Header transparent nav={settings.nav} />
+      <main>
+        <HomeHero hero={content.hero} />
+        <HomeAudienceSplit audience={content.audience} />
+        <HomeProofBar proof={content.proof} />
+        <HomeWhy why={content.why} />
+        <HomeFeatured featured={content.featured} listings={featured} />
+        <HomeLocations locations={content.locations} />
+        <HomeInsights insights={content.insights} />
+        <HomeTestimonials testimonials={content.testimonials} />
+        <HomeCTABand cta={content.cta} />
+      </main>
+    </>
+  );
+}

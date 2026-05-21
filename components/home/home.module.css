@@ -1,0 +1,538 @@
+/* Max Property — Home sections (reference page). Recreated from the prototype src/home.jsx. */
+
+.emEmber {
+  font-style: italic;
+  color: var(--color-action);
+}
+.emSunrise {
+  font-style: italic;
+  color: var(--sunrise);
+}
+
+/* Header row used by Featured + Insights (overline/heading left, CTA right) */
+.sectionHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+  gap: 24px;
+}
+.sectionHeadTitle {
+  margin-top: 24px;
+  font-size: clamp(36px, 4vw, 52px);
+  line-height: 1.05;
+  color: var(--color-text-strong);
+  letter-spacing: -0.015em;
+  max-width: 640px;
+}
+
+/* ── 1. Hero ──────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 760px;
+  overflow: hidden;
+  background: #1a120c;
+}
+.heroPoster {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 70% 20%, #2c1e15 0%, #1a120c 70%),
+    #1a120c;
+}
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 18, 12, 0.55) 0%,
+    rgba(26, 18, 12, 0.2) 40%,
+    rgba(26, 18, 12, 0.75) 100%
+  );
+}
+.heroInner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 96px;
+  padding-top: 120px;
+}
+.heroOverline {
+  color: rgba(244, 237, 229, 0.7);
+  margin-bottom: 32px;
+}
+.heroTitle {
+  font-size: clamp(56px, 7vw, 112px);
+  line-height: 0.95;
+  color: #f4ede5;
+  max-width: 1100px;
+  letter-spacing: -0.02em;
+}
+.heroBody {
+  margin-top: 36px;
+  max-width: 560px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: rgba(244, 237, 229, 0.85);
+}
+.heroCtas {
+  display: flex;
+  gap: 12px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+.heroPlay {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(8px);
+}
+.heroPlayBars {
+  display: flex;
+  gap: 3px;
+}
+.heroPlayBars span {
+  width: 3px;
+  height: 14px;
+  background: #fff;
+}
+.heroScroll {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(244, 237, 229, 0.6);
+}
+.heroScrollLine {
+  width: 32px;
+  height: 1px;
+  background: rgba(244, 237, 229, 0.4);
+}
+
+/* ── 2. Audience split ────────────────────────────────────────────────── */
+.audience {
+  padding: 120px 0 80px;
+}
+.audienceHeading {
+  font-size: clamp(36px, 4.4vw, 64px);
+  line-height: 1.05;
+  color: var(--color-text-strong);
+  letter-spacing: -0.015em;
+  max-width: 780px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.card {
+  display: block;
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  color: #f4ede5;
+}
+.cardBuyOffset {
+  margin-top: 64px;
+}
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+}
+.cardOverlaySell {
+  background: linear-gradient(180deg, rgba(54, 64, 37, 0) 30%, rgba(28, 18, 12, 0.85) 100%);
+}
+.cardOverlayBuy {
+  background: linear-gradient(180deg, rgba(80, 43, 52, 0) 30%, rgba(80, 43, 52, 0.85) 100%);
+}
+.cardEyebrow {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  z-index: 2;
+  color: rgba(244, 237, 229, 0.65);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.cardContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 40px 40px 36px;
+}
+.cardTitle {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 88px;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: #f4ede5;
+}
+.cardBody {
+  margin-top: 24px;
+  max-width: 440px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(244, 237, 229, 0.85);
+}
+.cardCta {
+  margin-top: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--sunrise);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ── 3. Proof bar ─────────────────────────────────────────────────────── */
+.proof {
+  padding: 40px 0 100px;
+}
+
+/* ── 4. Why ───────────────────────────────────────────────────────────── */
+.why {
+  background: var(--color-bg-banding);
+  padding: 120px 0;
+}
+.whyHeading {
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.05;
+  color: var(--color-text-strong);
+  letter-spacing: -0.015em;
+  max-width: 780px;
+}
+.whyBody {
+  margin-top: 24px;
+  max-width: 560px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.pillar {
+  padding: 40px 36px 36px;
+  color: #f4ede5;
+  border-radius: var(--radius-lg);
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+.pillarNum {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+.pillarWord {
+  margin-top: auto;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 64px;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.pillarDot {
+  opacity: 0.5;
+}
+.pillarBody {
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 1.55;
+  opacity: 0.85;
+  max-width: 300px;
+}
+
+/* ── 5. Featured ──────────────────────────────────────────────────────── */
+.featured {
+  padding: 120px 0;
+}
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ── 6. Locations ─────────────────────────────────────────────────────── */
+.locations {
+  background: var(--mulberry);
+  color: #f4ede5;
+  padding: 120px 0;
+}
+.locHeading {
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.05;
+  color: #f4ede5;
+  letter-spacing: -0.015em;
+}
+.locGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.locCard {
+  display: block;
+  color: #f4ede5;
+}
+.locMedia {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #3a1f28;
+}
+.locOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(80, 43, 52, 0.85) 100%);
+}
+.locContent {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}
+.locName {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.locCount {
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(244, 237, 229, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── 7. Insights ──────────────────────────────────────────────────────── */
+.insights {
+  padding: 120px 0;
+}
+.insGrid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 24px;
+}
+.insCard {
+  display: block;
+}
+.insMedia {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.insCat {
+  color: var(--color-action);
+}
+.insTitle {
+  margin-top: 12px;
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--color-text-strong);
+  letter-spacing: -0.01em;
+}
+.insTitleLead {
+  font-size: 28px;
+}
+.insBlock {
+  margin-top: 20px;
+}
+.insMeta {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+/* ── 8. Testimonials ──────────────────────────────────────────────────── */
+.testi {
+  background: var(--color-bg-banding);
+  padding: 120px 0;
+}
+.testiGrid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+  align-items: start;
+}
+.testiHeading {
+  margin-top: 24px;
+  font-size: clamp(32px, 3.4vw, 44px);
+  line-height: 1.1;
+  color: var(--color-text-strong);
+  letter-spacing: -0.015em;
+}
+.rating {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-action);
+}
+.ratingText {
+  margin-left: 8px;
+  font-size: 14px;
+  color: var(--color-text-primary);
+}
+.ratingText strong {
+  color: var(--color-text-strong);
+}
+.ratingMeta {
+  color: var(--color-text-secondary);
+}
+.quote {
+  margin: 0;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.2;
+  color: var(--color-text-strong);
+  letter-spacing: -0.01em;
+}
+.quoteMark {
+  color: var(--color-action);
+}
+.author {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.authorAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  background: var(--white-mist-300);
+  flex: none;
+}
+.authorName {
+  font-size: 15px;
+  color: var(--color-text-strong);
+  font-weight: 500;
+}
+.authorDetail {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 48px;
+  align-items: center;
+}
+.ctrlBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-strong);
+  background: transparent;
+  color: var(--color-text-primary);
+}
+.counter {
+  margin-left: auto;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+/* ── 9. CTA band ──────────────────────────────────────────────────────── */
+.cta {
+  background: var(--color-bg-inverse);
+  color: #f4ede5;
+  padding: 140px 0 160px;
+  position: relative;
+  overflow: hidden;
+}
+.ctaOverline {
+  color: rgba(244, 237, 229, 0.5);
+}
+.ctaHeading {
+  margin-top: 32px;
+  font-size: clamp(56px, 7.5vw, 128px);
+  line-height: 0.95;
+  color: #f4ede5;
+  letter-spacing: -0.025em;
+  max-width: 1100px;
+}
+.ctaCtas {
+  display: flex;
+  gap: 12px;
+  margin-top: 64px;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .insGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .locGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    height: 600px;
+  }
+  .cards,
+  .pillars,
+  .grid3,
+  .insGrid,
+  .testiGrid {
+    grid-template-columns: 1fr;
+  }
+  .locGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cardBuyOffset {
+    margin-top: 0;
+  }
+  .cardTitle {
+    font-size: 64px;
+  }
+  .sectionHead {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .audience {
+    padding: 72px 0 48px;
+  }
+  .why,
+  .featured,
+  .locations,
+  .insights,
+  .testi {
+    padding: 72px 0;
+  }
+  .cta {
+    padding: 96px 0 110px;
+  }
+}

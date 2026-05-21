@@ -1,0 +1,20 @@
+.main {
+  padding-top: 72px; /* clear the fixed header */
+}
+.inner {
+  padding: 120px 0;
+  max-width: 640px;
+}
+.title {
+  margin-top: 24px;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-text-strong);
+}
+.note {
+  margin-top: 24px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}

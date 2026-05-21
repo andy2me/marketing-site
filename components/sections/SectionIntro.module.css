@@ -1,0 +1,14 @@
+.intro {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+  margin-bottom: 80px;
+}
+
+@media (max-width: 767px) {
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+}
