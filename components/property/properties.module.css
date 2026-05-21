@@ -1,0 +1,310 @@
+/* Max Property — Properties index (/buy). Recreated from the prototype src/properties.jsx. */
+
+/* ── Intro ────────────────────────────────────────────────────────────── */
+.intro {
+  padding: 72px 0 40px; /* top padding clears the 72px fixed header */
+}
+.introRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+}
+.introTitle {
+  margin-top: 20px;
+  font-size: clamp(40px, 4.4vw, 64px);
+  line-height: 1.05;
+  color: var(--color-text-strong);
+  letter-spacing: -0.02em;
+}
+.introMeta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  padding-bottom: 12px;
+  white-space: nowrap;
+}
+.live {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.05em;
+}
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-success);
+}
+
+/* ── Sticky filter bar ────────────────────────────────────────────────── */
+.filterBar {
+  position: sticky;
+  top: 72px;
+  z-index: 30;
+  background: rgba(247, 243, 239, 0.92);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.filterBarInner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  overflow-x: auto;
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  flex: 0 0 280px;
+  color: var(--color-text-secondary);
+}
+.searchInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: var(--color-text-primary);
+  flex: 1;
+  font-family: inherit;
+}
+.barRight {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.viewToggle {
+  display: flex;
+  height: 44px;
+  padding: 3px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+}
+.viewBtn,
+.viewActive {
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 6px;
+  border: none;
+  font-size: 13px;
+  color: var(--color-text-primary);
+  background: transparent;
+  white-space: nowrap;
+}
+.viewActive {
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Filter dropdown ──────────────────────────────────────────────────── */
+.ddWrap {
+  position: relative;
+}
+.ddTrigger {
+  height: 44px;
+  padding: 0 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.ddActive {
+  border-color: var(--color-action);
+  background: rgba(157, 77, 42, 0.06);
+  color: var(--color-action);
+}
+.ddLabel {
+  color: var(--color-text-secondary);
+}
+.ddActive .ddLabel {
+  color: var(--color-action);
+}
+.ddValue {
+  font-weight: 500;
+}
+.ddMenu {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  min-width: 220px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+  padding: 6px;
+  z-index: 40;
+}
+.ddItem {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.ddItem:hover {
+  background: var(--color-bg-subtle);
+}
+.ddItemActive {
+  background: var(--color-bg-subtle);
+}
+
+/* ── Toolbar ──────────────────────────────────────────────────────────── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 24px;
+  padding-bottom: 8px;
+  flex-wrap: wrap;
+}
+.count {
+  font-size: 14px;
+  color: var(--color-text-primary);
+}
+.count strong {
+  color: var(--color-text-strong);
+}
+.muted {
+  color: var(--color-text-secondary);
+}
+.rule {
+  flex: 1;
+  min-width: 24px;
+  height: 1px;
+  background: var(--color-border);
+}
+.chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  font-size: 12px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+.clearAll {
+  margin-left: 4px;
+  font-size: 12px;
+  color: var(--color-action);
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ── Grid + pagination ────────────────────────────────────────────────── */
+.gridSection {
+  padding: 24px 0 80px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.empty {
+  padding: 64px 0;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 15px;
+}
+.pagination {
+  margin-top: 48px;
+  text-align: center;
+}
+.pagination .muted {
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: block;
+}
+.mapLoading {
+  height: 760px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 13px;
+}
+
+/* ── CTA band (ember) ─────────────────────────────────────────────────── */
+.cta {
+  background: var(--ember);
+  color: #fff;
+  padding: 96px 0;
+}
+.ctaInner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 48px;
+}
+.ctaHeading {
+  margin-top: 16px;
+  font-size: clamp(36px, 4vw, 52px);
+  line-height: 1.05;
+  color: #fff;
+  letter-spacing: -0.015em;
+}
+.ctaBtn {
+  background: #fff;
+  color: var(--color-action);
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .introRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .barRight {
+    margin-left: 0;
+  }
+  .ctaInner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

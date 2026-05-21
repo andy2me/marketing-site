@@ -1,0 +1,167 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  height: 760px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--color-bg-surface);
+}
+
+/* List column */
+.listCol {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid var(--color-border);
+}
+.listHead {
+  padding: 14px 20px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.04em;
+}
+.listScroll {
+  overflow: auto;
+  flex: 1;
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 14px;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+  height: fit-content;
+}
+.itemActive {
+  border-color: var(--color-action);
+  background: rgba(157, 77, 42, 0.04);
+  box-shadow: var(--shadow-sm);
+}
+.itemThumb {
+  width: 120px;
+}
+.itemBody {
+  min-width: 0;
+}
+.itemPrice {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 18px;
+  line-height: 1.05;
+  color: var(--color-text-strong);
+}
+.itemStreet {
+  font-size: 13px;
+  color: var(--color-text-primary);
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.itemSuburb {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+.itemMeta {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+}
+.metaItem {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+/* Map column */
+.mapCol {
+  position: relative;
+  background: var(--soft-linen-400);
+  overflow: hidden;
+}
+.mapBase {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.pin {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  transition: transform 120ms;
+}
+.pinActive {
+  transform: translate(-50%, -100%) scale(1.06);
+}
+.pinLabel {
+  padding: 7px 12px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-text-strong);
+  box-shadow: var(--shadow-sm);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+.pinActive .pinLabel {
+  box-shadow: var(--shadow-md);
+}
+.pinPopover {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: block;
+}
+.popBody {
+  padding: 12px 14px 14px;
+}
+.mapControls {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  gap: 6px;
+}
+.mapCtrlBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  font-size: 18px;
+  display: grid;
+  place-items: center;
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .listCol {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    max-height: 420px;
+  }
+  .mapCol {
+    height: 460px;
+  }
+}

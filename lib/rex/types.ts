@@ -4,6 +4,8 @@
 
 export type ListingStatus = "For Sale" | "Auction" | "Under Offer" | "Sold";
 
+export type PropertyType = "House" | "Apartment" | "Townhouse" | "Land";
+
 export type ListingAgent = {
   id: string;
   name: string;
@@ -27,6 +29,9 @@ export type ListingCard = {
   baths: number;
   cars: number;
   land: string;
+  type: PropertyType;
+  /** Numeric price for sort/filter; null when not disclosed (Contact Agent / auction-only). */
+  priceValue: number | null;
   agent: ListingAgent;
   /** REAL coordinates (not the prototype's % positions) — for MapLibre. */
   coords: { lat: number; lng: number };

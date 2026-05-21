@@ -6,8 +6,20 @@ import { IconBed, IconBath, IconCar, IconLand } from "@/components/icons";
 import { STATUS_COLOR, type ListingCard } from "@/lib/rex/types";
 import styles from "./PropertyCard.module.css";
 
-export function PropertyCard({ p, saved = false }: { p: ListingCard; saved?: boolean }) {
+export function PropertyCard({
+  p,
+  saved = false,
+  onToggleSave,
+}: {
+  p: ListingCard;
+  saved?: boolean;
+  /** Provide to lift save state (controlled); omit for self-managed local state. */
+  onToggleSave?: (id: string, next: boolean) => void;
+}) {
   const sold = p.status === "Sold";
+  const saveProps = onToggleSave
+    ? { saved, onToggle: onToggleSave }
+    : { defaultSaved: saved };
 
   return (
     <Link
@@ -30,7 +42,7 @@ export function PropertyCard({ p, saved = false }: { p: ListingCard; saved?: boo
         <span className={styles.status} style={{ background: STATUS_COLOR[p.status] }}>
           {p.status}
         </span>
-        <SaveButton id={p.id} initial={saved} />
+        <SaveButton id={p.id} {...saveProps} />
       </div>
 
       <div className={styles.body}>

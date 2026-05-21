@@ -5,26 +5,42 @@ import { IconHeart } from "@/components/icons";
 import styles from "./PropertyCard.module.css";
 
 /**
- * Heart save toggle. Local state for now; TODO: persist to account / local storage
- * (design handoff §PropertyCard) and fire a "saved property" analytics event (§13).
+ * Heart save toggle. Controlled when `saved` + `onToggle` are passed (the listings index
+ * lifts state so grid and map stay in sync); otherwise uncontrolled local state.
+ * TODO: persist to account / local storage and fire a "saved property" event (§13).
  */
-export function SaveButton({ id, initial = false }: { id: string; initial?: boolean }) {
-  const [saved, setSaved] = useState(initial);
+export function SaveButton({
+  id,
+  saved,
+  defaultSaved = false,
+  onToggle,
+}: {
+  id: string;
+  saved?: boolean;
+  defaultSaved?: boolean;
+  onToggle?: (id: string, next: boolean) => void;
+}) {
+  const controlled = saved !== undefined;
+  const [internal, setInternal] = useState(defaultSaved);
+  const isSaved = controlled ? saved : internal;
+
   return (
     <button
       type="button"
       className={styles.save}
-      aria-pressed={saved}
-      aria-label={saved ? "Remove from saved" : "Save property"}
+      aria-pressed={isSaved}
+      aria-label={isSaved ? "Remove from saved" : "Save property"}
       data-listing={id}
-      style={{ color: saved ? "var(--color-action)" : "var(--white-mist-700)" }}
+      style={{ color: isSaved ? "var(--color-action)" : "var(--white-mist-700)" }}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        setSaved((s) => !s);
+        const next = !isSaved;
+        if (!controlled) setInternal(next);
+        onToggle?.(id, next);
       }}
     >
-      <IconHeart filled={saved} />
+      <IconHeart filled={isSaved} />
     </button>
   );
 }
