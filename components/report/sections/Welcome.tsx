@@ -60,44 +60,46 @@ export function Welcome({ report }: { report: Report }) {
         </div>
       </div>
 
-      {/* Features — mobile dash list */}
-      <div className={`${s.block} ${s.mOnly}`}>
-        <div className="overline">What stands out</div>
-        <ul className={s.featureList}>
-          {property.features.map((f, i) => (
-            <li key={i} className={s.featureItem}>
-              <span className={s.featureDash}>&mdash;</span>
-              <span>{f}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Features — desktop numbered 2-col + heading */}
-      <div className={`${s.dFeatures} ${s.dOnly}`}>
-        <div>
+      {/* Features + reference — mobile */}
+      <div className={s.mOnly}>
+        <div className={s.block}>
           <div className="overline">What stands out</div>
-          <h3 className={s.dFeaturesH3}>Six things we&rsquo;d want a buyer to feel first.</h3>
+          <ul className={s.featureList}>
+            {property.features.map((f, i) => (
+              <li key={i} className={s.featureItem}>
+                <span className={s.featureDash}>&mdash;</span>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul className={s.dFeatureList}>
-          {property.features.map((f, i) => (
-            <li key={i} className={s.dFeatureItem}>
-              <span className={s.dFeatureNum}>{String(i + 1).padStart(2, "0")}</span>
-              <span>{f}</span>
-            </li>
-          ))}
-        </ul>
+        <p className={s.refLine}>
+          Prepared {preparedOn} · Ref {ref} · By {agent.name}
+        </p>
       </div>
 
-      {/* Reference line */}
-      <p className={`${s.refLine} ${s.mOnly}`}>
-        Prepared {preparedOn} · Ref {ref} · By {agent.name}
-      </p>
-      <div className={`${s.dRefRow} ${s.dOnly}`}>
-        <span>
-          Prepared {preparedOn} · Ref {ref}
-        </span>
-        <span>By {agent.name}</span>
+      {/* Features + reference — desktop (numbered 2-col + heading) */}
+      <div className={s.dOnly}>
+        <div className={s.dFeatures}>
+          <div>
+            <div className="overline">What stands out</div>
+            <h3 className={s.dFeaturesH3}>Six things we&rsquo;d want a buyer to feel first.</h3>
+          </div>
+          <ul className={s.dFeatureList}>
+            {property.features.map((f, i) => (
+              <li key={i} className={s.dFeatureItem}>
+                <span className={s.dFeatureNum}>{String(i + 1).padStart(2, "0")}</span>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className={s.dRefRow}>
+          <span>
+            Prepared {preparedOn} · Ref {ref}
+          </span>
+          <span>By {agent.name}</span>
+        </div>
       </div>
     </>
   );
