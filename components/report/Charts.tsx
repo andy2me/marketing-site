@@ -39,11 +39,14 @@ export function MedianPriceChart({
   height = 160,
   accent = "var(--color-action)",
   label,
+  gradientId = "med-fill",
 }: {
   series: number[];
   height?: number;
   accent?: string;
   label?: string;
+  /** Unique per instance — the same chart may render in both the mobile + desktop subtrees. */
+  gradientId?: string;
 }) {
   const W = 320;
   const H = height;
@@ -71,7 +74,7 @@ export function MedianPriceChart({
     { i: Math.floor(series.length / 2), t: "12mo", anchor: "middle" as const },
     { i: series.length - 1, t: "Today", anchor: "end" as const },
   ];
-  const gradId = "med-fill";
+  const gradId = gradientId;
   return (
     <svg
       viewBox={`0 0 ${W} ${H}`}
@@ -252,11 +255,14 @@ export function SearchSparkline({
   height = 64,
   accent = "var(--mulberry)",
   label,
+  gradientId = "srch-fill",
 }: {
   series: number[];
   height?: number;
   accent?: string;
   label?: string;
+  /** Unique per instance — the same chart may render in both the mobile + desktop subtrees. */
+  gradientId?: string;
 }) {
   const W = 320;
   const H = height;
@@ -270,7 +276,7 @@ export function SearchSparkline({
   ]);
   const linePath = smooth(pts);
   const areaPath = `${linePath} L${pts[pts.length - 1][0]},${padT + innerH} L${pts[0][0]},${padT + innerH} Z`;
-  const gradId = "srch-fill";
+  const gradId = gradientId;
   return (
     <svg
       viewBox={`0 0 ${W} ${H}`}

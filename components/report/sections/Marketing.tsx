@@ -1,19 +1,24 @@
 import type { Report } from "@/lib/report/types";
+import { SectionIntro } from "../SectionIntro";
 import s from "../report.module.css";
 
-// 05 · Marketing — inclusions (list on mobile, 3×3 grid on desktop) + indicative budget.
+// 05 · Marketing — inclusions (list on mobile, 3×3 grid on desktop) + indicative budget band.
 export function Marketing({ report }: { report: Report }) {
   const { marketing, property } = report;
+  const lede = `The marketing budget for ${property.street} is costed before launch and approved by you in writing. No add-ons after the fact.`;
   return (
     <>
-      <div className="overline">What&rsquo;s included</div>
-      <h2 className={s.h2}>
-        One fee. Everything that <em className={s.emEmber}>matters</em>.
-      </h2>
-      <p className={s.lede}>
-        The marketing budget for {property.street} is costed before launch and approved by you in
-        writing. No add-ons after the fact.
-      </p>
+      <SectionIntro
+        n="05"
+        overline="What's included"
+        title={
+          <>
+            One fee. Everything that <em className={s.emEmber}>matters</em>.
+          </>
+        }
+        lede={lede}
+        mobileLede={lede}
+      />
 
       <div className={s.inclusions}>
         {marketing.inclusions.map((it, i) => (
@@ -29,12 +34,10 @@ export function Marketing({ report }: { report: Report }) {
           <div className="overline">Indicative marketing investment</div>
           <p className={s.budgetNote}>
             Built to suit a river-front three-bed at this price point. Final figure agreed before
-            launch.
+            launch — no add-ons after the fact.
           </p>
         </div>
-        <div className={s.num} style={{ fontSize: 26 }}>
-          {marketing.indicativeBudget}
-        </div>
+        <div className={`${s.num} ${s.budgetNum}`}>{marketing.indicativeBudget}</div>
       </div>
     </>
   );

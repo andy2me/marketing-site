@@ -1,5 +1,6 @@
 import type { Report, ApproachPhase } from "@/lib/report/types";
 import { IconCheck } from "@/components/icons";
+import { SectionIntro } from "../SectionIntro";
 import { InlineCTA } from "../atoms";
 import s from "../report.module.css";
 
@@ -7,19 +8,25 @@ function phaseBg(tone: ApproachPhase["tone"]): string {
   return tone === "linen" ? "var(--soft-linen-300)" : `var(--${tone})`;
 }
 
-// 04 · Approach to market — three phase cards (Preparing → Early momentum → Maximum atmosphere).
+const LEDE =
+  "We don't list and hope. Every campaign is paced deliberately — preparing, building, and then closing — so the market meets your home at its strongest possible moment.";
+
+// 04 · Approach — three phase cards (stacked on mobile, three-up on desktop).
 export function Approach({ report }: { report: Report }) {
   const { approach } = report;
   return (
     <>
-      <div className="overline">How we&rsquo;d run the campaign</div>
-      <h2 className={s.h2}>
-        Three phases. One <em className={s.emEmber}>considered</em> arc.
-      </h2>
-      <p className={s.lede}>
-        We don&rsquo;t list and hope. Every campaign is paced deliberately — preparing, building,
-        and then closing — so the market meets your home at its strongest possible moment.
-      </p>
+      <SectionIntro
+        n="04"
+        overline="How we'd run the campaign"
+        title={
+          <>
+            Three phases. One <em className={s.emEmber}>considered</em> arc.
+          </>
+        }
+        lede={LEDE}
+        mobileLede={LEDE}
+      />
 
       <div className={s.phaseList}>
         {approach.map((p) => {

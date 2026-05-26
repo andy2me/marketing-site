@@ -74,6 +74,7 @@ export const report: Report = {
     searchSeries: [3100, 3220, 3380, 3470, 3550, 3680, 3820, 3940, 4050, 4140, 4220, 4280],
     inventory: 14,
     monthsSupply: 1.6,
+    clearanceRate: 82,
     indicativeRangeLow: "$1.78M",
     indicativeRangeHigh: "$1.92M",
   },

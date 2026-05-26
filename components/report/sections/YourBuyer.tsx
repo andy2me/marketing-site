@@ -1,9 +1,10 @@
 import type { Report } from "@/lib/report/types";
 import { toneVar } from "@/lib/report/types";
 import { SegmentBar } from "../Charts";
+import { SectionIntro } from "../SectionIntro";
 import s from "../report.module.css";
 
-// 03 · Your buyer — headline, stacked segment bar, segment cards, dark database band.
+// 03 · Your buyer — stacked segment bar, segment cards (2×2 on desktop), dark database band.
 export function YourBuyer({ report }: { report: Report }) {
   const { buyer } = report;
   const segments = buyer.segments.map((seg) => ({
@@ -13,14 +14,20 @@ export function YourBuyer({ report }: { report: Report }) {
   }));
   return (
     <>
-      <div className="overline">Buyer intelligence</div>
-      <h2 className={s.h2}>
-        Your most likely buyer is <em className={s.emEmber}>not</em> a stranger.
-      </h2>
-      <p className={s.lede}>{buyer.headline}</p>
+      <SectionIntro
+        n="03"
+        overline="Buyer intelligence"
+        title={
+          <>
+            Your most likely buyer is <em className={s.emEmber}>not</em> a stranger.
+          </>
+        }
+        lede={buyer.headline}
+        mobileLede={buyer.headline}
+      />
 
       <div className={s.block}>
-        <SegmentBar segments={segments} />
+        <SegmentBar segments={segments} height={22} />
         <div className={s.segCaption}>
           <span>BUYER MIX · LAST 12 MONTHS</span>
           <span>{buyer.sampleNote}</span>
@@ -31,9 +38,9 @@ export function YourBuyer({ report }: { report: Report }) {
         {buyer.segments.map((seg, i) => (
           <article key={i} className={s.segCard}>
             <div className={s.segPct} style={{ background: toneVar(seg.tone) }}>
-              <span className={`${s.num} ${s.onDark}`} style={{ fontSize: 22 }}>
+              <span className={`${s.num} ${s.onDark} ${s.segNum}`}>
                 {seg.pct}
-                <span className={s.segPctSign}>%</span>
+                <span className={s.segNumUnit}>%</span>
               </span>
             </div>
             <div>
@@ -49,9 +56,7 @@ export function YourBuyer({ report }: { report: Report }) {
         <div className={s.signals}>
           {buyer.signals.map((sig, i) => (
             <div key={i} className={s.signal}>
-              <span className={`${s.num} ${s.signalNum}`} style={{ fontSize: 32 }}>
-                {sig.k}
-              </span>
+              <span className={`${s.num} ${s.signalNum} ${s.signalNumSize}`}>{sig.k}</span>
               <span className={s.signalText}>{sig.v}</span>
             </div>
           ))}

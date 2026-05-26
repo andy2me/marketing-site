@@ -74,6 +74,7 @@ export type Market = {
   searchSeries: number[]; // 12 monthly values
   inventory: number; // active listings
   monthsSupply: number; // months of supply
+  clearanceRate: number; // % (shown in the desktop demand band)
   indicativeRangeLow: string; // "$1.78M"
   indicativeRangeHigh: string; // "$1.92M"
 };
