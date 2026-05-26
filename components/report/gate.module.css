@@ -1,0 +1,213 @@
+/* Max Property — Appraisal Builder · email-gate modal. Recreated from gate.jsx.
+ * Centred over a blurred preview (the blur is applied to the shell by ReportFrame). */
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 18px 34px;
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 18, 12, 0.45) 0%,
+    rgba(26, 18, 12, 0.72) 70%,
+    rgba(26, 18, 12, 0.85) 100%
+  );
+}
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  background: var(--color-bg-page);
+  border: 1px solid var(--white-mist-300);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  animation: modalIn 0.42s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.dot {
+  color: var(--color-action);
+}
+
+.banner {
+  position: relative;
+  height: 130px;
+}
+.bannerImg {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+}
+.bannerScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(26, 18, 12, 0) 30%, rgba(26, 18, 12, 0.6) 100%);
+}
+.bannerTop {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.bannerWordmark {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-text-on-dark);
+}
+.bannerKicker {
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(244, 237, 229, 0.7);
+}
+.bannerBottom {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 12px;
+  color: var(--color-text-on-dark);
+}
+.bannerFor {
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(244, 237, 229, 0.7);
+}
+.bannerName {
+  margin-top: 2px;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.body {
+  padding: 22px 22px 24px;
+}
+.heading {
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.headingEm {
+  font-style: italic;
+}
+.intro {
+  margin-top: 14px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}
+
+.field {
+  display: block;
+  margin-top: 22px;
+}
+.fieldLabel {
+  display: block;
+  margin-bottom: 8px;
+}
+.inputWrap {
+  position: relative;
+  display: block;
+}
+.inputIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+  display: inline-flex;
+}
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px 0 40px;
+  border-radius: 10px;
+  background: var(--color-bg-surface);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-strong);
+  font-family: inherit;
+  font-size: 15px;
+  outline: none;
+}
+.input:focus-visible {
+  border-color: var(--color-action);
+}
+.inputError {
+  border-color: var(--color-error);
+}
+.error {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--color-error);
+}
+
+.submit {
+  margin-top: 14px;
+  width: 100%;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--color-action);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 120ms, opacity 120ms;
+}
+.submit:hover {
+  background: var(--color-action-hover);
+}
+.submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.note {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+.noteLock {
+  color: var(--color-success);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.noteLink {
+  color: var(--color-action);
+  text-decoration: underline;
+}

@@ -1,0 +1,14 @@
+/* Max Property — Appraisal Builder · frame. The proposal sits blurred behind the email gate
+ * until it's cleared (design handoff §Gate animation). */
+
+.gated {
+  filter: blur(8px) saturate(110%);
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gated {
+    filter: saturate(110%);
+  }
+}

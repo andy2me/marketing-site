@@ -146,3 +146,78 @@ export function IconYouTube({ size = 16, ...p }: IconProps) {
     </svg>
   );
 }
+
+// ── Added for the Appraisal Builder (ported from the prototype ApIcon set) ──────────────
+export function IconArrowL({ size = 14, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} {...svgProps(size, p)}>
+      <path d="M19 12H5m6 6-6-6 6-6" />
+    </svg>
+  );
+}
+export function IconArea({ size = 16, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} {...svgProps(size, p)}>
+      <path d="M4 4h6M4 4v6M20 20h-6M20 20v-6M4 4l16 16" />
+    </svg>
+  );
+}
+export function IconPhone({ size = 14, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} {...svgProps(size, p)}>
+      <path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" />
+    </svg>
+  );
+}
+export function IconMail({ size = 14, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} {...svgProps(size, p)}>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3 7 9 6 9-6" />
+    </svg>
+  );
+}
+export function IconCalendar({ size = 14, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} {...svgProps(size, p)}>
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M3 9h18M8 3v4M16 3v4" />
+    </svg>
+  );
+}
+export function IconCheck({ size = 14, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} {...svgProps(size, p)}>
+      <path d="m4 12 5 5L20 6" />
+    </svg>
+  );
+}
+export function IconMenu({ size = 18, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} {...svgProps(size, p)}>
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
+  );
+}
+export function IconLock({ size = 14, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} {...svgProps(size, p)}>
+      <rect x="4" y="11" width="16" height="10" rx="2" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+    </svg>
+  );
+}
+export function IconTrend({ size = 14, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} {...svgProps(size, p)}>
+      <path d="m3 17 6-6 4 4 8-9M14 6h7v7" />
+    </svg>
+  );
+}
+export function IconChevronRight({ size = 12, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} {...svgProps(size, p)}>
+      <path d="m9 6 6 6-6 6" />
+    </svg>
+  );
+}

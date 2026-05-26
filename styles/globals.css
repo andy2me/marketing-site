@@ -60,6 +60,18 @@ a {
   outline-offset: 2px;
 }
 
+/* Respect reduced-motion globally — section fadeUp, gate/sheet animation, transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ── Overline ─────────────────────────────────────────────────────────── */
 .overline {
   font-family: var(--font-body), system-ui, sans-serif;
