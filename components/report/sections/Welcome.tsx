@@ -33,11 +33,21 @@ export function Welcome({ report }: { report: Report }) {
       </div>
 
       <div className={s.welcomeIntro}>
-        <ImageSlot
-          label={`hero · ${property.street.toLowerCase()} · river twilight · 4:5 portrait`}
-          ratio="4/5"
-          className={s.welcomeHero}
-        />
+        {property.heroUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element -- plain <img> keeps this presentational; next/image would need remotePatterns config when hosts change.
+          <img
+            src={property.heroUrl}
+            alt={`${property.street}, ${property.suburb}`}
+            className={s.welcomeHero}
+            style={{ aspectRatio: "4 / 5", width: "100%", height: "auto", objectFit: "cover", display: "block" }}
+          />
+        ) : (
+          <ImageSlot
+            label={`hero · ${property.street.toLowerCase()} · 4:5 portrait`}
+            ratio="4/5"
+            className={s.welcomeHero}
+          />
+        )}
         <div>
           <div className={`overline ${s.addrEyebrow}`}>
             <IconPin />

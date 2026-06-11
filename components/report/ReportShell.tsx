@@ -67,6 +67,12 @@ export function ReportShell({ report, children }: { report: Report; children: Re
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [pathname]);
 
+  // Print route renders the proposal end-to-end for download — strip the shell chrome entirely.
+  // Early return AFTER all hooks so rules-of-hooks stays satisfied.
+  if (pathname?.endsWith("/print")) {
+    return <>{children}</>;
+  }
+
   return (
     <div className={s.root}>
       {/* ── Desktop top bar ─────────────────────────────────────────── */}

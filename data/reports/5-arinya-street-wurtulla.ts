@@ -34,7 +34,7 @@ export const report: Report = {
     phone: "0438 116 191",
     email: "matt@maxproperty.au",
     bio: "Matt heads Max. Property Collective on the Sunshine Coast — measured advice, the patience to find the right buyer, and a habit of being straight with vendors about timing and price.",
-    portraitUrl: null,
+    portraitUrl: "/assets/team/matt-powe.jpg",
     recent: [],
   },
 
@@ -64,9 +64,9 @@ export const report: Report = {
       "Two floors of renovation opportunity",
       "Elevated brick home, garage converted (no car accommodation)",
       "Walk-to-beach position between Currimundi Lake and the Pangali Canal",
-      "Needs significant repair — value-add upside",
+      "Platform for incredible vision",
     ],
-    heroUrl: null,
+    heroUrl: "/assets/property/5-arinya-street-wurtulla/hero.jpg",
     galleryUrls: [],
   },
 
@@ -177,11 +177,8 @@ export const report: Report = {
         tone: "clay",
       },
     ],
-    signals: [
-      { k: "216", v: "Potential buyers currently active on Wurtulla listings (↑22.7% week on week)." },
-      { k: "5", v: "Comparable homes for sale — roughly 1.4 months of stock." },
-      { k: "43", v: "Houses sold in the past year (↑19.4%), at a median 26 days on market." },
-    ],
+    // Database signals band hidden for this property (vendor preference) — section detects empty.
+    signals: [],
   },
 
   // Approach phases — agency template, unchanged.
@@ -253,7 +250,7 @@ export const report: Report = {
       { n: "$100M+", l: "Sold across the Sunshine Coast in 2025" },
       { n: "500+", l: "Properties brought to market" },
       { n: "21", l: "Median days on market" },
-      { n: "4.9", l: "Average vendor rating · RateMyAgent" },
+      { n: "4.9", l: "Average vendor rating · realestate.com.au" },
     ],
     rating: { score: "4.9", outOf: "5", stars: 5, reviews: "180+ verified vendor reviews" },
     testimonial: {

@@ -21,6 +21,18 @@ export function YourTeam({ report }: { report: Report }) {
     </div>
   );
 
+  const portrait = agent.portraitUrl ? (
+    // eslint-disable-next-line @next/next/no-img-element -- plain <img> keeps this presentational (next/image would need remotePatterns config).
+    <img
+      src={agent.portraitUrl}
+      alt={agent.name}
+      className={s.teamPortrait}
+      style={{ aspectRatio: "4 / 5", width: "100%", height: "auto", objectFit: "cover", display: "block" }}
+    />
+  ) : (
+    <ImageSlot label={`portrait · ${agent.name.toLowerCase()} · 4:5`} ratio="4/5" className={s.teamPortrait} />
+  );
+
   return (
     <>
       <SectionIntro
@@ -37,7 +49,7 @@ export function YourTeam({ report }: { report: Report }) {
       {/* ── Mobile ───────────────────────────────────────────── */}
       <div className={s.mOnly}>
         <div className={s.teamGrid}>
-          <ImageSlot label={`portrait · ${agent.name.toLowerCase()} · 4:5`} ratio="4/5" className={s.teamPortrait} />
+          {portrait}
           <div className={s.teamBodyTop}>
             <h3 className={s.teamName}>
               {agent.name}
@@ -70,7 +82,7 @@ export function YourTeam({ report }: { report: Report }) {
       {/* ── Desktop ──────────────────────────────────────────── */}
       <div className={s.dOnly}>
         <div className={s.dTeamSplit}>
-          <ImageSlot label={`portrait · ${agent.name.toLowerCase()} · 4/5`} ratio="4/5" className={s.teamPortrait} />
+          {portrait}
           <div>
             <h3 className={s.dTeamName}>
               {agent.name}

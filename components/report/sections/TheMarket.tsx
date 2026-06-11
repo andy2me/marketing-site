@@ -84,7 +84,7 @@ export function TheMarket({ report }: { report: Report }) {
           <div className={s.compList}>
             {comps.map((c, i) => (
               <article key={i} className={s.comp}>
-                <ImageSlot label="comp" ratio="1/1" className={s.compImg} />
+                <ImageSlot label={c.addr.toLowerCase()} ratio="1/1" className={s.compImg} />
                 <div className={s.compBody}>
                   <div className={s.compHead}>
                     <div>
@@ -208,7 +208,7 @@ export function TheMarket({ report }: { report: Report }) {
           <div className={s.dCompGrid}>
             {comps.map((c, i) => (
               <article key={i} className={s.dComp}>
-                <ImageSlot label="comp" ratio="4/3" />
+                <ImageSlot label={`${c.addr.toLowerCase()} · ${c.beds}bd`} ratio="4/3" />
                 <div className={s.dCompBody}>
                   <div className={s.dCompPrice}>{c.price}</div>
                   <div className={s.dCompAddr}>{c.addr}</div>

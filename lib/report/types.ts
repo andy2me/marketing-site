@@ -195,9 +195,9 @@ export type SectionDef = {
 };
 
 export const SECTIONS: SectionDef[] = [
-  { id: "welcome", route: "welcome", n: "01", title: "Welcome", long: "Welcome", hint: "A first look at your apartment" },
-  { id: "market", route: "the-market", n: "02", title: "The market", long: "The market", hint: "Noosaville right now" },
-  { id: "buyer", route: "your-buyer", n: "03", title: "Your buyer", long: "Your buyer", hint: "Who's likely to buy this home" },
+  { id: "welcome", route: "welcome", n: "01", title: "Welcome", long: "Welcome", hint: "A first look at your property" },
+  { id: "market", route: "the-market", n: "02", title: "The market", long: "The market", hint: "Your location right now" },
+  { id: "buyer", route: "your-buyer", n: "03", title: "Your buyer", long: "Your buyer", hint: "Who's likely to buy this property" },
   { id: "approach", route: "approach", n: "04", title: "Approach", long: "Approach to market", hint: "How we'd run the campaign" },
   { id: "marketing", route: "marketing", n: "05", title: "Marketing", long: "Marketing", hint: "What's included" },
   { id: "team", route: "your-team", n: "06", title: "Your team", long: "Your team", hint: "Who looks after you" },

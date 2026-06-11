@@ -72,6 +72,17 @@ a {
   }
 }
 
+/* Print: opt back in to printing backgrounds so the brand bands (mulberry, fern, sunrise)
+ * render in the downloaded PDF rather than appearing as white blocks. */
+@media print {
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
 /* ── Overline ─────────────────────────────────────────────────────────── */
 .overline {
   font-family: var(--font-body), system-ui, sans-serif;

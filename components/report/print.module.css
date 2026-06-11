@@ -1,0 +1,38 @@
+/* Max Property — printable proposal layout (Download as PDF flow).
+ * Renders all 8 sections stacked, no shell chrome. The browser print dialog opens
+ * automatically; users save as PDF (or print). */
+
+.printRoot {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 32px 64px;
+  background: var(--color-bg-page);
+}
+
+.printSection {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.printSection:first-child {
+  padding-top: 16px;
+}
+.printSection:last-child {
+  border-bottom: none;
+}
+
+@media print {
+  /* Lose the page background; remove rounded edges that print weirdly. */
+  .printRoot {
+    max-width: 100%;
+    padding: 0;
+    background: white;
+  }
+  .printSection {
+    page-break-after: always;
+    padding: 24px 0;
+    border-bottom: none;
+  }
+  .printSection:last-child {
+    page-break-after: auto;
+  }
+}

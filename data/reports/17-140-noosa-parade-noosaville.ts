@@ -194,7 +194,7 @@ export const report: Report = {
       { n: "$100M+", l: "Sold across the Noosa Shire in 2025" },
       { n: "500+", l: "Properties brought to market" },
       { n: "21", l: "Median days on market" },
-      { n: "4.9", l: "Average vendor rating · RateMyAgent" },
+      { n: "4.9", l: "Average vendor rating · realestate.com.au" },
     ],
     rating: { score: "4.9", outOf: "5", stars: 5, reviews: "180+ verified vendor reviews" },
     testimonial: {

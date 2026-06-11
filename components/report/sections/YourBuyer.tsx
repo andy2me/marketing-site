@@ -51,17 +51,19 @@ export function YourBuyer({ report }: { report: Report }) {
         ))}
       </div>
 
-      <div className={`${s.card} ${s.bandInk}`}>
-        <div className={`overline ${s.onDarkMuted}`}>Inside our database, right now</div>
-        <div className={s.signals}>
-          {buyer.signals.map((sig, i) => (
-            <div key={i} className={s.signal}>
-              <span className={`${s.num} ${s.signalNum} ${s.signalNumSize}`}>{sig.k}</span>
-              <span className={s.signalText}>{sig.v}</span>
-            </div>
-          ))}
+      {buyer.signals.length > 0 ? (
+        <div className={`${s.card} ${s.bandInk}`}>
+          <div className={`overline ${s.onDarkMuted}`}>Inside our database, right now</div>
+          <div className={s.signals}>
+            {buyer.signals.map((sig, i) => (
+              <div key={i} className={s.signal}>
+                <span className={`${s.num} ${s.signalNum} ${s.signalNumSize}`}>{sig.k}</span>
+                <span className={s.signalText}>{sig.v}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : null}
     </>
   );
 }

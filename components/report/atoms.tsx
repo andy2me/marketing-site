@@ -129,11 +129,13 @@ export function NextStepsActions() {
   );
 }
 
-/** Next-steps secondary actions — "Save for later" / "Forward to your partner".
- *  Stubs per the handoff (confirm behaviour with Andy T); forwarding copies the report URL. */
+/** Next-steps secondary actions — Download / Save / Forward.
+ *  Download opens a printable version of the proposal in a new tab and auto-fires the browser
+ *  print dialog so the vendor can save as PDF. Save/Forward remain stubs (forward copies URL). */
 export function SecondaryActions() {
   const { slug, email } = useReport();
   const actions = [
+    { label: "Download as PDF", sub: "Opens a printable version — save or print", kind: "download" as const },
     { label: "Save for later", sub: "Bookmark; we won't email you", kind: "save" as const },
     { label: "Forward to your partner", sub: "Copy a read-only link", kind: "forward" as const },
   ];
@@ -148,6 +150,9 @@ export function SecondaryActions() {
             track({ type: "report.cta.click", slug, section: "next", label: a.label, email });
             if (a.kind === "forward" && typeof navigator !== "undefined" && navigator.clipboard) {
               navigator.clipboard.writeText(window.location.href).catch(() => {});
+            }
+            if (a.kind === "download" && typeof window !== "undefined") {
+              window.open(`/property/report/${slug}/print`, "_blank", "noopener");
             }
           }}
         >

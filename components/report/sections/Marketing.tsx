@@ -33,8 +33,8 @@ export function Marketing({ report }: { report: Report }) {
         <div>
           <div className="overline">Indicative marketing investment</div>
           <p className={s.budgetNote}>
-            Built to suit a river-front three-bed at this price point. Final figure agreed before
-            launch — no add-ons after the fact.
+            Built to suit a property of this description. Final figure agreed before launch — no
+            add-ons after the fact.
           </p>
         </div>
         <div className={`${s.num} ${s.budgetNum}`}>{marketing.indicativeBudget}</div>
