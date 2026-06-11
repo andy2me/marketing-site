@@ -34,7 +34,7 @@ export const report: Report = {
     phone: "0438 116 191",
     email: "matt@maxproperty.au",
     bio: "Matt heads Max. Property Collective on the Sunshine Coast — measured advice, the patience to find the right buyer, and a habit of being straight with vendors about timing and price.",
-    portraitUrl: "/assets/team/matt-powe.jpg",
+    portraitUrl: "/assets/team/matt-powe.webp",
     recent: [],
   },
 
