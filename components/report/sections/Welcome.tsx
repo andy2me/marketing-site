@@ -1,18 +1,30 @@
-import type { Report } from "@/lib/report/types";
+import type { CSSProperties, ReactElement } from "react";
+import type { PropertyFact, PropertyFactIcon, Report } from "@/lib/report/types";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import { IconBed, IconBath, IconCar, IconArea, IconPin } from "@/components/icons";
 import s from "../report.module.css";
 
+const FACT_ICON: Record<PropertyFactIcon, ReactElement> = {
+  bed: <IconBed />,
+  bath: <IconBath />,
+  car: <IconCar />,
+  area: <IconArea />,
+};
+
 // 01 · Welcome — prepared-for, hero (5/7 on desktop), address, overture, facts strip, features.
 export function Welcome({ report }: { report: Report }) {
   const { property, vendor, ref, preparedOn, agent } = report;
-  const facts = [
-    { ic: <IconBed />, v: property.beds, l: "Bedrooms" },
-    { ic: <IconBath />, v: property.baths, l: "Bathrooms" },
-    { ic: <IconCar />, v: property.cars, l: "Car spaces" },
-    { ic: <IconArea />, v: property.internal, l: "Internal" },
-    { ic: <IconArea />, v: property.outdoor, l: "Terrace" },
+  // Use the property's bespoke facts override if supplied; otherwise auto-derive from beds/
+  // baths/cars and any present internal / outdoor measurements (skip cells we have no value for).
+  const facts: PropertyFact[] = property.facts ?? [
+    { icon: "bed", v: property.beds, l: "Bedrooms" },
+    { icon: "bath", v: property.baths, l: "Bathrooms" },
+    { icon: "car", v: property.cars, l: "Car spaces" },
+    ...(property.internal ? [{ icon: "area" as const, v: property.internal, l: "Internal" }] : []),
+    ...(property.outdoor ? [{ icon: "area" as const, v: property.outdoor, l: "Terrace" }] : []),
   ];
+  // Drive grid column count from data so the strip never has trailing empty cells.
+  const factsStyle = { "--fact-cols": facts.length } as CSSProperties;
   return (
     <>
       <div className={s.welcomeFor}>
@@ -49,10 +61,10 @@ export function Welcome({ report }: { report: Report }) {
       {/* Facts strip */}
       <div className={s.factsBlock}>
         <div className="overline">At a glance</div>
-        <div className={s.factsGrid}>
+        <div className={s.factsGrid} style={factsStyle}>
           {facts.map((f, i) => (
             <div key={i} className={s.factCell}>
-              <span className={s.factIcon}>{f.ic}</span>
+              <span className={s.factIcon}>{FACT_ICON[f.icon]}</span>
               <span className={`${s.num} ${s.factNum}`}>{f.v}</span>
               <span className={s.factLabel}>{f.l}</span>
             </div>

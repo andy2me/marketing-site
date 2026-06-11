@@ -626,15 +626,15 @@ export function ReportComposer() {
               <NumField label="Car spaces" value={report.property.cars} onChange={(v) => setProperty("cars", v)} min={0} />
               <Field
                 label="Internal m²"
-                value={report.property.internal}
-                onChange={(v) => setProperty("internal", v)}
-                placeholder="162m²"
+                value={report.property.internal ?? ""}
+                onChange={(v) => setProperty("internal", v || undefined)}
+                placeholder="162m² · leave blank if unknown"
               />
               <Field
                 label="Outdoor m²"
-                value={report.property.outdoor}
-                onChange={(v) => setProperty("outdoor", v)}
-                placeholder="38m²"
+                value={report.property.outdoor ?? ""}
+                onChange={(v) => setProperty("outdoor", v || undefined)}
+                placeholder="38m² · leave blank if N/A"
               />
             </div>
             <TextField
@@ -816,7 +816,7 @@ export function ReportComposer() {
                   <div className={`${s.row} ${s.row3}`}>
                     <Field label="Price" value={c.price} onChange={(v) => set({ ...c, price: v })} />
                     <Field label="Sold" value={c.sold} onChange={(v) => set({ ...c, sold: v })} placeholder="Apr 2026" />
-                    <NumField label="Days" value={c.days} onChange={(v) => set({ ...c, days: v })} />
+                    <NumField label="Days (0 to hide)" value={c.days ?? 0} onChange={(v) => set({ ...c, days: v > 0 ? v : undefined })} />
                   </div>
                   <div className={`${s.row} ${s.row3}`}>
                     <NumField label="Beds" value={c.beds} onChange={(v) => set({ ...c, beds: v })} />

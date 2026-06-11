@@ -10,9 +10,11 @@
 
 import type { Report } from "./types";
 import { report as noosaParade } from "@/data/reports/17-140-noosa-parade-noosaville";
+import { report as arinya } from "@/data/reports/5-arinya-street-wurtulla";
 
 const REPORTS: Record<string, Report> = {
   [noosaParade.slug]: noosaParade,
+  [arinya.slug]: arinya,
 };
 
 /** Resolve a report by its stable slug. null → 404 (notFound). */

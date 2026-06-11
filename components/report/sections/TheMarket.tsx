@@ -97,7 +97,10 @@ export function TheMarket({ report }: { report: Report }) {
                     <span className={s.compMetaItem}><IconBed size={14} />{c.beds}</span>
                     <span className={s.compMetaItem}><IconBath size={14} />{c.baths}</span>
                     <span className={s.compMetaItem}><IconCar size={14} />{c.cars}</span>
-                    <span className={s.compMetaDays}>{c.days}d · {c.sold}</span>
+                    <span className={s.compMetaDays}>
+                      {c.days != null ? `${c.days}d · ` : ""}
+                      {c.sold}
+                    </span>
                   </div>
                 </div>
               </article>
@@ -216,7 +219,7 @@ export function TheMarket({ report }: { report: Report }) {
                       <span className={s.dCompMetaItem}><IconBath size={14} />{c.baths}</span>
                       <span className={s.dCompMetaItem}><IconCar size={14} />{c.cars}</span>
                     </span>
-                    <span className={s.dCompDays}>{c.days}d</span>
+                    {c.days != null ? <span className={s.dCompDays}>{c.days}d</span> : <span />}
                   </div>
                   <div className={s.dCompSold}>SOLD · {c.sold}</div>
                 </div>

@@ -40,6 +40,17 @@ export type Agent = {
   recent: AgentSale[];
 };
 
+/** A single cell in the welcome "At a glance" facts strip. When `Property.facts` is set, it
+ *  replaces the default 5-cell strip derived from beds/baths/cars/internal/outdoor. */
+export type PropertyFactIcon = "bed" | "bath" | "car" | "area";
+export type PropertyFact = {
+  icon: PropertyFactIcon;
+  /** Big numeral / value (e.g. 4, "635m²", "None"). */
+  v: string | number;
+  /** Small uppercase label (e.g. "Bedrooms", "Land", "Garage"). */
+  l: string;
+};
+
 export type Property = {
   street: string; // "17/140 Noosa Parade"
   suburb: string; // "Noosaville"
@@ -49,8 +60,13 @@ export type Property = {
   beds: number;
   baths: number;
   cars: number;
-  internal: string; // "162m²"
-  outdoor: string; // "38m²"
+  /** Internal floor area (e.g. "162m²"). Omit when not supplied by the data source. */
+  internal?: string;
+  /** Outdoor / terrace (e.g. "38m²"). Omit when not applicable. */
+  outdoor?: string;
+  /** Override the auto-derived 5-cell facts strip with a bespoke list (e.g. include "Land"
+   *  or "Pool" instead of internal m²). When absent, beds/baths/cars/internal/outdoor are used. */
+  facts?: PropertyFact[];
   /** Serif overture quote, one sentence. */
   overture: string;
   /** 1–2 sentence prose intro. */
@@ -86,7 +102,8 @@ export type Comp = {
   beds: number;
   baths: number;
   cars: number;
-  days: number;
+  /** Days on market. Omit when not supplied (some sources only give the sold date). */
+  days?: number;
   sold: string; // "Apr 2026"
   imageUrl?: string | null;
 };

@@ -49,20 +49,22 @@ export function YourTeam({ report }: { report: Report }) {
           </div>
         </div>
 
-        <div className={s.block}>
-          <div className="overline">{first}&rsquo;s recent campaigns</div>
-          <div className={s.recentList}>
-            {agent.recent.map((r, i) => (
-              <div key={i} className={s.recent}>
-                <div>
-                  <div className={s.recentAddr}>{r.addr}</div>
-                  <div className={s.recentMeta}>SOLD · {r.days} DAYS</div>
+        {agent.recent.length > 0 ? (
+          <div className={s.block}>
+            <div className="overline">{first}&rsquo;s recent campaigns</div>
+            <div className={s.recentList}>
+              {agent.recent.map((r, i) => (
+                <div key={i} className={s.recent}>
+                  <div>
+                    <div className={s.recentAddr}>{r.addr}</div>
+                    <div className={s.recentMeta}>SOLD · {r.days} DAYS</div>
+                  </div>
+                  <div className={s.recentPrice}>{r.price}</div>
                 </div>
-                <div className={s.recentPrice}>{r.price}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
 
       {/* ── Desktop ──────────────────────────────────────────── */}
@@ -80,21 +82,23 @@ export function YourTeam({ report }: { report: Report }) {
           </div>
         </div>
 
-        <div className={s.dBlock}>
-          <div className="overline">{first}&rsquo;s recent campaigns</div>
-          <div className={s.dRecentGrid}>
-            {agent.recent.map((r, i) => (
-              <div key={i} className={s.dRecentCard}>
-                <div className={s.dRecentPrice}>{r.price}</div>
-                <div className={s.dRecentAddr}>{r.addr}</div>
-                <div className={s.dRecentFoot}>
-                  <span>SOLD</span>
-                  <span>{r.days} days</span>
+        {agent.recent.length > 0 ? (
+          <div className={s.dBlock}>
+            <div className="overline">{first}&rsquo;s recent campaigns</div>
+            <div className={s.dRecentGrid}>
+              {agent.recent.map((r, i) => (
+                <div key={i} className={s.dRecentCard}>
+                  <div className={s.dRecentPrice}>{r.price}</div>
+                  <div className={s.dRecentAddr}>{r.addr}</div>
+                  <div className={s.dRecentFoot}>
+                    <span>SOLD</span>
+                    <span>{r.days} days</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </>
   );
