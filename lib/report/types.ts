@@ -106,6 +106,9 @@ export type Comp = {
   days?: number;
   sold: string; // "Apr 2026"
   imageUrl?: string | null;
+  /** Optional listing URL (e.g. realestate.com.au). When set, the comp card becomes a link
+   *  to the source listing, opening in a new tab. */
+  url?: string;
 };
 
 export type BuyerSegment = {

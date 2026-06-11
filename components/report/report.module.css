@@ -344,6 +344,10 @@
   background: var(--color-bg-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+  transition: border-color 120ms;
+}
+a.comp:hover {
+  border-color: var(--color-border-strong);
 }
 .compImg {
   border-radius: var(--radius-md);
@@ -458,6 +462,10 @@
   border: 1px solid var(--color-border);
   border-radius: 14px;
   overflow: hidden;
+  transition: border-color 120ms;
+}
+a.dComp:hover {
+  border-color: var(--color-border-strong);
 }
 .dCompBody {
   padding: 18px;

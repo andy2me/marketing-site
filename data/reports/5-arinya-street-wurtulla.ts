@@ -108,6 +108,7 @@ export const report: Report = {
       baths: 2,
       cars: 4,
       sold: "Dec 2025",
+      url: "https://www.realestate.com.au/property/1-alloota-st-wurtulla-qld-4575/",
       // days on market not supplied for this sale
     },
     {
@@ -119,6 +120,7 @@ export const report: Report = {
       cars: 2,
       days: 9,
       sold: "Apr 2026",
+      url: "https://www.realestate.com.au/property/40-naroon-cres-wurtulla-qld-4575/",
     },
     {
       addr: "100 Piringa Street",
@@ -129,6 +131,7 @@ export const report: Report = {
       cars: 3,
       days: 49,
       sold: "Sep 2025",
+      url: "https://www.realestate.com.au/property/100-piringa-st-wurtulla-qld-4575/",
     },
     {
       // Larger 4-bed — closest by configuration; top-end anchor, not like-for-like.
@@ -140,6 +143,7 @@ export const report: Report = {
       cars: 2,
       days: 10,
       sold: "Feb 2026",
+      url: "https://www.realestate.com.au/property/4-royal-cl-wurtulla-qld-4575/",
     },
   ],
 

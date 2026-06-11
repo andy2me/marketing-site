@@ -82,29 +82,36 @@ export function TheMarket({ report }: { report: Report }) {
           <div className="overline">Recent comparable sales</div>
           <h3 className={s.h3}>Four homes against which yours is positioned.</h3>
           <div className={s.compList}>
-            {comps.map((c, i) => (
-              <article key={i} className={s.comp}>
-                <ImageSlot label={c.addr.toLowerCase()} ratio="1/1" className={s.compImg} />
-                <div className={s.compBody}>
-                  <div className={s.compHead}>
-                    <div>
-                      <div className={s.compAddr}>{c.addr}</div>
-                      <div className={s.compSuburb}>{c.suburb}</div>
+            {comps.map((c, i) => {
+              const inner = (
+                <>
+                  <ImageSlot label={c.addr.toLowerCase()} ratio="1/1" className={s.compImg} />
+                  <div className={s.compBody}>
+                    <div className={s.compHead}>
+                      <div>
+                        <div className={s.compAddr}>{c.addr}</div>
+                        <div className={s.compSuburb}>{c.suburb}</div>
+                      </div>
+                      <div className={s.compPrice}>{c.price}</div>
                     </div>
-                    <div className={s.compPrice}>{c.price}</div>
+                    <div className={s.compMeta}>
+                      <span className={s.compMetaItem}><IconBed size={14} />{c.beds}</span>
+                      <span className={s.compMetaItem}><IconBath size={14} />{c.baths}</span>
+                      <span className={s.compMetaItem}><IconCar size={14} />{c.cars}</span>
+                      <span className={s.compMetaDays}>
+                        {c.days != null ? `${c.days}d · ` : ""}
+                        {c.sold}
+                      </span>
+                    </div>
                   </div>
-                  <div className={s.compMeta}>
-                    <span className={s.compMetaItem}><IconBed size={14} />{c.beds}</span>
-                    <span className={s.compMetaItem}><IconBath size={14} />{c.baths}</span>
-                    <span className={s.compMetaItem}><IconCar size={14} />{c.cars}</span>
-                    <span className={s.compMetaDays}>
-                      {c.days != null ? `${c.days}d · ` : ""}
-                      {c.sold}
-                    </span>
-                  </div>
-                </div>
-              </article>
-            ))}
+                </>
+              );
+              return c.url ? (
+                <a key={i} className={s.comp} href={c.url} target="_blank" rel="noopener noreferrer">{inner}</a>
+              ) : (
+                <article key={i} className={s.comp}>{inner}</article>
+              );
+            })}
           </div>
         </div>
 
@@ -206,25 +213,32 @@ export function TheMarket({ report }: { report: Report }) {
             </p>
           </div>
           <div className={s.dCompGrid}>
-            {comps.map((c, i) => (
-              <article key={i} className={s.dComp}>
-                <ImageSlot label={`${c.addr.toLowerCase()} · ${c.beds}bd`} ratio="4/3" />
-                <div className={s.dCompBody}>
-                  <div className={s.dCompPrice}>{c.price}</div>
-                  <div className={s.dCompAddr}>{c.addr}</div>
-                  <div className={s.dCompSuburb}>{c.suburb}</div>
-                  <div className={s.dCompMeta}>
-                    <span className={s.dCompMetaItems}>
-                      <span className={s.dCompMetaItem}><IconBed size={14} />{c.beds}</span>
-                      <span className={s.dCompMetaItem}><IconBath size={14} />{c.baths}</span>
-                      <span className={s.dCompMetaItem}><IconCar size={14} />{c.cars}</span>
-                    </span>
-                    {c.days != null ? <span className={s.dCompDays}>{c.days}d</span> : <span />}
+            {comps.map((c, i) => {
+              const inner = (
+                <>
+                  <ImageSlot label={`${c.addr.toLowerCase()} · ${c.beds}bd`} ratio="4/3" />
+                  <div className={s.dCompBody}>
+                    <div className={s.dCompPrice}>{c.price}</div>
+                    <div className={s.dCompAddr}>{c.addr}</div>
+                    <div className={s.dCompSuburb}>{c.suburb}</div>
+                    <div className={s.dCompMeta}>
+                      <span className={s.dCompMetaItems}>
+                        <span className={s.dCompMetaItem}><IconBed size={14} />{c.beds}</span>
+                        <span className={s.dCompMetaItem}><IconBath size={14} />{c.baths}</span>
+                        <span className={s.dCompMetaItem}><IconCar size={14} />{c.cars}</span>
+                      </span>
+                      {c.days != null ? <span className={s.dCompDays}>{c.days}d</span> : <span />}
+                    </div>
+                    <div className={s.dCompSold}>SOLD · {c.sold}</div>
                   </div>
-                  <div className={s.dCompSold}>SOLD · {c.sold}</div>
-                </div>
-              </article>
-            ))}
+                </>
+              );
+              return c.url ? (
+                <a key={i} className={s.dComp} href={c.url} target="_blank" rel="noopener noreferrer">{inner}</a>
+              ) : (
+                <article key={i} className={s.dComp}>{inner}</article>
+              );
+            })}
           </div>
         </div>
 
