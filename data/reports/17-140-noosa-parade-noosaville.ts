@@ -177,7 +177,7 @@ export const report: Report = {
   marketing: {
     inclusions: [
       { c: "Photography", v: "Twilight + day, drone, walkthrough video" },
-      { c: "Styling", v: "Full home stylist, 4-week stage included" },
+      { c: "Digital styling", v: "Present the property in a furnished state" },
       { c: "Copy", v: "Bespoke editorial brochure, not template" },
       { c: "Portals", v: "Premiere on realestate.com.au + Domain" },
       { c: "Social", v: "Paid Meta + organic reels, geo-targeted" },

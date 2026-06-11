@@ -123,8 +123,8 @@ export function TheMarket({ report }: { report: Report }) {
             <span className={`${s.num} ${s.onDark}`} style={{ fontSize: 32 }}>{market.indicativeRangeHigh}</span>
           </div>
           <p className={s.bandProse}>
-            A measured guide based on the four comparable sales above, current inventory, and
-            Noosaville&rsquo;s recent trajectory. We&rsquo;d refine this together at a walk-through.
+            A measured guide based on the four comparable sales above, current inventory, and the
+            location&rsquo;s recent trajectory.
           </p>
         </div>
 
@@ -208,8 +208,8 @@ export function TheMarket({ report }: { report: Report }) {
               <h3 className={s.dCompsH3}>Four homes against which yours is positioned.</h3>
             </div>
             <p className={s.dCompsNote}>
-              We&rsquo;ve selected like-for-like — three-bedroom apartments along the river, sold in
-              the last 90 days. Days on market shown is from list to unconditional.
+              We&rsquo;ve selected close-by properties, sold in the last 9 months. Days on market
+              shown is from list to unconditional.
             </p>
           </div>
           <div className={s.dCompGrid}>
@@ -251,8 +251,8 @@ export function TheMarket({ report }: { report: Report }) {
               <span className={`${s.num} ${s.onDark}`} style={{ fontSize: 64 }}>{market.indicativeRangeHigh}</span>
             </div>
             <p className={s.dRangeProse}>
-              A measured guide based on the four comparable sales above, current inventory, and
-              Noosaville&rsquo;s recent trajectory. We&rsquo;d refine this together at a walk-through.
+              A measured guide based on the four comparable sales above, current inventory, and the
+              location&rsquo;s recent trajectory.
             </p>
           </div>
           <Link href={teamHref} className={s.dSunriseBtn}>
