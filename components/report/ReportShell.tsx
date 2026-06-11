@@ -198,7 +198,17 @@ export function ReportShell({ report, children }: { report: Report; children: Re
 
           <div className={s.sideAgent}>
             <div className={s.sideAgentCard}>
-              <span className={s.sideAgentAvatar} aria-hidden />
+              {report.agent.portraitUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element -- plain <img> keeps the shell light; next/image would force remotePatterns config for future hosts.
+                <img
+                  src={report.agent.portraitUrl}
+                  alt={report.agent.name}
+                  className={s.sideAgentAvatar}
+                  style={{ objectFit: "cover" }}
+                />
+              ) : (
+                <span className={s.sideAgentAvatar} aria-hidden />
+              )}
               <div>
                 <div className="overline">Your agent</div>
                 <div className={s.sideAgentName}>{report.agent.name}</div>
