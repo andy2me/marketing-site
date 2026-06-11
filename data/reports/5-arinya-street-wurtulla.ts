@@ -25,7 +25,7 @@ export const report: Report = {
   vendor: {
     firstName: "Tommy",
     lastName: "",
-    fullName: "Tommy, Sean, Leslie & Brooke",
+    fullName: "Tommy, Sean, Lesley & Brooke",
   },
 
   agent: {
