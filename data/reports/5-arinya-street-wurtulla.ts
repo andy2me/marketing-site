@@ -64,7 +64,7 @@ export const report: Report = {
       "Two floors of renovation opportunity",
       "Elevated brick home, garage converted (no car accommodation)",
       "Walk-to-beach position between Currimundi Lake and the Pangali Canal",
-      "Platform for incredible vision",
+      "Well poised for future growth",
     ],
     heroUrl: "/assets/property/5-arinya-street-wurtulla/hero.webp",
     galleryUrls: [],
