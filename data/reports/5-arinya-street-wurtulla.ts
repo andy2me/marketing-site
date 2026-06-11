@@ -66,7 +66,7 @@ export const report: Report = {
       "Walk-to-beach position between Currimundi Lake and the Pangali Canal",
       "Platform for incredible vision",
     ],
-    heroUrl: "/assets/property/5-arinya-street-wurtulla/hero.jpg",
+    heroUrl: "/assets/property/5-arinya-street-wurtulla/hero.webp",
     galleryUrls: [],
   },
 
