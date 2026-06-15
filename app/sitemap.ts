@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getListingSlugs } from "@/lib/rex/mock";
+import { getListingSlugs } from "@/lib/rex";
 
 const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 

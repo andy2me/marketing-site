@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Container } from "@/components/ui/Container";
 import { PropertiesBrowser } from "@/components/property/PropertiesBrowser";
 import { IconArrowR } from "@/components/icons";
-import { getActiveListings } from "@/lib/rex/mock";
+import { getActiveListings } from "@/lib/rex";
 import { getSiteSettings } from "@/lib/wp/mock";
 import s from "@/components/property/properties.module.css";
 

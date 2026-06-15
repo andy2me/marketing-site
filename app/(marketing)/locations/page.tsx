@@ -6,7 +6,7 @@ import { ImageSlot } from "@/components/ui/ImageSlot";
 import { PropertyCard } from "@/components/property/PropertyCard";
 import { IconArrowR } from "@/components/icons";
 import { getSiteSettings } from "@/lib/wp/mock";
-import { getActiveListings } from "@/lib/rex/mock";
+import { getActiveListings } from "@/lib/rex";
 import s from "./locations.module.css";
 
 export const metadata: Metadata = {

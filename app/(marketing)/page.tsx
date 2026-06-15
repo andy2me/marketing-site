@@ -12,7 +12,7 @@ import {
   HomeCTABand,
 } from "@/components/home/HomeSections";
 import { getHomeContent, getSiteSettings } from "@/lib/wp/mock";
-import { getFeaturedListings } from "@/lib/rex/mock";
+import { getFeaturedListings } from "@/lib/rex";
 import { getRatingSummary, getReviews } from "@/lib/reviews/mock";
 
 export const metadata: Metadata = {
