@@ -83,8 +83,6 @@ export type RexCriterion =
   | { name: string; value: string | number | boolean }
   | { name: string; value: Array<string | number>; type: "in" };
 
-export type RexSearchRows<T> = { rows: T[]; total?: number };
-
 const DEFAULT_EXTRA_FIELDS = [
   "subcategories",
   "advert_internet",
@@ -110,8 +108,8 @@ export async function searchPublishedListings(
     limit?: number;
   } = {},
   opts: FetchOpts = { tags: ["listings"], revalidate: 600 },
-): Promise<RexSearchRows<RexPublishedListing>> {
-  return call("PublishedListings/search", {
+): Promise<RexPublishedListing[]> {
+  return call<RexPublishedListing[]>("PublishedListings/search", {
     criteria: [...PUBLIC_LISTING_CRITERIA, ...(args.criteria ?? [])],
     result_format: args.resultFormat ?? "website_overrides_applied",
     limit: args.limit ?? 100,

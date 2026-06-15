@@ -12,8 +12,8 @@ const DEFAULT_SIMILAR = 3;
 const extractRexId = (slug: string): string | null => slug.match(/-(\d+)$/)?.[1] ?? null;
 
 async function fetchActiveCards(): Promise<ListingCard[]> {
-  const { rows } = await searchPublishedListings({
-    criteria: [{ name: "listing.system_listing_state", value: ["current"], type: "in" }],
+  const rows = await searchPublishedListings({
+    criteria: [{ name: "listing.system_listing_state", value: "current" }],
   });
   return rows.flatMap((row) => {
     const card = mapPublishedListingToCard(row);

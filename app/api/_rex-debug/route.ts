@@ -23,20 +23,26 @@ export async function GET(req: NextRequest) {
   // Try a no-criteria search first (just `publish_to_external` is auto-prepended by the client).
   let broadSearch: unknown;
   try {
-    const res = await searchPublishedListings({ limit: 3 }, { revalidate: 0 });
+    const rows = await searchPublishedListings({ limit: 3 }, { revalidate: 0 });
+    const first = rows[0] as
+      | Partial<{
+          _id: unknown;
+          system_listing_state: unknown;
+          address: { latitude?: unknown; longitude?: unknown };
+          images: unknown[];
+        }>
+      | undefined;
     broadSearch = {
       ok: true,
-      total: res.total ?? null,
-      rowCount: res.rows.length,
-      firstRowKeys: res.rows[0] ? Object.keys(res.rows[0]).sort() : null,
-      firstRowSample: res.rows[0]
+      rowCount: rows.length,
+      firstRowKeys: first ? Object.keys(first).sort() : null,
+      firstRowSample: first
         ? {
-            _id: (res.rows[0] as { _id?: unknown })._id ?? null,
-            system_listing_state: (res.rows[0] as { system_listing_state?: unknown })
-              .system_listing_state ?? null,
-            address_lat: (res.rows[0] as { address?: { latitude?: unknown } }).address?.latitude ?? null,
-            address_lng: (res.rows[0] as { address?: { longitude?: unknown } }).address?.longitude ?? null,
-            image_count: ((res.rows[0] as { images?: unknown[] }).images ?? []).length,
+            _id: first._id ?? null,
+            system_listing_state: first.system_listing_state ?? null,
+            address_lat: first.address?.latitude ?? null,
+            address_lng: first.address?.longitude ?? null,
+            image_count: (first.images ?? []).length,
           }
         : null,
     };
@@ -47,14 +53,14 @@ export async function GET(req: NextRequest) {
   // Try the "current" filter we actually use in production.
   let currentSearch: unknown;
   try {
-    const res = await searchPublishedListings(
+    const rows = await searchPublishedListings(
       {
-        criteria: [{ name: "listing.system_listing_state", value: ["current"], type: "in" }],
+        criteria: [{ name: "listing.system_listing_state", value: "current" }],
         limit: 3,
       },
       { revalidate: 0 },
     );
-    currentSearch = { ok: true, total: res.total ?? null, rowCount: res.rows.length };
+    currentSearch = { ok: true, rowCount: rows.length };
   } catch (err) {
     currentSearch = { ok: false, error: err instanceof Error ? err.message : String(err) };
   }
