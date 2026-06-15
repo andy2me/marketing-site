@@ -154,7 +154,11 @@ function buildListing(card: ListingCard): Listing {
 }
 
 export async function getActiveListings(): Promise<ListingCard[]> {
-  return CARDS;
+  return CARDS.filter((l) => l.status !== "Sold");
+}
+
+export async function getSoldListings(): Promise<ListingCard[]> {
+  return CARDS.filter((l) => l.status === "Sold");
 }
 
 export async function getFeaturedListings(limit = 3): Promise<ListingCard[]> {
