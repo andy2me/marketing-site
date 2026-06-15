@@ -6,9 +6,11 @@ import { StatRow } from "@/components/sections/StatRow";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import { Button } from "@/components/ui/Button";
 import { PropertyCard } from "@/components/property/PropertyCard";
-import { IconArrowR, IconArrowUR, IconStar } from "@/components/icons";
+import { IconArrowR, IconArrowUR } from "@/components/icons";
 import type { HomeContent } from "@/lib/wp/types";
 import type { ListingCard } from "@/lib/rex/types";
+import type { RatingSummary, Review } from "@/lib/reviews/types";
+import { TestimonialsCarousel } from "./TestimonialsCarousel";
 import s from "./home.module.css";
 
 /** Render a heading string with {braced} words turned into ember-italic <em>s. */
@@ -244,53 +246,20 @@ export function HomeInsights({ insights }: { insights: HomeContent["insights"] }
 // ── 8. Testimonials ──────────────────────────────────────────────────────────
 export function HomeTestimonials({
   testimonials,
+  summary,
+  reviews,
 }: {
   testimonials: HomeContent["testimonials"];
+  summary: RatingSummary;
+  reviews: Review[];
 }) {
-  const t = testimonials;
   return (
-    <section className={s.testi}>
-      <Container>
-        <div className={s.testiGrid}>
-          <div>
-            <div className="overline">{t.overline}</div>
-            <h2 className={s.testiHeading}>{t.heading}</h2>
-            <div className={s.rating}>
-              {[0, 1, 2, 3, 4].map((i) => (
-                <IconStar key={i} />
-              ))}
-              <span className={s.ratingText}>
-                <strong>{t.rating}</strong> · <span className={s.ratingMeta}>{t.ratingMeta}</span>
-              </span>
-            </div>
-          </div>
-
-          <div>
-            <blockquote className={s.quote}>
-              <span className={s.quoteMark}>“</span>
-              {t.quote}
-              <span className={s.quoteMark}>”</span>
-            </blockquote>
-            <div className={s.author}>
-              <span className={s.authorAvatar} aria-hidden />
-              <div>
-                <div className={s.authorName}>{t.authorName}</div>
-                <div className={s.authorDetail}>{t.authorDetail}</div>
-              </div>
-            </div>
-            <div className={s.controls}>
-              <button type="button" className={s.ctrlBtn} aria-label="Previous testimonial">
-                ←
-              </button>
-              <button type="button" className={s.ctrlBtn} aria-label="Next testimonial">
-                →
-              </button>
-              <div className={s.counter}>01 / {String(t.total).padStart(2, "0")}</div>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </section>
+    <TestimonialsCarousel
+      overline={testimonials.overline}
+      heading={testimonials.heading}
+      summary={summary}
+      reviews={reviews}
+    />
   );
 }
 

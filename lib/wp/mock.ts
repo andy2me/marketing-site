@@ -108,13 +108,6 @@ export async function getHomeContent(): Promise<HomeContent> {
     testimonials: {
       overline: "§ 06 · Vendor stories",
       heading: "The proof is in the campaigns.",
-      rating: "4.9",
-      ratingMeta: "180+ reviews on RateMyAgent",
-      quote:
-        "From the first appraisal call to the moment we handed over the keys, Max. felt like an extension of our family. They showed up with a strategy, and they delivered every promise.",
-      authorName: "Sarah & Tom Henley",
-      authorDetail: "Sold · 18 Hilltop Crescent, Noosaville · $2.65M",
-      total: 12,
     },
     cta: {
       overline: "§ 07 · Start a conversation today",
