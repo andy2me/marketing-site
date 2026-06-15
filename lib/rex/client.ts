@@ -99,6 +99,17 @@ const PUBLIC_LISTING_CRITERIA: RexCriterion[] = [
   { name: "listing.publish_to_external", value: true },
 ];
 
+// Rex's PublishedListings/search returns either a bare array (observed when empty) or
+// the canonical `{rows, total}` envelope (observed when populated, matching the etags-format
+// example in the sync docs). Unwrap to a flat array so callers don't have to know.
+function unwrapSearchRows<T>(result: unknown): T[] {
+  if (Array.isArray(result)) return result as T[];
+  if (result && typeof result === "object" && Array.isArray((result as { rows?: unknown }).rows)) {
+    return (result as { rows: T[] }).rows;
+  }
+  return [];
+}
+
 export async function searchPublishedListings(
   args: {
     criteria?: RexCriterion[];
@@ -109,13 +120,14 @@ export async function searchPublishedListings(
   } = {},
   opts: FetchOpts = { tags: ["listings"], revalidate: 600 },
 ): Promise<RexPublishedListing[]> {
-  return call<RexPublishedListing[]>("PublishedListings/search", {
+  const result = await call<unknown>("PublishedListings/search", {
     criteria: [...PUBLIC_LISTING_CRITERIA, ...(args.criteria ?? [])],
     result_format: args.resultFormat ?? "website_overrides_applied",
     limit: args.limit ?? 100,
     offset: args.offset ?? 0,
     extra_options: { extra_fields: args.extraFields ?? DEFAULT_EXTRA_FIELDS },
   }, opts);
+  return unwrapSearchRows<RexPublishedListing>(result);
 }
 
 export async function readPublishedListing(
