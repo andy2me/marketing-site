@@ -26,6 +26,7 @@ export async function GET(req: NextRequest) {
     const rows = await searchPublishedListings({ limit: 3 }, { revalidate: 0 });
     const first = rows[0] as
       | Partial<{
+          id: unknown;
           _id: unknown;
           system_listing_state: unknown;
           address: { latitude?: unknown; longitude?: unknown };
@@ -38,6 +39,7 @@ export async function GET(req: NextRequest) {
       firstRowKeys: first ? Object.keys(first).sort() : null,
       firstRowSample: first
         ? {
+            id: first.id ?? null,
             _id: first._id ?? null,
             system_listing_state: first.system_listing_state ?? null,
             address_lat: first.address?.latitude ?? null,

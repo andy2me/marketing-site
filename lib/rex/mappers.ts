@@ -77,7 +77,9 @@ export type RexAdvertInternet = { heading?: RexNullable<string>; body?: RexNulla
 export type RexLink = { link_type?: string; link_url?: string };
 
 export type RexPublishedListing = {
-  _id: string;
+  // Normal search responses return `id`; etags-format responses return `_id`. Accept both.
+  id?: string | number;
+  _id?: string | number;
   property_id?: RexNullable<string>;
   system_listing_state?: "current" | "sold" | "leased" | "withdrawn" | string;
   system_publication_timestamp?: RexNullable<string>;
@@ -131,6 +133,8 @@ const truthyBool = (v: RexBoolish): boolean => v === true || v === "1" || v === 
 
 const ensureHttps = (url: string): string => (url.startsWith("//") ? `https:${url}` : url);
 
+const rexId = (rex: RexPublishedListing): string => String(rex.id ?? rex._id ?? "");
+
 function deriveStreet(addr: RexAddress | undefined): string {
   if (!addr) return "";
   if (addr.formats?.street_name_number) return addr.formats.street_name_number;
@@ -149,10 +153,11 @@ function deriveSuburb(addr: RexAddress | undefined): string {
 }
 
 export function deriveSlug(rex: RexPublishedListing): string {
+  const id = rexId(rex);
   const street = deriveStreet(rex.address);
   const suburb = rex.address?.suburb_or_town ?? "";
   const base = [street, suburb].filter(Boolean).map(kebab).filter(Boolean).join("-");
-  return base ? `${base}-${rex._id}` : `listing-${rex._id}`;
+  return base ? `${base}-${id}` : `listing-${id}`;
 }
 
 function deriveStatus(rex: RexPublishedListing): ListingStatus {
@@ -264,7 +269,7 @@ function deriveNextOpen(events: RexEvent[] | undefined): string | undefined {
 function deriveRef(rex: RexPublishedListing): string {
   const suburb = rex.address?.suburb_or_town ?? "";
   const tag = suburb ? suburb.slice(0, 3).toUpperCase() : "MAX";
-  return `MX-${rex._id}-${tag}`;
+  return `MX-${rexId(rex)}-${tag}`;
 }
 
 export function mapPublishedListingToCard(rex: RexPublishedListing): ListingCard | null {
@@ -273,7 +278,7 @@ export function mapPublishedListingToCard(rex: RexPublishedListing): ListingCard
   const status = deriveStatus(rex);
   const attrs = rex.attributes;
   return {
-    id: rex._id,
+    id: rexId(rex),
     slug: deriveSlug(rex),
     image: deriveImage(rex),
     status,
