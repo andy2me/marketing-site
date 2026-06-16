@@ -19,10 +19,13 @@ const MANIFESTO = [
   { k: "02", w: "No handoffs after the appraisal.", body: "The agent you meet is the one who answers the phone at 9pm on settlement eve." },
   { k: "03", w: "No fee creep, no surprise add-ons.", body: "Every dollar is costed upfront and approved by you before we spend it." },
 ];
+// Only matt-powe is registered in lib/agents/store today — the other slugs
+// will 404 until their profiles are added. See plan §6.
 const LEADERS = [
-  { name: "James Whitlam", role: "Principal · Founder", patches: ["Noosa Heads", "Sunshine Beach"], years: "14", sales: "$284M", quote: "You can't shortcut trust. So we don't try.", color: "var(--mulberry)" },
-  { name: "Eliza Hart", role: "Director · Sales", patches: ["Noosaville", "Doonan"], years: "11", sales: "$176M", quote: "The best campaigns feel inevitable in hindsight.", color: "var(--fern)" },
-  { name: "Mae Robinson", role: "Senior Agent", patches: ["Tewantin", "Peregian Beach"], years: "8", sales: "$94M", quote: "Most homes only sell once. I take that personally.", color: "var(--ember)" },
+  { slug: "james-whitlam", name: "James Whitlam", role: "Principal · Founder", patches: ["Noosa Heads", "Sunshine Beach"], years: "14", sales: "$284M", quote: "You can't shortcut trust. So we don't try.", color: "var(--mulberry)" },
+  { slug: "eliza-hart", name: "Eliza Hart", role: "Director · Sales", patches: ["Noosaville", "Doonan"], years: "11", sales: "$176M", quote: "The best campaigns feel inevitable in hindsight.", color: "var(--fern)" },
+  { slug: "matt-powe", name: "Matt Powe", role: "Sales Agent · Noosaville", patches: ["Noosaville", "Tewantin"], years: "9", sales: "$142M", quote: "Nine years, one patch, and a buyer list most agencies would envy.", color: "var(--ember)" },
+  { slug: "mae-robinson", name: "Mae Robinson", role: "Senior Agent", patches: ["Tewantin", "Peregian Beach"], years: "8", sales: "$94M", quote: "Most homes only sell once. I take that personally.", color: "var(--ember)" },
 ];
 const SUPPORT = [
   { name: "Tom Reilly", role: "Operations Manager", init: "TR", color: "var(--clay)" },
@@ -90,7 +93,7 @@ export default async function TeamPage() {
           <Container>
             <div className={s.leadHead}>
               <h2 className={s.leadTitle}>Senior agents.</h2>
-              <div className={s.leadMeta}>3 principals · 1 senior agent</div>
+              <div className={s.leadMeta}>2 principals · 2 senior agents</div>
             </div>
             <div className={s.leadGrid}>
               {LEADERS.map((p) => (
@@ -124,7 +127,7 @@ export default async function TeamPage() {
                       </div>
                     </div>
                     <div className={s.leadBtns}>
-                      <Button href="/team" variant="secondary" size="sm">
+                      <Button href={`/team/${p.slug}`} variant="secondary" size="sm">
                         Profile
                       </Button>
                       <Button href="/contact?enquiry=general" variant="primary" size="sm">
