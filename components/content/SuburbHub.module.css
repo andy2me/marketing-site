@@ -1,0 +1,474 @@
+/* Max Property — Suburb Hub template (design handoff §4).
+ * Parent node of the Noosaville topic cluster. Fern hero, 5/7 stats, three
+ * coloured pillar cards, listings strip, journal strip, mulberry agent band,
+ * dark closing CTA. Reuses Phase 1 Container, buttons, and tokens.
+ */
+
+/* ── Hero ───────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  background: var(--fern);
+  color: var(--soft-linen-600);
+  overflow: hidden;
+}
+.heroInner {
+  position: relative;
+  padding-top: 128px;
+  padding-bottom: 88px;
+}
+.crumbs {
+  padding-bottom: 36px;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(244, 237, 229, 0.65);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.crumbs a {
+  color: var(--soft-linen-600);
+  border-bottom: 1px solid transparent;
+}
+.crumbs a:hover {
+  border-bottom-color: rgba(244, 237, 229, 0.4);
+}
+.crumbsSep {
+  opacity: 0.45;
+}
+.heroGrid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 64px;
+  align-items: end;
+}
+.heroOverline {
+  color: rgba(244, 237, 229, 0.6);
+}
+.heroH1 {
+  margin-top: 28px;
+  font-size: clamp(64px, 8.5vw, 144px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--soft-linen-600);
+}
+.heroPeriod {
+  color: var(--sunrise);
+}
+.heroIntro {
+  margin-top: 32px;
+  max-width: 540px;
+  font-size: 21px;
+  line-height: 1.5;
+  color: rgba(244, 237, 229, 0.88);
+}
+.heroBtns {
+  display: flex;
+  gap: 12px;
+  margin-top: 44px;
+  flex-wrap: wrap;
+}
+.heroMedia {
+  border-radius: 16px;
+  overflow: hidden;
+  background: repeating-linear-gradient(
+    135deg,
+    #2c331c 0 14px,
+    #364025 14px 28px
+  );
+  position: relative;
+}
+
+/* ── Stats ──────────────────────────────────────────────────────────── */
+.section {
+  padding: 112px 0;
+}
+.intro2 {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+  margin-bottom: 8px;
+}
+.sectionH2 {
+  font-size: clamp(34px, 3.8vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.sectionH2Em {
+  font-style: italic;
+  color: var(--color-action);
+}
+.statsBody {
+  margin-top: 24px;
+  max-width: 560px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.statBlock {
+  margin-top: 48px;
+}
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-border-strong);
+}
+.statK {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(40px, 4vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-text-strong);
+}
+.statTrend {
+  font-size: 18px;
+  margin-left: 8px;
+  font-family: var(--font-body), system-ui, sans-serif;
+  letter-spacing: 0;
+}
+.statTrendUp {
+  color: var(--color-success);
+}
+.statTrendDown {
+  color: var(--ember);
+}
+.statV {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  max-width: 180px;
+}
+.provenance {
+  margin-top: 24px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
+/* ── Pillar cards ───────────────────────────────────────────────────── */
+.pillarsBand {
+  padding: 112px 0;
+  background: var(--color-bg-banding);
+}
+.pillarIntro {
+  margin-bottom: 56px;
+}
+.pillarGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.pillarCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 380px;
+  color: var(--soft-linen-600);
+  border-radius: 16px;
+  padding: 36px 32px;
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.pillarCard:hover {
+  transform: translateY(-2px);
+}
+.pillarCardDisabled {
+  cursor: default;
+  opacity: 0.78;
+  filter: saturate(0.85);
+}
+.pillarCardDisabled:hover {
+  transform: none;
+}
+.pillarTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pillarIndex {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: rgba(244, 237, 229, 0.6);
+}
+.pillarCount {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pillarBottom {
+  margin-top: auto;
+  padding-top: 48px;
+}
+.pillarTitle {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 46px;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--soft-linen-600);
+}
+.pillarLine {
+  display: block;
+}
+.pillarBody {
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(244, 237, 229, 0.82);
+}
+.pillarLink {
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ── Listings strip ─────────────────────────────────────────────────── */
+.listings {
+  padding: 96px 0;
+}
+.stripHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.stripH2 {
+  margin-top: 20px;
+  font-size: clamp(32px, 3.6vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.listingsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.listingsEmpty {
+  border: 1px dashed var(--color-border-strong);
+  border-radius: 16px;
+  padding: 56px 40px;
+  text-align: center;
+  background: var(--color-bg-subtle);
+}
+.listingsEmpty p {
+  font-size: 18px;
+  color: var(--color-text-primary);
+  max-width: 420px;
+  margin: 0 auto 24px;
+}
+
+/* ── Insights row ───────────────────────────────────────────────────── */
+.insights {
+  padding: 112px 0;
+}
+.insightsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.insightCard {
+  display: block;
+}
+.insightMedia {
+  aspect-ratio: 5 / 4;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #d5cfc7;
+}
+.insightBlock {
+  margin-top: 18px;
+}
+.insightCat {
+  color: var(--color-action);
+}
+.insightTitle {
+  margin-top: 10px;
+  font-size: 22px;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+  text-wrap: pretty;
+}
+.insightMeta {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+/* ── Agent band (mulberry) ──────────────────────────────────────────── */
+.agent {
+  padding: 112px 0;
+  background: var(--mulberry);
+  color: var(--soft-linen-600);
+}
+.agentGrid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 72px;
+  align-items: center;
+}
+.agentMedia {
+  border-radius: 16px;
+  overflow: hidden;
+  background: repeating-linear-gradient(
+    135deg,
+    #3f2129 0 14px,
+    #502b34 14px 28px
+  );
+  position: relative;
+}
+.agentOverline {
+  color: var(--sunrise);
+}
+.agentH2 {
+  margin-top: 24px;
+  font-size: clamp(34px, 3.8vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--soft-linen-600);
+}
+.agentH2Em {
+  font-style: italic;
+  color: var(--sunrise);
+}
+.agentBio {
+  margin-top: 28px;
+  max-width: 520px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(244, 237, 229, 0.82);
+}
+.agentStats {
+  margin-top: 36px;
+  display: flex;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+.agentStatK {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--soft-linen-600);
+}
+.agentStatV {
+  margin-top: 6px;
+  font-size: 13px;
+  color: rgba(244, 237, 229, 0.7);
+}
+.agentBtns {
+  display: flex;
+  gap: 12px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+/* ── Closing CTA ────────────────────────────────────────────────────── */
+.closing {
+  padding: 130px 0;
+  background: var(--color-bg-inverse);
+  color: var(--soft-linen-600);
+}
+.closingGrid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 64px;
+  align-items: end;
+}
+.closingOverline {
+  color: rgba(244, 237, 229, 0.5);
+}
+.closingH2 {
+  margin-top: 28px;
+  font-size: clamp(48px, 5.5vw, 84px);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  color: var(--soft-linen-600);
+}
+.closingH2Em {
+  font-style: italic;
+  color: var(--sunrise);
+}
+.closingBody {
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(244, 237, 229, 0.72);
+  max-width: 380px;
+}
+.closingBtns {
+  display: flex;
+  gap: 12px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .heroGrid,
+  .intro2,
+  .agentGrid,
+  .closingGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .pillarGrid,
+  .insightsGrid,
+  .listingsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .heroInner {
+    padding-top: 96px;
+    padding-bottom: 64px;
+  }
+  .heroMedia {
+    max-width: 480px;
+  }
+  .statGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 767px) {
+  .pillarGrid,
+  .insightsGrid,
+  .listingsGrid {
+    grid-template-columns: 1fr;
+  }
+  .heroInner {
+    padding-top: 84px;
+    padding-bottom: 48px;
+  }
+  .section,
+  .pillarsBand,
+  .insights,
+  .agent {
+    padding: 64px 0;
+  }
+  .listings {
+    padding: 56px 0;
+  }
+  .closing {
+    padding: 80px 0;
+  }
+  .pillarCard {
+    min-height: 320px;
+    padding: 28px 24px;
+  }
+  .pillarTitle {
+    font-size: 38px;
+  }
+  .statGrid {
+    gap: 24px;
+  }
+}
