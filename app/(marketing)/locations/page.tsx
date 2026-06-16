@@ -119,7 +119,11 @@ export default async function LocationsPage() {
             </div>
             <div className={s.patchGrid}>
               {PATCHES.map((p) => (
-                <a key={p.name} href="/buy" className={s.patchCard}>
+                <a
+                  key={p.name}
+                  href={`/buy?suburb=${encodeURIComponent(p.name)}`}
+                  className={s.patchCard}
+                >
                   <div className={s.patchMedia}>
                     <ImageSlot ratio="5/4" style={{ borderRadius: 0, position: "absolute", inset: 0 }} />
                     <div className={s.patchOverlay} />
