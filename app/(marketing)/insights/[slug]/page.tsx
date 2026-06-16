@@ -8,7 +8,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { getSiteSettings } from "@/lib/wp/mock";
 import {
   getAllInsightSlugs,
@@ -148,7 +147,6 @@ export default async function InsightArticlePage({
             allLabel="All insights"
           />
         </main>
-        <Footer settings={settings} />
       </>
     );
   }
@@ -223,8 +221,6 @@ export default async function InsightArticlePage({
           allLabel="All insights"
         />
       </main>
-
-      <Footer settings={settings} />
 
       {/* JSON-LD */}
       <script

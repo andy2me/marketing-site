@@ -5,7 +5,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { getSiteSettings } from "@/lib/wp/mock";
 import { getPillar, getPillarSlugs, getSpoke } from "@/lib/guides/store";
 import {
@@ -108,8 +107,6 @@ export default async function PillarPage({
         ) : null}
         <GuideClosing guide={guide} />
       </main>
-
-      <Footer settings={settings} />
 
       <script
         type="application/ld+json"
