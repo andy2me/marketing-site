@@ -15,7 +15,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
       { label: "Contact", href: "/contact" },
     ],
     office: {
-      addressLines: ["123 Hastings Street", "Noosa Heads QLD 4567"],
+      addressLines: ["14 Project Ave", "Noosaville QLD 4566"],
       phone: "07 5447 1000",
       hours: "Mon–Fri · 9am–5pm",
     },
