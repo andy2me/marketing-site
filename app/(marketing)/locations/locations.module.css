@@ -218,11 +218,13 @@
   gap: 10px;
 }
 .patchAvatar {
+  position: relative;
   width: 28px;
   height: 28px;
   border-radius: var(--radius-pill);
   background: var(--white-mist-300);
   flex: none;
+  overflow: hidden;
 }
 .patchLeadName {
   font-size: 13px;

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -21,8 +22,8 @@ const PINS = [
   { x: 48, y: 30, name: "Noosa Heads" },
 ];
 const PATCHES = [
-  { name: "Noosaville", median: "$1.85M", growth: "+8.4%", dom: 24, listings: 14, lead: "Matt Powe", note: "River-side rhythm; cafés, kayaks, classic Queenslanders." },
-  { name: "Noosa Heads", median: "$3.95M", growth: "+11.2%", dom: 31, listings: 9, lead: "Matt Powe", note: "Hastings Street energy; the postcard you came for." },
+  { name: "Noosaville", median: "$1.85M", growth: "+8.4%", dom: 24, listings: 14, lead: "Matt Powe", leadPhoto: "/assets/team/matt-powe.webp", note: "River-side rhythm; cafés, kayaks, classic Queenslanders.", image: "/assets/locations/noosaville.jpg", imageAlt: "Aerial view of Noosaville along the Noosa River" },
+  { name: "Noosa Heads", median: "$3.95M", growth: "+11.2%", dom: 31, listings: 9, lead: "Matt Powe", leadPhoto: "/assets/team/matt-powe.webp", note: "Hastings Street energy; the postcard you came for.", image: "/assets/locations/noosa-heads.jpg", imageAlt: "Aerial view of Noosa Heads with lakes and bushland" },
 ];
 const CHIPS = ["Noosaville", "Noosa Heads"];
 
@@ -115,7 +116,17 @@ export default async function LocationsPage() {
                   className={s.patchCard}
                 >
                   <div className={s.patchMedia}>
-                    <ImageSlot ratio="5/4" style={{ borderRadius: 0, position: "absolute", inset: 0 }} />
+                    {p.image ? (
+                      <Image
+                        src={p.image}
+                        alt={p.imageAlt}
+                        fill
+                        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                        style={{ objectFit: "cover" }}
+                      />
+                    ) : (
+                      <ImageSlot ratio="5/4" style={{ borderRadius: 0, position: "absolute", inset: 0 }} />
+                    )}
                     <div className={s.patchOverlay} />
                     <div className={s.patchHead}>
                       <div className={s.patchName}>{p.name}</div>
@@ -139,7 +150,17 @@ export default async function LocationsPage() {
                       </div>
                     </div>
                     <div className={s.patchLead}>
-                      <span className={s.patchAvatar} aria-hidden />
+                      <span className={s.patchAvatar} aria-hidden>
+                        {p.leadPhoto ? (
+                          <Image
+                            src={p.leadPhoto}
+                            alt=""
+                            fill
+                            sizes="28px"
+                            style={{ objectFit: "cover", borderRadius: "inherit" }}
+                          />
+                        ) : null}
+                      </span>
                       <span className={s.patchLeadName}>
                         Led by <span style={{ color: "var(--color-text-strong)" }}>{p.lead}</span>
                       </span>
