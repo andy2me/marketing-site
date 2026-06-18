@@ -21,8 +21,8 @@ const PINS = [
   { x: 48, y: 30, name: "Noosa Heads" },
 ];
 const PATCHES = [
-  { name: "Noosaville", median: "$1.85M", growth: "+8.4%", dom: 24, listings: 14, lead: "Eliza Hart", note: "River-side rhythm; cafés, kayaks, classic Queenslanders." },
-  { name: "Noosa Heads", median: "$3.95M", growth: "+11.2%", dom: 31, listings: 9, lead: "James Whitlam", note: "Hastings Street energy; the postcard you came for." },
+  { name: "Noosaville", median: "$1.85M", growth: "+8.4%", dom: 24, listings: 14, lead: "Matt Powe", note: "River-side rhythm; cafés, kayaks, classic Queenslanders." },
+  { name: "Noosa Heads", median: "$3.95M", growth: "+11.2%", dom: 31, listings: 9, lead: "Matt Powe", note: "Hastings Street energy; the postcard you came for." },
 ];
 const CHIPS = ["Noosaville", "Noosa Heads"];
 
