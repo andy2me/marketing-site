@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ImageSlot } from "@/components/ui/ImageSlot";
-import { IconPlay, IconHeart, IconClose, IconArrowR } from "@/components/icons";
+import { IconPlay, IconClose, IconArrowR } from "@/components/icons";
 import s from "./detail.module.css";
 
 /**
@@ -10,7 +10,42 @@ import s from "./detail.module.css";
  * Keyboard ←/→/Esc + focus trap (§14). Real photos swap into `images`; until then the
  * grid and lightbox show striped placeholders at the final aspect ratios.
  */
-export function PropertyGallery({ images, alt }: { images: string[]; alt: string }) {
+export function PropertyGallery({
+  title,
+  images,
+  alt,
+  videoTour,
+  walkthrough,
+  floorplan,
+}: {
+  title: string;
+  images: string[];
+  alt: string;
+  videoTour?: string;
+  walkthrough?: string;
+  floorplan?: string;
+}) {
+  const hasMedia = Boolean(videoTour || walkthrough || floorplan);
+
+  const [shareLabel, setShareLabel] = useState<"Share" | "Copied">("Share");
+  const onShare = async () => {
+    const url = typeof window !== "undefined" ? window.location.href : "";
+    if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
+      try {
+        await navigator.share({ title, url });
+        return;
+      } catch {
+        // user cancelled or share failed — fall through to clipboard
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareLabel("Copied");
+      window.setTimeout(() => setShareLabel("Share"), 1600);
+    } catch {
+      // ignore
+    }
+  };
   const hasPhotos = images.length > 0;
   const frames = hasPhotos ? images.length : 6;
   const totalLabel = hasPhotos ? images.length : 22;
@@ -83,18 +118,49 @@ export function PropertyGallery({ images, alt }: { images: string[]; alt: string
           <span className={s.galleryMore}>+{totalLabel - 4} photos</span>,
         )}
 
-        <div className={s.galleryTopLeft}>
-          <span className={s.pill}>
-            <IconPlay size={16} /> Video tour
-          </span>
-          <span className={s.pill}>3D walkthrough</span>
-          <span className={s.pill}>Floorplan</span>
-        </div>
+        {hasMedia && (
+          <div className={s.galleryTopLeft}>
+            {videoTour && (
+              <a
+                href={videoTour}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={s.pill}
+              >
+                <IconPlay size={16} /> Video tour
+              </a>
+            )}
+            {walkthrough && (
+              <a
+                href={walkthrough}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={s.pill}
+              >
+                3D walkthrough
+              </a>
+            )}
+            {floorplan && (
+              <a
+                href={floorplan}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={s.pill}
+              >
+                Floorplan
+              </a>
+            )}
+          </div>
+        )}
         <div className={s.galleryTopRight}>
-          <span className={s.pill}>
-            <IconHeart size={16} /> Save
-          </span>
-          <span className={s.pill}>Share</span>
+          <button
+            type="button"
+            className={s.pill}
+            onClick={onShare}
+            aria-label="Share property"
+          >
+            {shareLabel}
+          </button>
         </div>
         <button type="button" className={s.galleryViewAll} onClick={() => openAt(0)}>
           View all {totalLabel} photos

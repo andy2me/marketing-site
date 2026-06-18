@@ -110,6 +110,9 @@ const HILLTOP_DETAIL = {
     "Walk to Noosa Marina + River Boardwalk",
   ],
   floorArea: "248m²",
+  videoTour: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  walkthrough: "https://my.matterport.com/show/?m=example",
+  floorplan: "https://placehold.co/1200x900/png?text=Floorplan",
   ref: "MX-2402-NSV",
   distances: [
     { label: "Noosa River", value: "450m" },

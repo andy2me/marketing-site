@@ -54,6 +54,12 @@ export type Listing = ListingCard & {
   features: string[];
   inspections: Inspection[];
   floorArea?: string;
+  /** External video tour URL (YouTube, Vimeo, etc.). Hide pill when absent. */
+  videoTour?: string;
+  /** External 3D walkthrough URL (Matterport, etc.). Hide pill when absent. */
+  walkthrough?: string;
+  /** Floorplan image URL. Hide pill when absent. */
+  floorplan?: string;
   /** Listing reference, e.g. "MX-2402-NSV". */
   ref: string;
   /** Neighbourhood distances for the location block. */
