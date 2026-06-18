@@ -259,7 +259,6 @@ export default async function SellPage() {
                   <span className={s.quoteMark}>”</span>
                 </blockquote>
                 <div className={s.advAuthor}>
-                  <span className={s.advAvatar} aria-hidden />
                   <div>
                     <div className={s.advName}>Matt Powe</div>
                     <div className={s.advRole}>Principal · Founder</div>
