@@ -64,16 +64,111 @@
   margin-left: 8px;
 }
 
+/* ── Mobile menu button (hidden ≥768px) ────────────────────────────────── */
+.menuBtn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 120ms,
+    border-color 120ms,
+    color 120ms;
+}
+.menuBtn:hover {
+  background: var(--color-bg-subtle);
+}
+.menuBtnOnDark {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(244, 237, 229, 0.95);
+}
+.menuBtnOnDark:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* ── Drawer ────────────────────────────────────────────────────────────── */
+@keyframes drawerScrimIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes drawerPanelIn {
+  from { transform: translateY(-12px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.drawer {
+  position: fixed;
+  inset: 72px 0 0 0;
+  z-index: 49;
+  display: none;
+}
+.drawerScrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 18, 12, 0.45);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  animation: drawerScrimIn 0.2s ease;
+}
+.drawerPanel {
+  position: relative;
+  background: var(--color-bg-page);
+  border-bottom: 1px solid var(--color-border);
+  padding: 8px 20px calc(28px + env(safe-area-inset-bottom, 0px));
+  animation: drawerPanelIn 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+  box-shadow: var(--shadow-md);
+}
+.drawerList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 2px;
+}
+.drawerLink {
+  display: block;
+  padding: 16px 4px;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+  border-bottom: 1px solid var(--color-border);
+}
+.drawerLink:active {
+  color: var(--color-action);
+}
+.drawerLinkActive {
+  color: var(--color-action);
+}
+.drawerCta {
+  margin-top: 20px;
+  width: 100%;
+}
+
 @media (max-width: 1023px) {
   .nav {
     gap: 24px;
   }
 }
 
-/* Foundation slice: hide the text nav below the tablet breakpoint to avoid overflow.
-   The full hamburger drawer is a responsive-pass deliverable (§12). */
+/* Below tablet: hide the inline nav, show the menu button + drawer. */
 @media (max-width: 767px) {
-  .link {
+  .nav {
     display: none;
+  }
+  .menuBtn {
+    display: inline-flex;
+  }
+  .drawer {
+    display: block;
   }
 }

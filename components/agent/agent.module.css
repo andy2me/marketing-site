@@ -4,7 +4,8 @@
 
 /* ── Hero ──────────────────────────────────────────────────────────────── */
 .hero {
-  padding: 24px 0 0;
+  /* 72px clears the fixed header; 24px gives the breadcrumb breathing room. */
+  padding: 96px 0 0;
 }
 .breadcrumb {
   display: flex;

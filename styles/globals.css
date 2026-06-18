@@ -169,6 +169,14 @@ a {
   .container {
     padding: 0 var(--container-pad-mobile);
   }
+  /* Prevent iOS Safari's focus zoom: inputs need ≥16px font-size. Per-page
+     styles can size inputs visually smaller via padding/height — this only
+     pins the rendered text size on mobile. */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea {
+    font-size: 16px;
+  }
 }
 
 /* ── Image placeholder utility ────────────────────────────────────────── */

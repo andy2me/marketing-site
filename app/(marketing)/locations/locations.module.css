@@ -321,6 +321,16 @@
     grid-template-columns: 1fr;
     gap: 32px;
   }
+  .introH1 {
+    font-size: clamp(44px, 12vw, 64px);
+  }
+  .introStats {
+    flex-wrap: wrap;
+    gap: 24px 32px;
+  }
+  .statN {
+    font-size: 36px;
+  }
   .patchGrid,
   .grid3 {
     grid-template-columns: 1fr;
@@ -331,6 +341,17 @@
     align-items: flex-start;
   }
   .mapBox {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
+  }
+  .legend {
+    bottom: 16px;
+    left: 16px;
+    padding: 10px 12px;
+  }
+  .cta {
+    padding: 72px 0;
+  }
+  .ctaH2 {
+    font-size: clamp(36px, 11vw, 56px);
   }
 }

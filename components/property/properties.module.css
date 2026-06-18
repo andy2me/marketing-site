@@ -2,7 +2,8 @@
 
 /* ── Intro ────────────────────────────────────────────────────────────── */
 .intro {
-  padding: 72px 0 40px; /* top padding clears the 72px fixed header */
+  /* 72px clears the fixed header; 24px gives the overline breathing room. */
+  padding: 96px 0 40px;
 }
 .introRow {
   display: flex;
@@ -78,6 +79,9 @@
   color: var(--color-text-primary);
   flex: 1;
   font-family: inherit;
+}
+.pillRow {
+  display: contents;
 }
 .barRight {
   margin-left: auto;
@@ -300,9 +304,38 @@
     align-items: flex-start;
     gap: 16px;
   }
+
+  /* Stack the filter bar: search on top (full-width), pills row scrolls below. */
+  .filterBarInner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    overflow-x: visible;
+  }
+  .search {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+  .pillRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    margin: 0 calc(-1 * var(--container-pad-mobile));
+    padding: 0 var(--container-pad-mobile);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .pillRow::-webkit-scrollbar {
+    display: none;
+  }
   .barRight {
     margin-left: 0;
+    flex: none;
   }
+
   .ctaInner {
     grid-template-columns: 1fr;
     gap: 24px;

@@ -120,40 +120,42 @@ export function PropertiesBrowser({ listings }: { listings: ListingCard[] }) {
             />
           </div>
 
-          <FilterDropdown label="Suburb" value={filters.suburb} options={SUBURB_OPTIONS} onSelect={(v) => setFilter("suburb", v)} />
-          <FilterDropdown label="Price range" value={filters.price} options={PRICE_OPTIONS} onSelect={(v) => setFilter("price", v)} />
-          <FilterDropdown label="Beds" value={filters.beds} options={BEDS_OPTIONS} onSelect={(v) => setFilter("beds", v)} />
-          <FilterDropdown label="Property type" value={filters.type} options={TYPE_OPTIONS} onSelect={(v) => setFilter("type", v)} />
-          <FilterDropdown label="Status" value={filters.status} options={STATUS_OPTIONS} onSelect={(v) => setFilter("status", v)} />
+          <div className={s.pillRow}>
+            <FilterDropdown label="Suburb" value={filters.suburb} options={SUBURB_OPTIONS} onSelect={(v) => setFilter("suburb", v)} />
+            <FilterDropdown label="Price range" value={filters.price} options={PRICE_OPTIONS} onSelect={(v) => setFilter("price", v)} />
+            <FilterDropdown label="Beds" value={filters.beds} options={BEDS_OPTIONS} onSelect={(v) => setFilter("beds", v)} />
+            <FilterDropdown label="Property type" value={filters.type} options={TYPE_OPTIONS} onSelect={(v) => setFilter("type", v)} />
+            <FilterDropdown label="Status" value={filters.status} options={STATUS_OPTIONS} onSelect={(v) => setFilter("status", v)} />
 
-          <div className={s.barRight}>
-            <FilterDropdown
-              label="Sort"
-              value={sortLabel}
-              options={SORT_OPTIONS.map((o) => o.label)}
-              includeAny={false}
-              neutral
-              onSelect={(label) =>
-                onSort(SORT_OPTIONS.find((o) => o.label === label)?.key ?? "newest")
-              }
-            />
-            <div className={s.viewToggle} role="group" aria-label="View">
-              <button
-                type="button"
-                className={view === "grid" ? s.viewActive : s.viewBtn}
-                aria-pressed={view === "grid"}
-                onClick={() => setView("grid")}
-              >
-                <IconGrid /> Grid
-              </button>
-              <button
-                type="button"
-                className={view === "map" ? s.viewActive : s.viewBtn}
-                aria-pressed={view === "map"}
-                onClick={() => setView("map")}
-              >
-                <IconMap /> Map
-              </button>
+            <div className={s.barRight}>
+              <FilterDropdown
+                label="Sort"
+                value={sortLabel}
+                options={SORT_OPTIONS.map((o) => o.label)}
+                includeAny={false}
+                neutral
+                onSelect={(label) =>
+                  onSort(SORT_OPTIONS.find((o) => o.label === label)?.key ?? "newest")
+                }
+              />
+              <div className={s.viewToggle} role="group" aria-label="View">
+                <button
+                  type="button"
+                  className={view === "grid" ? s.viewActive : s.viewBtn}
+                  aria-pressed={view === "grid"}
+                  onClick={() => setView("grid")}
+                >
+                  <IconGrid /> Grid
+                </button>
+                <button
+                  type="button"
+                  className={view === "map" ? s.viewActive : s.viewBtn}
+                  aria-pressed={view === "map"}
+                  onClick={() => setView("map")}
+                >
+                  <IconMap /> Map
+                </button>
+              </div>
             </div>
           </div>
         </Container>

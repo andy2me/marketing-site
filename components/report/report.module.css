@@ -762,8 +762,8 @@ a.dComp:hover {
   background: var(--soft-linen-400);
   border: 1px solid var(--color-border);
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 8px;
   align-items: baseline;
 }
 .budgetNote {
@@ -1404,6 +1404,7 @@ a.dComp:hover {
     background: var(--mulberry);
     border: none;
     color: var(--color-text-on-dark);
+    grid-template-columns: 1fr auto;
     align-items: center;
     gap: 32px;
   }
