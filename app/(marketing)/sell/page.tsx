@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -7,6 +8,7 @@ import { SectionIntro } from "@/components/sections/SectionIntro";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { IconArrowR } from "@/components/icons";
 import { getSiteSettings } from "@/lib/wp/mock";
+import { getSoldListings } from "@/lib/rex";
 import { AppraisalForm } from "./AppraisalForm";
 import s from "./sell.module.css";
 
@@ -31,12 +33,9 @@ const PROCESS = [
   { n: "05", w: "Negotiate", body: "Weekly vendor reports, buyer-by-buyer commentary, and a negotiation strategy that protects your reserve.", time: "Weeks 3–5" },
   { n: "06", w: "Settle", body: "From accepted offer to handover of keys — coordinated with your conveyancer, no surprises.", time: "Week 6+" },
 ];
-const SOLD = [
-  { addr: "18 Hilltop Crescent", suburb: "Noosaville", price: "$2,650,000", guide: "$2.3–2.5M", days: 21 },
-  { addr: "5 River Cove Lane", suburb: "Noosaville", price: "$2,800,000", guide: "Auction", days: 18 },
-  { addr: "22 Hastings Outlook", suburb: "Noosa Heads", price: "$1,720,000", guide: "$1.55M+", days: 14 },
-  { addr: "3 Banksia Avenue", suburb: "Noosa Heads", price: "$4,250,000", guide: "$3.8M+", days: 32 },
-];
+const SOLD_LIMIT = 4;
+const stripSoldPrefix = (price: string) => price.replace(/^Sold\s*·\s*/i, "");
+const suburbName = (suburb: string) => suburb.replace(/\s+QLD.*$/, "");
 const INCLUDED = [
   { c: "Photography", v: "Twilight + day, drone, walkthrough video" },
   { c: "Styling", v: "Full home stylist, 4-week stage included" },
@@ -57,7 +56,8 @@ const FAQS = [
 const dimOverline = { color: "rgba(244,237,229,.6)" };
 
 export default async function SellPage() {
-  const settings = await getSiteSettings();
+  const [settings, sold] = await Promise.all([getSiteSettings(), getSoldListings()]);
+  const recentSold = sold.slice(0, SOLD_LIMIT);
 
   return (
     <>
@@ -92,11 +92,26 @@ export default async function SellPage() {
                   </Button>
                 </div>
               </div>
-              <ImageSlot
-                ratio="4/5"
-                label="vendor portrait · 4:5"
-                className={s.heroImg}
-              />
+              <div className={s.heroBrand} aria-hidden>
+                <svg
+                  className={s.heroBrandMark}
+                  viewBox="220 215 1041 1012"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1251.02 228.126V236.918L1195.36 313.113L1196.82 1217.2H832.077V1208.4L911.179 1132.21L909.714 440.593H900.925L656.295 1042.83H640.182L351.606 453.78H344.282V551.955C344.282 866.992 439.497 1061.87 621.139 1209.87V1217.2H312.056V383.447L230.024 236.918V228.126L546.431 225.196L758.835 673.574H766.159L944.87 228.126H1251.02Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <div className={s.heroBrandRule}>
+                  <span>Max.</span>
+                  <span>by name</span>
+                  <span>·</span>
+                  <span>maximum by outcome</span>
+                </div>
+                <div className={s.heroBrandFoot}>Est. Noosa</div>
+              </div>
             </div>
           </Container>
         </section>
@@ -162,23 +177,39 @@ export default async function SellPage() {
               </Button>
             </div>
             <div className={s.soldGrid}>
-              {SOLD.map((x) => (
-                <article key={x.addr} className={s.soldCard}>
-                  <div className={s.soldMedia}>
-                    <ImageSlot ratio="4/3" />
-                    <span className={s.soldTag}>Sold</span>
-                  </div>
-                  <div className={s.soldBody}>
-                    <div className={s.soldPrice}>{x.price}</div>
-                    <div className={s.soldAddr}>{x.addr}</div>
-                    <div className={s.soldSuburb}>{x.suburb}</div>
-                    <div className={s.soldMeta}>
-                      <span>Guide · {x.guide}</span>
-                      <span>{x.days} days</span>
+              {recentSold.length === 0 ? (
+                <p className={s.soldEmpty}>
+                  Recent campaign results will appear here as they settle.
+                </p>
+              ) : (
+                recentSold.map((p) => (
+                  <article key={p.id} className={s.soldCard}>
+                    <div className={s.soldMedia}>
+                      {p.image ? (
+                        <Image
+                          src={p.image}
+                          alt={p.street}
+                          fill
+                          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 25vw"
+                          className={s.soldImg}
+                        />
+                      ) : (
+                        <ImageSlot ratio="4/3" />
+                      )}
+                      <span className={s.soldTag}>Sold</span>
                     </div>
-                  </div>
-                </article>
-              ))}
+                    <div className={s.soldBody}>
+                      <div className={s.soldPrice}>{stripSoldPrefix(p.price)}</div>
+                      <div className={s.soldAddr}>{p.street}</div>
+                      <div className={s.soldSuburb}>{suburbName(p.suburb)}</div>
+                      <div className={s.soldMeta}>
+                        <span>{p.beds} bed · {p.baths} bath</span>
+                        <span>{p.type}</span>
+                      </div>
+                    </div>
+                  </article>
+                ))
+              )}
             </div>
           </Container>
         </section>
@@ -210,7 +241,16 @@ export default async function SellPage() {
         <section className={s.sec}>
           <Container>
             <div className={s.advGrid}>
-              <ImageSlot ratio="4/5" label="principal portrait · 4:5" style={{ borderRadius: 16 }} />
+              <div className={s.advPortrait}>
+                <Image
+                  src="/assets/team/matt-powe-large.jpg"
+                  alt="Matt Powe, Principal and Founder of Max Property"
+                  fill
+                  sizes="(max-width: 767px) 100vw, 40vw"
+                  className={s.advImg}
+                  priority={false}
+                />
+              </div>
               <div>
                 <div className="overline">§ 05 · A word from the principal</div>
                 <blockquote className={s.advQuote}>
@@ -221,7 +261,7 @@ export default async function SellPage() {
                 <div className={s.advAuthor}>
                   <span className={s.advAvatar} aria-hidden />
                   <div>
-                    <div className={s.advName}>James Whitlam</div>
+                    <div className={s.advName}>Matt Powe</div>
                     <div className={s.advRole}>Principal · Founder</div>
                   </div>
                 </div>
