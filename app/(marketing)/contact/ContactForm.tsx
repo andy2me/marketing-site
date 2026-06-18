@@ -158,7 +158,7 @@ export function ContactForm() {
               )}
               {enquiry === "buy" && (
                 <>
-                  <LSelect label="Suburb of interest" name="suburb" options={["Noosaville", "Noosa Heads", "Sunshine Beach", "Tewantin", "Doonan", "Peregian"]} />
+                  <LSelect label="Suburb of interest" name="suburb" options={["Noosaville", "Noosa Heads"]} />
                   <LSelect label="Budget" name="budget" options={["Under $1M", "$1–2M", "$2–3M", "$3–5M", "$5M+"]} />
                   <LSelect label="Bedrooms" name="bedrooms" options={["1", "2", "3", "4", "5+"]} />
                   <LSelect label="Type" name="type" options={["House", "Apartment", "Townhouse", "Land"]} />

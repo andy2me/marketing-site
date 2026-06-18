@@ -33,8 +33,8 @@ const PROCESS = [
 ];
 const SOLD = [
   { addr: "18 Hilltop Crescent", suburb: "Noosaville", price: "$2,650,000", guide: "$2.3–2.5M", days: 21 },
-  { addr: "5 Saltwater Court", suburb: "Sunshine Beach", price: "$2,800,000", guide: "Auction", days: 18 },
-  { addr: "22 Pandanus Way", suburb: "Tewantin", price: "$1,720,000", guide: "$1.55M+", days: 14 },
+  { addr: "5 River Cove Lane", suburb: "Noosaville", price: "$2,800,000", guide: "Auction", days: 18 },
+  { addr: "22 Hastings Outlook", suburb: "Noosa Heads", price: "$1,720,000", guide: "$1.55M+", days: 14 },
   { addr: "3 Banksia Avenue", suburb: "Noosa Heads", price: "$4,250,000", guide: "$3.8M+", days: 32 },
 ];
 const INCLUDED = [

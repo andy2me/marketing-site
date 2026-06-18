@@ -29,13 +29,11 @@ const CARDS: ArticleCard[] = [
   { slug: "auction-or-private-treaty", category: "Selling", title: "Auction or private treaty? How we'd decide for you.", date: "04 May 2026", readLabel: "4 min read", author: "Matt Powe" },
   { slug: "noosaville-supply-story", category: "Buying", title: "Inside Noosaville's quiet supply story.", date: "28 Apr 2026", readLabel: "5 min read", author: "Matt Powe" },
   { slug: "units-vs-houses-river", category: "Buying", title: "Units vs houses on the river: what actually holds value.", date: "22 Apr 2026", readLabel: "6 min read", author: "Matt Powe" },
-  { slug: "tewantin-buyers", category: "Locations", title: "What we love about Tewantin (and why buyers are catching on).", date: "21 Apr 2026", readLabel: "5 min read", author: "Matt Powe" },
   { slug: "stylist-roi", category: "Design", title: "How a stylist actually pays for themselves on a $2M home.", date: "14 Apr 2026", readLabel: "6 min read", author: "Matt Powe" },
   { slug: "q1-clearance-rates", category: "Market", title: "Sunshine Coast auction clearance rates — Q1 wrap.", date: "07 Apr 2026", readLabel: "7 min read", author: "Matt Powe" },
   { slug: "boring-properties", category: "Investors", title: "The case for boring properties in a noisy year.", date: "30 Mar 2026", readLabel: "5 min read", author: "Matt Powe" },
   { slug: "photographer-vs-portal", category: "Selling", title: "Why your photographer matters more than your portal package.", date: "23 Mar 2026", readLabel: "4 min read", author: "Matt Powe" },
   { slug: "first-home-buyers", category: "Buying", title: "What we tell first-home buyers (that no-one else will).", date: "16 Mar 2026", readLabel: "6 min read", author: "Matt Powe" },
-  { slug: "sunshine-beach-winter", category: "Locations", title: "Sunshine Beach in winter — a buyer's-eye walkthrough.", date: "09 Mar 2026", readLabel: "5 min read", author: "Matt Powe" },
 ];
 
 /** Full article (with body) — null when the slug isn't fully written yet. */

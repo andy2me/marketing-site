@@ -95,8 +95,6 @@ export async function getHomeContent(): Promise<HomeContent> {
       cards: [
         { name: "Noosaville", count: 14, slug: "noosaville" },
         { name: "Noosa Heads", count: 9, slug: "noosa-heads" },
-        { name: "Sunshine Beach", count: 6, slug: "sunshine-beach" },
-        { name: "Tewantin", count: 8, slug: "tewantin" },
       ],
     },
     insights: {

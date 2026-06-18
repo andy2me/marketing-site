@@ -22,7 +22,7 @@ export const EMPTY_FILTERS: Filters = {
   status: null,
 };
 
-export const SUBURB_OPTIONS = ["Noosaville", "Noosa Heads", "Sunshine Beach", "Tewantin"];
+export const SUBURB_OPTIONS = ["Noosaville", "Noosa Heads"];
 export const PRICE_OPTIONS = ["Under $1M", "1M – 3M", "3M – 5M", "5M+"];
 export const BEDS_OPTIONS = ["2+", "3+", "4+", "5+"];
 export const TYPE_OPTIONS = ["House", "Apartment", "Townhouse", "Land"];

@@ -23,15 +23,15 @@ const CARDS: ListingCard[] = [
   },
   {
     id: "7-banksia", slug: "7-banksia", status: "Auction", price: "Auction · Sat 14 Jun", priceValue: null,
-    street: "7 Banksia Avenue", suburb: "Sunshine Beach QLD 4567", type: "House",
+    street: "7 Banksia Avenue", suburb: "Noosa Heads QLD 4567", type: "House",
     beds: 5, baths: 4, cars: 2, land: "840m²", agent: AGENTS.james,
-    coords: { lat: -26.4045, lng: 153.1011 }, featured: true,
+    coords: { lat: -26.3925, lng: 153.0905 }, featured: true,
   },
   {
     id: "18-tea-tree", slug: "18-tea-tree", status: "For Sale", price: "Offers over $1,890,000", priceValue: 1890000,
-    street: "18 Tea Tree Lane", suburb: "Tewantin QLD 4565", type: "Townhouse",
+    street: "18 Tea Tree Lane", suburb: "Noosaville QLD 4566", type: "Townhouse",
     beds: 3, baths: 2, cars: 2, land: "540m²", agent: AGENTS.mae,
-    coords: { lat: -26.3871, lng: 153.0386 }, featured: true,
+    coords: { lat: -26.3968, lng: 153.0745 }, featured: true,
   },
   {
     id: "3-headland", slug: "3-headland", status: "Under Offer", price: "$3,950,000", priceValue: 3950000,
@@ -53,15 +53,15 @@ const CARDS: ListingCard[] = [
   },
   {
     id: "9-saltwater", slug: "9-saltwater", status: "Sold", price: "Sold · $2,800,000", priceValue: 2800000,
-    street: "9 Saltwater Court", suburb: "Sunshine Beach QLD 4567", type: "House",
+    street: "9 Saltwater Court", suburb: "Noosa Heads QLD 4567", type: "House",
     beds: 4, baths: 3, cars: 2, land: "720m²", agent: AGENTS.mae,
-    coords: { lat: -26.4068, lng: 153.0998 },
+    coords: { lat: -26.3908, lng: 153.0942 },
   },
   {
     id: "5-pandanus", slug: "5-pandanus", status: "For Sale", price: "$1,650,000", priceValue: 1650000,
-    street: "5 Pandanus Way", suburb: "Tewantin QLD 4565", type: "House",
+    street: "5 Pandanus Way", suburb: "Noosaville QLD 4566", type: "House",
     beds: 4, baths: 2, cars: 2, land: "680m²", agent: AGENTS.eliza,
-    coords: { lat: -26.3859, lng: 153.0421 },
+    coords: { lat: -26.3979, lng: 153.0712 },
   },
   {
     id: "16-laguna", slug: "16-laguna", status: "For Sale", price: "$2,150,000", priceValue: 2150000,

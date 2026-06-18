@@ -19,22 +19,12 @@ export const metadata: Metadata = {
 const PINS = [
   { x: 32, y: 40, name: "Noosaville", active: true },
   { x: 48, y: 30, name: "Noosa Heads" },
-  { x: 60, y: 50, name: "Sunshine Beach" },
-  { x: 22, y: 58, name: "Tewantin" },
-  { x: 36, y: 62, name: "Doonan" },
-  { x: 50, y: 72, name: "Peregian Beach" },
-  { x: 64, y: 80, name: "Coolum" },
-  { x: 18, y: 78, name: "Cooroy" },
 ];
 const PATCHES = [
   { name: "Noosaville", median: "$1.85M", growth: "+8.4%", dom: 24, listings: 14, lead: "Eliza Hart", note: "River-side rhythm; cafés, kayaks, classic Queenslanders." },
   { name: "Noosa Heads", median: "$3.95M", growth: "+11.2%", dom: 31, listings: 9, lead: "James Whitlam", note: "Hastings Street energy; the postcard you came for." },
-  { name: "Sunshine Beach", median: "$3.10M", growth: "+9.6%", dom: 26, listings: 6, lead: "James Whitlam", note: "Beachy hush; a village that votes early and walks barefoot." },
-  { name: "Tewantin", median: "$1.32M", growth: "+5.8%", dom: 35, listings: 8, lead: "Mae Robinson", note: "Local-first, value-rich; an honest day's work, an honest sale." },
-  { name: "Doonan", median: "$2.45M", growth: "+6.1%", dom: 48, listings: 5, lead: "Eliza Hart", note: "Acreage country; horses, hinterland and big skies." },
-  { name: "Peregian Beach", median: "$2.05M", growth: "+10.2%", dom: 22, listings: 7, lead: "Mae Robinson", note: "Pine forest meets surf; the quiet sibling of Sunny Beach." },
 ];
-const CHIPS = ["Noosaville", "Noosa Heads", "Sunshine Beach", "Tewantin", "Doonan"];
+const CHIPS = ["Noosaville", "Noosa Heads"];
 
 export default async function LocationsPage() {
   const [settings, listings] = await Promise.all([getSiteSettings(), getActiveListings()]);
@@ -65,8 +55,8 @@ export default async function LocationsPage() {
                 </p>
                 <div className={s.introStats}>
                   {[
-                    { n: "12", l: "Suburbs covered" },
-                    { n: "4", l: "Senior agents" },
+                    { n: "2", l: "Suburbs covered" },
+                    { n: "2", l: "Senior agents" },
                     { n: "180+", l: "Sold in 24 months" },
                   ].map((x) => (
                     <div key={x.l}>
