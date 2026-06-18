@@ -23,19 +23,25 @@ export async function GET(req: NextRequest) {
   // Try a no-criteria search first (just `publish_to_external` is auto-prepended by the client).
   let broadSearch: unknown;
   try {
-    const rows = await searchPublishedListings({ limit: 3 }, { revalidate: 0 });
-    const first = rows[0] as
-      | Partial<{
-          id: unknown;
-          _id: unknown;
-          system_listing_state: unknown;
-          address: { latitude?: unknown; longitude?: unknown };
-          images: unknown[];
-        }>
-      | undefined;
+    const rows = await searchPublishedListings({ limit: 50 }, { revalidate: 0 });
+    type DebugRow = Partial<{
+      id: unknown;
+      _id: unknown;
+      system_listing_state: unknown;
+      address: { latitude?: unknown; longitude?: unknown };
+      images: unknown[];
+    }>;
+    const typed = rows as DebugRow[];
+    const stateBreakdown = typed.reduce<Record<string, number>>((acc, r) => {
+      const k = (r.system_listing_state as string) ?? "unknown";
+      acc[k] = (acc[k] ?? 0) + 1;
+      return acc;
+    }, {});
+    const first = typed[0];
     broadSearch = {
       ok: true,
       rowCount: rows.length,
+      stateBreakdown,
       firstRowKeys: first ? Object.keys(first).sort() : null,
       firstRowSample: first
         ? {
@@ -58,7 +64,7 @@ export async function GET(req: NextRequest) {
     const rows = await searchPublishedListings(
       {
         criteria: [{ name: "listing.system_listing_state", value: "current" }],
-        limit: 3,
+        limit: 50,
       },
       { revalidate: 0 },
     );
