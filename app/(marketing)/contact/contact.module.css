@@ -235,6 +235,7 @@
   margin-top: 10px;
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 }
 .prefChip {
   display: inline-flex;
@@ -400,6 +401,36 @@
   }
   .top {
     padding: 96px 0 40px;
+  }
+  .topH1 {
+    font-size: clamp(40px, 11vw, 56px);
+  }
+  .topIntro {
+    font-size: 16px;
+  }
+  .formCard {
+    padding: 24px 20px;
+    border-radius: 14px;
+  }
+  .formTitle {
+    font-size: 26px;
+  }
+  .sideCard {
+    padding: 24px 20px;
+    border-radius: 14px;
+  }
+  .dropIn {
+    padding: 20px 20px;
+  }
+  .officeCard {
+    padding: 28px 24px;
+    border-radius: 14px;
+  }
+  .officeH2 {
+    font-size: 36px;
+  }
+  .mapWrap {
+    min-height: 320px;
   }
   .faqSec {
     padding: 72px 0;

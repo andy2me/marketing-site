@@ -661,9 +661,24 @@
     align-items: flex-start;
     text-align: left;
   }
+  .kfPrice {
+    font-size: 36px;
+  }
   .kfStats {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px 16px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px 12px;
+    padding: 20px 0;
+  }
+  .kfStatValue {
+    font-size: 24px;
+  }
+  /* Subnav: drop the right-side meta, let tabs scroll. */
+  .subnavMeta {
+    display: none;
+  }
+  .subnavInner {
+    height: auto;
+    min-height: 56px;
   }
   .featureGrid,
   .distances,
@@ -676,6 +691,29 @@
   }
   .inspectRow {
     grid-template-columns: 50px 1fr;
-    gap: 12px 16px;
+    gap: 4px 16px;
+    padding: 16px 18px;
+  }
+  .inspectRow > :nth-child(3),
+  .inspectRow > :nth-child(4) {
+    grid-column: 2;
+  }
+  .body {
+    padding: 40px 0 72px;
+  }
+  .h2 {
+    font-size: clamp(28px, 7.4vw, 36px);
+  }
+  .h3 {
+    font-size: 22px;
+  }
+  .prose {
+    font-size: 16px;
+  }
+  .similar {
+    padding: 64px 0;
+  }
+  .cta {
+    padding: 72px 0;
   }
 }

@@ -502,6 +502,21 @@
   .hero {
     height: 600px;
   }
+  .heroInner {
+    padding-top: 96px;
+    padding-bottom: 72px;
+  }
+  .heroPlay {
+    right: 20px;
+    bottom: 24px;
+  }
+  .heroScroll {
+    left: 20px;
+    bottom: 24px;
+  }
+  .heroBody {
+    font-size: 16px;
+  }
   .cards,
   .pillars,
   .grid3,
@@ -509,18 +524,39 @@
   .testiGrid {
     grid-template-columns: 1fr;
   }
+  .testiGrid {
+    gap: 32px;
+  }
   .locGrid {
     grid-template-columns: 1fr 1fr;
   }
   .cardBuyOffset {
     margin-top: 0;
   }
+  .cardContent {
+    padding: 28px 24px 24px;
+  }
   .cardTitle {
-    font-size: 64px;
+    font-size: 56px;
+  }
+  .cardBody {
+    margin-top: 16px;
+  }
+  .cardCta {
+    margin-top: 20px;
+  }
+  .pillar {
+    min-height: 0;
+    padding: 28px 24px 24px;
+  }
+  .pillarWord {
+    margin-top: 32px;
+    font-size: 48px;
   }
   .sectionHead {
     flex-direction: column;
     align-items: flex-start;
+    margin-bottom: 32px;
   }
   .audience {
     padding: 72px 0 48px;
@@ -534,5 +570,8 @@
   }
   .cta {
     padding: 96px 0 110px;
+  }
+  .locName {
+    font-size: 26px;
   }
 }

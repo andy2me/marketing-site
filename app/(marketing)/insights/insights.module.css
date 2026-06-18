@@ -320,17 +320,37 @@
     grid-template-columns: 1fr;
     gap: 32px;
   }
+  .introH1 {
+    font-size: clamp(40px, 11vw, 56px);
+  }
   .gridCols {
     grid-template-columns: 1fr;
+  }
+  .grid {
+    padding: 56px 0 80px;
   }
   .catBarInner {
     flex-direction: column;
     align-items: flex-start;
+    gap: 16px;
   }
   .search {
     width: 100%;
+    min-width: 0;
   }
   .nlFields {
     grid-template-columns: 1fr;
+  }
+  .nlForm {
+    padding: 24px 20px;
+  }
+  .newsletter {
+    padding: 72px 0;
+  }
+  .featH2 {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+  .cardTitle {
+    font-size: 22px;
   }
 }

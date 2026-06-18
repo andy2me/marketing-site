@@ -474,8 +474,18 @@
     min-height: 0;
   }
   .heroInner {
-    padding-top: 128px;
+    padding-top: 112px;
     padding-bottom: 72px;
+  }
+  .heroH1 {
+    font-size: clamp(48px, 12vw, 64px);
+  }
+  .heroBody {
+    margin-top: 28px;
+    font-size: 17px;
+  }
+  .heroCtas {
+    margin-top: 32px;
   }
   .heroGrid,
   .advGrid,
@@ -494,9 +504,16 @@
   .formGrid {
     grid-template-columns: 1fr;
   }
+  .statNum {
+    font-size: 40px;
+  }
   .procRow {
     grid-template-columns: 1fr;
     gap: 8px;
+    padding: 28px 0;
+  }
+  .procWord {
+    font-size: 32px;
   }
   .procTime {
     text-align: left;
@@ -505,5 +522,11 @@
   .includedItem:not(:nth-child(3n + 1)) {
     padding: 24px 0;
     border-right: none;
+  }
+  .apprH2 {
+    font-size: clamp(40px, 11vw, 56px);
+  }
+  .form {
+    padding: 24px 20px;
   }
 }
