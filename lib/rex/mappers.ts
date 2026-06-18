@@ -228,6 +228,16 @@ function deriveGallery(rex: RexPublishedListing): string[] {
   return (rex.images ?? []).map((img) => ensureHttps(img.url)).filter(Boolean);
 }
 
+function deriveFloorplan(rex: RexPublishedListing): string | undefined {
+  const first = rex.floorplans?.[0]?.url;
+  return first ? ensureHttps(first) : undefined;
+}
+
+function findLinkByType(rex: RexPublishedListing, match: RegExp): string | undefined {
+  const link = rex.links?.find((l) => l.link_type && match.test(l.link_type) && l.link_url);
+  return link?.link_url ? ensureHttps(link.link_url) : undefined;
+}
+
 function deriveAgent(rex: RexPublishedListing): ListingAgent {
   const a = rex.listing_agent_1;
   if (!a) return { id: "unknown", name: "Max Property", photo: null };
@@ -319,6 +329,9 @@ export function mapPublishedListingToDetail(rex: RexPublishedListing): Listing |
     floorArea: toIntOrNull(rex.attributes?.buildarea_m2)
       ? `${toIntOrNull(rex.attributes?.buildarea_m2)}m²`
       : undefined,
+    videoTour: findLinkByType(rex, /video/i),
+    walkthrough: findLinkByType(rex, /virtual|3d|tour|matterport/i),
+    floorplan: deriveFloorplan(rex),
     ref: deriveRef(rex),
     distances: [],
   };

@@ -55,7 +55,14 @@ export function PropertyDetailView({
         <span className={s.bcCurrent}>{listing.street}</span>
       </Container>
 
-      <PropertyGallery images={listing.gallery} alt={listing.street} />
+      <PropertyGallery
+        title={`${listing.street}, ${name}`}
+        images={listing.gallery}
+        alt={listing.street}
+        videoTour={listing.videoTour}
+        walkthrough={listing.walkthrough}
+        floorplan={listing.floorplan}
+      />
 
       {/* Key facts */}
       <Container as="section" className={s.keyfacts}>

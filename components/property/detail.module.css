@@ -107,6 +107,12 @@
   align-items: center;
   gap: 6px;
   box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.pill:hover {
+  background: rgba(255, 255, 255, 1);
 }
 .galleryViewAll {
   position: absolute;
