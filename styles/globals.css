@@ -21,6 +21,10 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Guard against accidental horizontal overflow on small screens (e.g. a long
+     unbreakable string pushing the viewport wider). `clip` rather than `hidden`
+     so it doesn't create a scroll container that would break position: sticky. */
+  overflow-x: clip;
 }
 
 h1,
