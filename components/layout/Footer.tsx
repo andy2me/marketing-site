@@ -73,7 +73,6 @@ export function Footer({ settings }: { settings: SiteSettings }) {
           <div>© Max Property · All rights reserved</div>
           <div className={styles.legal}>
             <Link href="/privacy">Privacy Policy</Link>
-            <Link href="/terms">Terms</Link>
           </div>
         </div>
       </div>

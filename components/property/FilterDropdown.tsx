@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { IconChevron } from "@/components/icons";
 import s from "./properties.module.css";
 
@@ -22,21 +23,46 @@ export function FilterDropdown({
   neutral?: boolean;
 }) {
   const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => setMounted(true), []);
+
+  useLayoutEffect(() => {
+    if (!open) return;
+    const update = () => {
+      const rect = triggerRef.current?.getBoundingClientRect();
+      if (rect) setPos({ top: rect.bottom + 4, left: rect.left });
+    };
+    update();
+    window.addEventListener("scroll", update, true);
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update, true);
+      window.removeEventListener("resize", update);
+    };
+  }, [open]);
 
   useEffect(() => {
+    if (!open) return;
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      const target = e.target as Node;
+      if (triggerRef.current?.contains(target)) return;
+      if (menuRef.current?.contains(target)) return;
+      setOpen(false);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
-  }, []);
+  }, [open]);
 
   const active = !neutral && !!value;
 
   return (
-    <div ref={ref} className={s.ddWrap}>
+    <div className={s.ddWrap}>
       <button
+        ref={triggerRef}
         type="button"
         className={`${s.ddTrigger} ${active ? s.ddActive : ""}`}
         aria-expanded={open}
@@ -51,39 +77,47 @@ export function FilterDropdown({
         <IconChevron />
       </button>
 
-      {open && (
-        <div className={s.ddMenu} role="listbox">
-          {includeAny && (
-            <button
-              type="button"
-              role="option"
-              aria-selected={!value}
-              className={`${s.ddItem} ${!value ? s.ddItemActive : ""}`}
-              onClick={() => {
-                onSelect(null);
-                setOpen(false);
-              }}
+      {open && mounted && pos
+        ? createPortal(
+            <div
+              ref={menuRef}
+              className={s.ddMenu}
+              role="listbox"
+              style={{ position: "fixed", top: pos.top, left: pos.left }}
             >
-              Any
-            </button>
-          )}
-          {options.map((o) => (
-            <button
-              key={o}
-              type="button"
-              role="option"
-              aria-selected={o === value}
-              className={`${s.ddItem} ${o === value ? s.ddItemActive : ""}`}
-              onClick={() => {
-                onSelect(o);
-                setOpen(false);
-              }}
-            >
-              {o}
-            </button>
-          ))}
-        </div>
-      )}
+              {includeAny && (
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected={!value}
+                  className={`${s.ddItem} ${!value ? s.ddItemActive : ""}`}
+                  onClick={() => {
+                    onSelect(null);
+                    setOpen(false);
+                  }}
+                >
+                  Any
+                </button>
+              )}
+              {options.map((o) => (
+                <button
+                  key={o}
+                  type="button"
+                  role="option"
+                  aria-selected={o === value}
+                  className={`${s.ddItem} ${o === value ? s.ddItemActive : ""}`}
+                  onClick={() => {
+                    onSelect(o);
+                    setOpen(false);
+                  }}
+                >
+                  {o}
+                </button>
+              ))}
+            </div>,
+            document.body,
+          )
+        : null}
     </div>
   );
 }

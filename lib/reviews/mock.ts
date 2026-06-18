@@ -27,7 +27,7 @@ const REVIEWS: Review[] = [
     author: "Daniel O'Keefe",
     rating: 5,
     date: "2026-03-30",
-    detail: "Sold · 7 Banksia Avenue, Sunshine Beach · $2.8M",
+    detail: "Sold · 7 Banksia Avenue, Noosa Heads · $2.8M",
     agentId: "matt-powe",
     agentName: "Matt Powe",
   },

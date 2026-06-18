@@ -15,11 +15,15 @@ export async function getSiteSettings(): Promise<SiteSettings> {
       { label: "Contact", href: "/contact" },
     ],
     office: {
-      addressLines: ["123 Hastings Street", "Noosa Heads QLD 4567"],
-      phone: "07 5447 1000",
+      addressLines: ["14 Project Ave", "Noosaville QLD 4566"],
+      phone: "0438 116 191",
       hours: "Mon–Fri · 9am–5pm",
     },
-    social: { instagram: "#", facebook: "#", youtube: "#" },
+    social: {
+      instagram: "https://www.instagram.com/maxproperty.au/",
+      facebook: "https://www.facebook.com/people/Max-Property/61580649546865/",
+      youtube: "https://www.youtube.com/@maxpropertyau",
+    },
     footer: {
       tagline:
         "Estate agents on the Sunshine Coast. Personalised service, trusted expertise — your outcome drives our approach.",
@@ -91,8 +95,6 @@ export async function getHomeContent(): Promise<HomeContent> {
       cards: [
         { name: "Noosaville", count: 14, slug: "noosaville" },
         { name: "Noosa Heads", count: 9, slug: "noosa-heads" },
-        { name: "Sunshine Beach", count: 6, slug: "sunshine-beach" },
-        { name: "Tewantin", count: 8, slug: "tewantin" },
       ],
     },
     insights: {

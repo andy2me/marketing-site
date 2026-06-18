@@ -100,11 +100,18 @@
   margin-top: 14px;
 }
 .agentAvatar {
+  position: relative;
   width: 24px;
   height: 24px;
   border-radius: var(--radius-pill);
   background: var(--white-mist-300);
   display: inline-block;
+  overflow: hidden;
+  flex: none;
+}
+.agentAvatarImg {
+  object-fit: cover;
+  object-position: center top;
 }
 .agentName {
   font-size: 12px;
