@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Container } from "@/components/ui/Container";
+import { LiveIndicator } from "@/components/property/LiveIndicator";
 import { PropertiesBrowser } from "@/components/property/PropertiesBrowser";
 import { IconArrowR } from "@/components/icons";
 import { getSoldListings } from "@/lib/rex";
@@ -34,9 +35,7 @@ export default async function SoldPage() {
                 <h1 className={s.introTitle}>Real outcomes.</h1>
               </div>
               <div className={s.introMeta}>
-                <span className={s.live}>
-                  <span className={s.liveDot} /> Live · synced with Rex
-                </span>
+                <LiveIndicator updatedAt={Date.now()} />
               </div>
             </div>
           </Container>
