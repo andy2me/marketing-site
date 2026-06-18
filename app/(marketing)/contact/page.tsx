@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 const FAQS = [
   { q: "How quickly do you reply to enquiries?", a: "Inside one business day, and usually a lot sooner. Appraisal requests are routed straight to a principal." },
   { q: "Do you take after-hours calls?", a: "Yes — once we're working with you. The number on your campaign reaches your agent directly, 7am–9pm, every day." },
-  { q: "Can I drop in without an appointment?", a: "Of course. The office is on Hastings Street and we keep the kettle on. For appraisals we'd still ask you to book — so the right agent is in." },
+  { q: "Can I drop in without an appointment?", a: "Of course. The office is on Project Ave in Noosaville and we keep the kettle on. For appraisals we'd still ask you to book — so the right agent is in." },
   { q: "Do you sell outside the Noosa shire?", a: "Selectively. We'd rather refer you to someone better-placed than overpromise — ask us, we'll be honest." },
 ];
 
@@ -48,8 +48,8 @@ export default async function ContactPage() {
                   business day. For anything urgent, the office phone is the fastest path.
                 </p>
                 <div className={s.topContacts}>
-                  <a href="tel:0754471000" className={s.topPhone}>
-                    <strong>07 5447 1000</strong>
+                  <a href="tel:0438116191" className={s.topPhone}>
+                    <strong>0438 116 191</strong>
                     <span>· Mon–Fri 9–5</span>
                   </a>
                   <a href="mailto:hello@maxproperty.au" className={s.topEmail}>
@@ -76,12 +76,12 @@ export default async function ContactPage() {
                     § Office
                   </div>
                   <h2 className={s.officeH2}>
-                    Hastings Street<span style={{ color: "var(--sunrise)" }}>.</span>
+                    Project Ave<span style={{ color: "var(--sunrise)" }}>.</span>
                   </h2>
                   <div className={s.officeAddr}>
-                    123 Hastings Street
+                    14 Project Ave
                     <br />
-                    Noosa Heads QLD 4567
+                    Noosaville QLD 4566
                     <br />
                     Australia
                   </div>
@@ -89,7 +89,7 @@ export default async function ContactPage() {
                 <div className={s.officeStats}>
                   <div>
                     <div className={s.officeStatLabel}>Phone</div>
-                    <div className={s.officeStatValue}>07 5447 1000</div>
+                    <div className={s.officeStatValue}>0438 116 191</div>
                   </div>
                   <div>
                     <div className={s.officeStatLabel}>Email</div>
@@ -127,13 +127,13 @@ export default async function ContactPage() {
                 <div className={s.mapPin}>
                   <div className={s.mapPinCard}>
                     <div style={{ fontSize: 13, fontWeight: 500 }}>Max. Property</div>
-                    <div className={s.mapPinSub}>123 Hastings St</div>
+                    <div className={s.mapPinSub}>14 Project Ave</div>
                   </div>
                   <div className={s.mapPinDot} />
                 </div>
                 <div className={s.mapBtns}>
                   <a
-                    href="https://maps.google.com/?q=123+Hastings+Street+Noosa+Heads"
+                    href="https://maps.google.com/?q=14+Project+Ave+Noosaville+QLD"
                     className="btn btn-sm"
                     style={{
                       background: "var(--color-bg-surface)",

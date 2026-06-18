@@ -19,11 +19,11 @@ const ENQUIRY_OPTIONS: { v: Enquiry; l: string }[] = [
 
 // Content → WordPress ACF (§7). Extensible: add a key to each table.
 const ENQUIRY_AGENT: Record<Enquiry, { name: string; role: string; note: string; resp: string }> = {
-  sell: { name: "James Whitlam", role: "Principal · Founder", note: "James handles every appraisal personally. Expect a call inside one business day to schedule a walk-through.", resp: "Inside 4 hours" },
-  buy: { name: "Eliza Hart", role: "Director · Sales", note: "Eliza coordinates buyer enquiries across the team and routes you to the right local agent.", resp: "Within 1 business day" },
-  media: { name: "Mae Robinson", role: "Senior Agent", note: "For interview, photography or comment requests, Mae is your fastest path to a quote on the record.", resp: "Same day" },
-  careers: { name: "Tom Reilly", role: "Operations Manager", note: "Tom manages hiring across the team. Speculative notes are welcome — we keep them on file.", resp: "Within 1 business day" },
-  general: { name: "The front desk", role: "Office · Hastings St", note: "For anything that doesn't fit a box — questions, referrals, market chats — we'll route it to the right person.", resp: "Within 1 business day" },
+  sell: { name: "Matt Powe", role: "Principal · Founder", note: "Matt handles every appraisal personally. Expect a call inside one business day to schedule a walk-through.", resp: "Inside 4 hours" },
+  buy: { name: "Matt Powe", role: "Principal · Founder", note: "Matt handles buyer enquiries personally — expect a call inside one business day with what's on and what's coming.", resp: "Within 1 business day" },
+  media: { name: "Matt Powe", role: "Principal · Founder", note: "For interview, photography or comment requests, Matt is your fastest path to a quote on the record.", resp: "Same day" },
+  careers: { name: "Matt Powe", role: "Principal · Founder", note: "Matt reads every note that comes through — speculative welcome, we keep them on file.", resp: "Within 1 business day" },
+  general: { name: "Matt Powe", role: "Principal · Founder", note: "For anything that doesn't fit a box — questions, referrals, market chats — Matt will route it to the right person.", resp: "Within 1 business day" },
 };
 
 const FORM_HEADING: Record<Enquiry, string> = {
@@ -106,9 +106,9 @@ export function ContactForm() {
             <div className={s.dropIn}>
               <Overline>Prefer to drop in?</Overline>
               <div className={s.dropInAddr}>
-                123 Hastings Street
+                14 Project Ave
                 <br />
-                Noosa Heads QLD 4567
+                Noosaville QLD 4566
               </div>
               <div className={s.dropInHours}>Mon–Fri · 9am–5pm</div>
             </div>
