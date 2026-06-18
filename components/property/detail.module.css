@@ -11,7 +11,10 @@
 
 /* ── Breadcrumb ───────────────────────────────────────────────────────── */
 .breadcrumb {
-  padding: 24px 0 8px;
+  /* Vertical only — keep the horizontal padding inherited from .container
+     (a `padding` shorthand here would zero it out and clip content on mobile). */
+  padding-top: 24px;
+  padding-bottom: 8px;
   font-size: 13px;
   color: var(--color-text-secondary);
   display: flex;
@@ -183,7 +186,9 @@
 
 /* ── Key facts ────────────────────────────────────────────────────────── */
 .keyfacts {
-  padding: 40px 0 24px;
+  /* Vertical only — preserve .container's horizontal padding. */
+  padding-top: 40px;
+  padding-bottom: 24px;
 }
 .kfTop {
   display: grid;
@@ -307,7 +312,9 @@
 
 /* ── Body ─────────────────────────────────────────────────────────────── */
 .body {
-  padding: 64px 0 96px;
+  /* Vertical only — preserve .container's horizontal padding. */
+  padding-top: 64px;
+  padding-bottom: 96px;
 }
 .bodyGrid {
   display: grid;
@@ -710,7 +717,8 @@
     grid-column: 2;
   }
   .body {
-    padding: 40px 0 72px;
+    padding-top: 40px;
+    padding-bottom: 72px;
   }
   .h2 {
     font-size: clamp(28px, 7.4vw, 36px);
