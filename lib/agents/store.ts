@@ -8,9 +8,11 @@
 
 import type { Agent } from "./types";
 import { matt } from "@/data/agents/matt-powe";
+import { kirsty } from "@/data/agents/kirsty-kernot";
 
 const AGENTS: Record<string, Agent> = {
   [matt.slug]: matt,
+  [kirsty.slug]: kirsty,
 };
 
 export async function getAgent(slug: string): Promise<Agent | null> {
