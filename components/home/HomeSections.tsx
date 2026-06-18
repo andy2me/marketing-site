@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Container } from "@/components/ui/Container";
@@ -193,6 +194,13 @@ export function HomeLocations({ locations }: { locations: HomeContent["locations
           {locations.cards.map((l) => (
             <Link key={l.slug} href="/locations" className={s.locCard}>
               <div className={s.locMedia}>
+                <Image
+                  src={l.image}
+                  alt={l.imageAlt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                  className={s.locImage}
+                />
                 <span className={s.locOverlay} />
                 <div className={s.locContent}>
                   <div className={s.locName}>{l.name}</div>
