@@ -19,7 +19,11 @@ export async function getSiteSettings(): Promise<SiteSettings> {
       phone: "0438 116 191",
       hours: "Mon–Fri · 9am–5pm",
     },
-    social: { instagram: "#", facebook: "#", youtube: "#" },
+    social: {
+      instagram: "https://www.instagram.com/maxproperty.au/",
+      facebook: "https://www.facebook.com/people/Max-Property/61580649546865/",
+      youtube: "https://www.youtube.com/@maxpropertyau",
+    },
     footer: {
       tagline:
         "Estate agents on the Sunshine Coast. Personalised service, trusted expertise — your outcome drives our approach.",
