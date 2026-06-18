@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { DoorstepForm } from "@/components/forms/DoorstepForm";
 import { Overline } from "@/components/ui/Overline";
@@ -89,7 +90,15 @@ export function ContactForm() {
             <div className={s.sideCard}>
               <Overline>Your point of contact</Overline>
               <div className={s.sideAgent}>
-                <span className={s.sideAvatar} aria-hidden />
+                <span className={s.sideAvatar}>
+                  <Image
+                    src="/assets/team/matt-powe-large.jpg"
+                    alt={agent.name}
+                    fill
+                    sizes="64px"
+                    className={s.sideAvatarImg}
+                  />
+                </span>
                 <div>
                   <div className={s.sideName}>{agent.name}</div>
                   <div className={s.sideRole}>{agent.role}</div>

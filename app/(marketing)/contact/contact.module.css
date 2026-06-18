@@ -66,11 +66,17 @@
   align-items: center;
 }
 .sideAvatar {
+  position: relative;
   width: 64px;
   height: 64px;
   border-radius: var(--radius-pill);
   background: var(--white-mist-300);
   flex: none;
+  overflow: hidden;
+}
+.sideAvatarImg {
+  object-fit: cover;
+  object-position: center top;
 }
 .sideName {
   font-size: 17px;
