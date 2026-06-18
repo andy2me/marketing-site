@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Container } from "@/components/ui/Container";
 import { PropertiesBrowser } from "@/components/property/PropertiesBrowser";
 import { IconArrowR } from "@/components/icons";
-import { getActiveListings } from "@/lib/rex";
+import { getAllListings } from "@/lib/rex";
 import { getSiteSettings } from "@/lib/wp/mock";
 import s from "@/components/property/properties.module.css";
 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export const revalidate = 900;
 
 export default async function BuyPage() {
-  const [listings, settings] = await Promise.all([getActiveListings(), getSiteSettings()]);
+  const [listings, settings] = await Promise.all([getAllListings(), getSiteSettings()]);
 
   return (
     <>
