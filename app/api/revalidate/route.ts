@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import type { NextRequest } from "next/server";
 
 // On-demand ISR endpoint (§6). Today: Rex listing-change webhooks. WordPress publish
@@ -8,6 +8,11 @@ import type { NextRequest } from "next/server";
 // set by lib/rex/client.ts (`listings` for the collection, `listing:<id>` per detail).
 // Using `{ expire: 0 }` rather than the "max" profile because a listing-change
 // notification is the user telling us the cache is wrong *now*, not "stale soon".
+//
+// Belt-and-braces: tag invalidation clears the data cache, but /sold and /buy declare
+// `export const revalidate = 900` which is the page-level full-route cache. That sits
+// downstream of the data cache, so we also explicitly invalidate those paths.
+const LISTING_PAGES = ["/buy", "/sold"] as const;
 
 const REX_SECRET = process.env.REX_WEBHOOK_SECRET;
 
@@ -61,6 +66,11 @@ export async function POST(req: NextRequest) {
   const ids = extractListingIds(body);
   revalidateTag("listings", { expire: 0 });
   for (const id of ids) revalidateTag(`listing:${id}`, { expire: 0 });
+  for (const path of LISTING_PAGES) revalidatePath(path);
 
-  return Response.json({ revalidated: true, tags: ["listings", ...ids.map((id) => `listing:${id}`)] });
+  return Response.json({
+    revalidated: true,
+    tags: ["listings", ...ids.map((id) => `listing:${id}`)],
+    paths: [...LISTING_PAGES],
+  });
 }
