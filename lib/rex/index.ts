@@ -31,6 +31,16 @@ export async function getSoldListings(): Promise<ListingCard[]> {
   return fetchCardsByState("sold");
 }
 
+export async function getAllListings(): Promise<ListingCard[]> {
+  if (!isRexConfigured()) return mockSource.getAllListings();
+  const [current, sold, leased] = await Promise.all([
+    fetchCardsByState("current"),
+    fetchCardsByState("sold"),
+    fetchCardsByState("leased"),
+  ]);
+  return [...current, ...sold, ...leased];
+}
+
 export async function getFeaturedListings(limit = DEFAULT_FEATURED): Promise<ListingCard[]> {
   if (!isRexConfigured()) return mockSource.getFeaturedListings(limit);
   const all = await fetchCardsByState("current");
