@@ -82,7 +82,7 @@ export default async function TeamPage() {
               <h2 className={s.leadTitle}>The agents.</h2>
               <div className={s.leadMeta}>{agents.length} estate agents</div>
             </div>
-            <div className={s.leadGrid} style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
+            <div className={s.leadGrid}>
               {agents.map((p) => (
                 <article key={p.slug} className={s.leadCard}>
                   <div className={s.leadPortrait}>

@@ -92,7 +92,9 @@
 }
 .leadGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* min(100%, 280px) keeps a single full-width column on phones (no overflow)
+     while collapsing to 2 columns for the team on tablet/desktop. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 24px;
 }
 .leadCard {
