@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import { IconBed, IconBath, IconCar } from "@/components/icons";
 import type { ListingCard } from "@/lib/rex/types";
@@ -68,7 +69,19 @@ export function PropertyMap({
               onMouseEnter={() => setHoverId(p.id)}
               onMouseLeave={() => setHoverId(null)}
             >
-              <ImageSlot ratio="3/2" className={s.itemThumb} />
+              <div className={s.itemThumb}>
+                {p.image ? (
+                  <Image
+                    src={p.image}
+                    alt={p.street}
+                    fill
+                    sizes="120px"
+                    className={s.itemThumbImg}
+                  />
+                ) : (
+                  <ImageSlot ratio="3/2" className={s.itemThumbSlot} />
+                )}
+              </div>
               <div className={s.itemBody}>
                 <div className={s.itemPrice}>{p.price}</div>
                 <div className={s.itemStreet}>{p.street}</div>
@@ -142,7 +155,19 @@ export function PropertyMap({
               </div>
               {active && (
                 <Link href={`/properties/${p.slug}`} className={s.pinPopover}>
-                  <ImageSlot ratio="3/2" />
+                  <div className={s.popThumb}>
+                    {p.image ? (
+                      <Image
+                        src={p.image}
+                        alt={p.street}
+                        fill
+                        sizes="260px"
+                        className={s.popThumbImg}
+                      />
+                    ) : (
+                      <ImageSlot ratio="3/2" className={s.popThumbSlot} />
+                    )}
+                  </div>
                   <div className={s.popBody}>
                     <div className={s.itemPrice}>{p.price}</div>
                     <div className={s.itemStreet}>{p.street}</div>
