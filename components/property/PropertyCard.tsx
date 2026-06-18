@@ -66,7 +66,17 @@ export function PropertyCard({
         </div>
 
         <div className={styles.agent}>
-          <span className={styles.agentAvatar} aria-hidden />
+          <span className={styles.agentAvatar}>
+            {p.agent.photo ? (
+              <Image
+                src={p.agent.photo}
+                alt=""
+                fill
+                sizes="24px"
+                className={styles.agentAvatarImg}
+              />
+            ) : null}
+          </span>
           <span className={styles.agentName}>{p.agent.name}</span>
         </div>
       </div>

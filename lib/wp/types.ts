@@ -64,12 +64,6 @@ export type HomeContent = {
   testimonials: {
     overline: string;
     heading: string;
-    rating: string;
-    ratingMeta: string;
-    quote: string;
-    authorName: string;
-    authorDetail: string;
-    total: number;
   };
   cta: {
     overline: string;

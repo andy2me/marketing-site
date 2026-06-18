@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { PropertyDetailView } from "@/components/property/PropertyDetailView";
-import { getListingBySlug, getListingSlugs, getSimilarListings } from "@/lib/rex/mock";
+import { getListingBySlug, getListingSlugs, getSimilarListings } from "@/lib/rex";
 import { getSiteSettings } from "@/lib/wp/mock";
 import { listingJsonLd } from "@/lib/seo/listing";
 

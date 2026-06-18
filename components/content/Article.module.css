@@ -1,0 +1,401 @@
+/* Max Property — Insights child layout (design handoff §7).
+ * Hero is wide; body is a 720px editorial measure; related rail is a 3-up linen band.
+ */
+
+/* ── Coming-soon placeholder (stub slugs in CARDS but not ARTICLES) ─── */
+.comingSoon {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 0 24px;
+  text-align: center;
+}
+.comingSoonBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-action) 12%, transparent);
+  color: var(--color-action);
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.comingSoonBadgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-action);
+  animation: comingSoonPulse 1800ms ease-in-out infinite;
+}
+@keyframes comingSoonPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+.comingSoonH2 {
+  margin-top: 28px;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.comingSoonBody {
+  margin-top: 18px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.comingSoonBtns {
+  margin-top: 32px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Hero ───────────────────────────────────────────────────────────── */
+.hero {
+  padding: 56px 0 40px;
+}
+.heroInner {
+  max-width: 840px;
+  margin-top: 32px;
+}
+.pillRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.pill {
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+}
+.pillFilled {
+  background: var(--ember);
+  color: #fff;
+}
+.pillOutline {
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-secondary);
+}
+.title {
+  margin-top: 24px;
+  font-size: clamp(44px, 5.2vw, 76px);
+  line-height: 1.0;
+  letter-spacing: -0.025em;
+  color: var(--color-text-strong);
+  text-wrap: balance;
+}
+.titleEm {
+  font-style: italic;
+  color: var(--color-action);
+}
+.dek {
+  margin-top: 24px;
+  max-width: 660px;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}
+.metaRow {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.pubBlock {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.pubDate {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 22px;
+  color: var(--color-text-strong);
+}
+.pubSep {
+  width: 1px;
+  height: 22px;
+  background: var(--color-border-strong);
+}
+.pubRead {
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
+/* ── Byline ─────────────────────────────────────────────────────────── */
+.byline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.bylineAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: var(--white-mist-300);
+  flex: none;
+}
+.bylineName {
+  font-size: 15px;
+  color: var(--color-text-strong);
+  font-weight: 500;
+}
+.bylineRole {
+  margin-top: 2px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+/* ── Breadcrumb ─────────────────────────────────────────────────────── */
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  flex-wrap: wrap;
+}
+.crumbs a:hover {
+  color: var(--color-text-strong);
+}
+.crumbsSep {
+  opacity: 0.5;
+}
+
+/* ── Hero media ─────────────────────────────────────────────────────── */
+.media {
+  padding: 8px 0 56px;
+}
+.mediaFrame {
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #d5cfc7;
+  position: relative;
+}
+.mediaFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.mediaCaption {
+  margin-top: 14px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+}
+
+/* ── Body ───────────────────────────────────────────────────────────── */
+.body {
+  padding: 0 0 64px;
+}
+.bodyInner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.p {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  margin: 0 0 24px;
+}
+.p:last-child {
+  margin-bottom: 0;
+}
+.dropCap {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 26px;
+  float: left;
+  line-height: 0.9;
+  margin: 6px 10px 0 0;
+  color: var(--color-action);
+}
+.h2 {
+  margin: 48px 0 16px;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+  scroll-margin-top: 96px;
+}
+.bodyLink {
+  color: var(--color-action);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.bodyLink:hover {
+  color: var(--color-action-hover);
+}
+.quote {
+  margin: 36px 0 24px;
+  padding-left: 28px;
+  border-left: 3px solid var(--color-action);
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 28px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+}
+
+/* ── Chart data card ────────────────────────────────────────────────── */
+.chart {
+  margin: 48px 0;
+  padding: 40px;
+  border-radius: 16px;
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+}
+.chartHead {
+  margin-bottom: 8px;
+}
+.chartCaption {
+  margin-top: 16px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Inline CTA (linen, end-of-body) ────────────────────────────────── */
+.ctaWrap {
+  margin-top: 56px;
+}
+.cta {
+  padding: 40px;
+  border-radius: 16px;
+  background: var(--soft-linen-400);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+}
+.ctaBody h3 {
+  margin-top: 8px;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.ctaBody p {
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+  max-width: 440px;
+}
+
+/* ── Related rail ───────────────────────────────────────────────────── */
+.related {
+  padding: 96px 0;
+  background: var(--color-bg-banding);
+}
+.relatedHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.relatedH2 {
+  font-size: clamp(30px, 3.2vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.relatedCard {
+  display: block;
+}
+.relatedMedia {
+  aspect-ratio: 5 / 4;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #d5cfc7;
+}
+.relatedBlock {
+  margin-top: 16px;
+}
+.relatedCat {
+  color: var(--color-action);
+}
+.relatedTitle {
+  margin-top: 10px;
+  font-size: 21px;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+  text-wrap: pretty;
+}
+.relatedMeta {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 1023px) {
+  .relatedGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cta {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 40px 0 24px;
+  }
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+  .chart {
+    padding: 24px;
+  }
+  .cta {
+    padding: 28px;
+  }
+  .ctaBody h3 {
+    font-size: 24px;
+  }
+  .quote {
+    font-size: 22px;
+    padding-left: 18px;
+  }
+  .h2 {
+    font-size: 26px;
+    margin-top: 40px;
+  }
+  .metaRow {
+    gap: 16px;
+  }
+  .pubDate {
+    font-size: 20px;
+  }
+}

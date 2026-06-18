@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { Container } from "@/components/ui/Container";
 import { PropertyCard } from "./PropertyCard";
@@ -34,6 +34,7 @@ type View = "grid" | "map";
 export function PropertiesBrowser({ listings }: { listings: ListingCard[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   // Initialise from the URL once (shareable/deep-linkable state, §8).
   const [filters, setFilters] = useState<Filters>(() => ({
@@ -65,8 +66,8 @@ export function PropertiesBrowser({ listings }: { listings: ListingCard[] }) {
     if (sort !== "newest") params.set("sort", sort);
     if (view !== "grid") params.set("view", view);
     const qs = params.toString();
-    router.replace(qs ? `/buy?${qs}` : "/buy", { scroll: false });
-  }, [filters, query, sort, view, router]);
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  }, [filters, query, sort, view, router, pathname]);
 
   const results = useMemo(() => {
     const base = filterAndSort(listings, filters, sort);

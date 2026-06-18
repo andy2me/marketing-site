@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/Button";
 import { ImageSlot } from "@/components/ui/ImageSlot";
 import { IconArrowUR } from "@/components/icons";
 import { getSiteSettings } from "@/lib/wp/mock";
+import { listAgents } from "@/lib/agents/store";
 import s from "./team.module.css";
 
 export const metadata: Metadata = {
   title: "Team — Agents & Leadership",
   description:
-    "Eight people, four agents, four operators. Meet the Max Property team — deliberately small, so every campaign is owned by a person you can reach.",
+    "Meet the Max Property team — Matt Powe and Kirsty Kernot. Deliberately small, so every campaign is owned by a person you can reach.",
   alternates: { canonical: "/team" },
 };
 
@@ -19,30 +20,20 @@ const MANIFESTO = [
   { k: "02", w: "No handoffs after the appraisal.", body: "The agent you meet is the one who answers the phone at 9pm on settlement eve." },
   { k: "03", w: "No fee creep, no surprise add-ons.", body: "Every dollar is costed upfront and approved by you before we spend it." },
 ];
-const LEADERS = [
-  { name: "James Whitlam", role: "Principal · Founder", patches: ["Noosa Heads", "Sunshine Beach"], years: "14", sales: "$284M", quote: "You can't shortcut trust. So we don't try.", color: "var(--mulberry)" },
-  { name: "Eliza Hart", role: "Director · Sales", patches: ["Noosaville", "Doonan"], years: "11", sales: "$176M", quote: "The best campaigns feel inevitable in hindsight.", color: "var(--fern)" },
-  { name: "Mae Robinson", role: "Senior Agent", patches: ["Tewantin", "Peregian Beach"], years: "8", sales: "$94M", quote: "Most homes only sell once. I take that personally.", color: "var(--ember)" },
-];
-const SUPPORT = [
-  { name: "Tom Reilly", role: "Operations Manager", init: "TR", color: "var(--clay)" },
-  { name: "Iris Bennett", role: "Campaign Director", init: "IB", color: "var(--mulberry)" },
-  { name: "Daniel Chen", role: "Marketing Lead", init: "DC", color: "var(--fern)" },
-  { name: "Olive Maddox", role: "Vendor Liaison", init: "OM", color: "var(--ember)" },
-];
+
 const CULTURE_STATS = [
-  { k: "Avg tenure", v: "6.4 yrs" },
-  { k: "Glassdoor", v: "4.8" },
+  { k: "Combined experience", v: "40+ yrs" },
   { k: "Local hires", v: "100%" },
 ];
+
 const ROLES = [
-  { title: "Sales Associate", patch: "Noosaville · Tewantin", type: "Full-time" },
-  { title: "Campaign Coordinator", patch: "Office · Noosa Heads", type: "Full-time" },
+  { title: "Sales Associate", patch: "Noosaville", type: "Full-time" },
+  { title: "Campaign Coordinator", patch: "Noosaville", type: "Full-time" },
   { title: "Stylist (contract)", patch: "All patches", type: "Part-time" },
 ];
 
 export default async function TeamPage() {
-  const settings = await getSiteSettings();
+  const [settings, agents] = await Promise.all([getSiteSettings(), listAgents()]);
 
   return (
     <>
@@ -62,9 +53,8 @@ export default async function TeamPage() {
                 </h1>
               </div>
               <p className={s.heroIntro}>
-                Eight people. Four agents, four operators. We&rsquo;re deliberately small so every
-                campaign is owned by a person who can be reached on a Sunday — and so the same
-                person who pitches you also signs the contract.
+                We&rsquo;re deliberately small so every campaign is owned by a person who can be
+                reached on a Sunday — and so the same person who pitches you also signs the contract.
               </p>
             </div>
           </Container>
@@ -89,28 +79,31 @@ export default async function TeamPage() {
         <section className={s.leadership}>
           <Container>
             <div className={s.leadHead}>
-              <h2 className={s.leadTitle}>Senior agents.</h2>
-              <div className={s.leadMeta}>3 principals · 1 senior agent</div>
+              <h2 className={s.leadTitle}>The agents.</h2>
+              <div className={s.leadMeta}>{agents.length} estate agents</div>
             </div>
-            <div className={s.leadGrid}>
-              {LEADERS.map((p) => (
-                <article key={p.name} className={s.leadCard}>
-                  <div className={s.leadPortrait} style={{ background: p.color }}>
-                    <blockquote className={s.leadQuote}>“{p.quote}”</blockquote>
+            <div className={s.leadGrid} style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
+              {agents.map((p) => (
+                <article key={p.slug} className={s.leadCard}>
+                  <div className={s.leadPortrait}>
+                    {p.headshot ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={p.headshot}
+                        alt={p.name}
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        }}
+                      />
+                    ) : null}
                   </div>
                   <div className={s.leadBody}>
                     <div className={s.leadName}>{p.name}</div>
                     <div className={s.leadRole}>{p.role}</div>
-                    <div className={s.leadStats}>
-                      <div>
-                        <div className={s.statK}>Years</div>
-                        <div className={s.statV}>{p.years}</div>
-                      </div>
-                      <div>
-                        <div className={s.statK}>Sold (lifetime)</div>
-                        <div className={s.statV}>{p.sales}</div>
-                      </div>
-                    </div>
                     <div style={{ marginTop: 20 }}>
                       <div className="overline" style={{ fontSize: 11 }}>
                         Patches
@@ -124,7 +117,7 @@ export default async function TeamPage() {
                       </div>
                     </div>
                     <div className={s.leadBtns}>
-                      <Button href="/team" variant="secondary" size="sm">
+                      <Button href={`/team/${p.slug}`} variant="secondary" size="sm">
                         Profile
                       </Button>
                       <Button href="/contact?enquiry=general" variant="primary" size="sm">
@@ -133,36 +126,6 @@ export default async function TeamPage() {
                     </div>
                   </div>
                 </article>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        {/* Support */}
-        <section className={s.support}>
-          <Container>
-            <div className={s.split} style={{ marginBottom: 48 }}>
-              <div>
-                <div className="overline">§ Behind the scenes</div>
-                <h2 className={s.leadTitle} style={{ marginTop: 24 }}>
-                  The operators.
-                </h2>
-              </div>
-              <p className={s.heroIntro} style={{ alignSelf: "end" }}>
-                Behind every campaign there&rsquo;s a marketing lead, a stylist&rsquo;s brief, a
-                coordinator booking the photographer at golden hour, and someone calling you back
-                inside 30 minutes. These are them.
-              </p>
-            </div>
-            <div className={s.supportGrid}>
-              {SUPPORT.map((t) => (
-                <div key={t.name} className={s.supportCard}>
-                  <div className={s.avatar} style={{ background: t.color }}>
-                    {t.init}
-                  </div>
-                  <div className={s.supName}>{t.name}</div>
-                  <div className={s.supRole}>{t.role}</div>
-                </div>
               ))}
             </div>
           </Container>

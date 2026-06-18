@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getListingSlugs } from "@/lib/rex/mock";
+import { getListingSlugs } from "@/lib/rex";
 
 const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 
@@ -12,12 +12,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "",
     "/sell",
     "/buy",
+    "/sold",
     "/locations",
     "/insights",
     "/team",
     "/contact",
     "/privacy",
-    "/terms",
   ];
   const staticEntries = staticRoutes.map((route) => ({
     url: `${base}${route}`,

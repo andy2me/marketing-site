@@ -12,7 +12,8 @@ import {
   HomeCTABand,
 } from "@/components/home/HomeSections";
 import { getHomeContent, getSiteSettings } from "@/lib/wp/mock";
-import { getFeaturedListings } from "@/lib/rex/mock";
+import { getFeaturedListings } from "@/lib/rex";
+import { getRatingSummary, getReviews } from "@/lib/reviews/mock";
 
 export const metadata: Metadata = {
   title: { absolute: "Max Property — Estate Agents, Sunshine Coast" },
@@ -25,10 +26,12 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function HomePage() {
-  const [content, settings, featured] = await Promise.all([
+  const [content, settings, featured, ratingSummary, reviews] = await Promise.all([
     getHomeContent(),
     getSiteSettings(),
     getFeaturedListings(3),
+    getRatingSummary(),
+    getReviews(),
   ]);
 
   return (
@@ -42,7 +45,7 @@ export default async function HomePage() {
         <HomeFeatured featured={content.featured} listings={featured} />
         <HomeLocations locations={content.locations} />
         <HomeInsights insights={content.insights} />
-        <HomeTestimonials testimonials={content.testimonials} />
+        <HomeTestimonials testimonials={content.testimonials} summary={ratingSummary} reviews={reviews} />
         <HomeCTABand cta={content.cta} />
       </main>
     </>
