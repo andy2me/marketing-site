@@ -16,7 +16,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     ],
     office: {
       addressLines: ["14 Project Ave", "Noosaville QLD 4566"],
-      phone: "07 5447 1000",
+      phone: "0438 116 191",
       hours: "Mon–Fri · 9am–5pm",
     },
     social: { instagram: "#", facebook: "#", youtube: "#" },
