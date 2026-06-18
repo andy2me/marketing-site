@@ -13,6 +13,16 @@ body {
   padding: 0;
 }
 
+/* Guard against accidental horizontal overflow on small screens (e.g. a long
+   unbreakable string, or a grid/flex child refusing to shrink, pushing the
+   viewport wider). Applied to both html and body so the viewport scroll
+   container itself is constrained. `clip` rather than `hidden` so it doesn't
+   spin up a scroll container that would break the sticky header / sub-nav. */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   font-family: var(--font-body), system-ui, -apple-system, sans-serif;
   color: var(--color-text-primary);
@@ -21,10 +31,6 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  /* Guard against accidental horizontal overflow on small screens (e.g. a long
-     unbreakable string pushing the viewport wider). `clip` rather than `hidden`
-     so it doesn't create a scroll container that would break position: sticky. */
-  overflow-x: clip;
 }
 
 h1,

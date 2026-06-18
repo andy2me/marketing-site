@@ -191,6 +191,9 @@
   gap: 48px;
   align-items: end;
 }
+.kfTop > * {
+  min-width: 0;
+}
 .kfStatus {
   color: var(--color-action);
 }
@@ -200,6 +203,7 @@
   line-height: 1.02;
   color: var(--color-text-strong);
   letter-spacing: -0.02em;
+  overflow-wrap: break-word;
 }
 .kfSuburb {
   margin-top: 10px;
@@ -310,6 +314,12 @@
   grid-template-columns: 1fr 400px;
   gap: 80px;
   align-items: start;
+}
+/* Grid items default to min-width: auto and refuse to shrink below their
+   content's intrinsic width — a common source of horizontal overflow on
+   mobile. Allow the columns to shrink to the available track instead. */
+.bodyGrid > * {
+  min-width: 0;
 }
 .block {
   margin-top: 64px;
