@@ -53,10 +53,10 @@
 }
 .mapBox {
   position: relative;
-  aspect-ratio: 16 / 8;
+  aspect-ratio: 1000 / 560;
   border-radius: 16px;
   overflow: hidden;
-  background: linear-gradient(135deg, #e5dace 0%, #d8ccc0 100%);
+  background: linear-gradient(135deg, #e7dcd0 0%, #dbcfc2 100%);
   border: 1px solid var(--color-border);
 }
 .mapSvg {
@@ -102,7 +102,7 @@
 .legend {
   position: absolute;
   bottom: 24px;
-  left: 24px;
+  right: 24px;
   background: var(--color-bg-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -347,7 +347,7 @@
   }
   .legend {
     bottom: 16px;
-    left: 16px;
+    right: 16px;
     padding: 10px 12px;
   }
   .cta {
