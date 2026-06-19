@@ -302,9 +302,6 @@ export function GuideFAQSection({
           <div>
             <div className={`overline ${s.faqOverline}`}>{eyebrow}</div>
             <h2 className={s.faqH2}>{heading}</h2>
-            <p className={s.faqNote}>
-              Answers wired to FAQ schema so they can surface directly in search.
-            </p>
           </div>
           <div>
             <FAQAccordion items={items} />

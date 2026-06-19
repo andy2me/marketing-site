@@ -1,6 +1,7 @@
-// Max Property — Insight: "The Sunshine Coast market — May 2026".
-// Replaces the live placeholder for /insights/sunshine-coast-market-may-2026 and seeds the
-// featured slot on /insights. Copy ported from the content-cluster design handoff (§7).
+// Max Property — Insight: "The Sunshine Coast market — May 2026" (re-sourced).
+// Every figure is tied to a dated public source per the editorial brief; the
+// monthly listings chart and the "filling auction calendar" line were dropped
+// because they couldn't be publicly verified at shire granularity.
 
 import type { Article } from "@/lib/insights/types";
 
@@ -10,7 +11,7 @@ export const article: Article = {
   badge: "Editor's pick",
   title: "The Sunshine Coast market in May 2026.",
   titleEmphasis: "May 2026",
-  dek: "Stock is recovering, buyer enquiry is back at 2024 levels, and the winter auction calendar is filling fast. Here's what we're seeing on the ground — and what we'd do if we were you.",
+  dek: "Tight, still rising, but with enough breathing room that buyers can compare, plan and negotiate rather than chase. Here's what the data shows — and what we'd do if we were you.",
   date: "12 May 2026",
   isoDate: "2026-05-12",
   readMinutes: 6,
@@ -20,47 +21,67 @@ export const article: Article = {
     suburb: "Noosaville",
   },
   hero: {
-    alt: "The Noosa River mouth at dusk, May 2026.",
-    caption: "The Noosa River mouth, May 2026 · Max. Property",
+    src: "/assets/locations/noosa-heads.jpg",
+    alt: "Noosa Heads coastline and bushland from above — the Sunshine Coast region in 2026.",
+    caption: "The Sunshine Coast · May 2026 · Max. Property",
   },
   body: [
     {
       kind: "p",
-      text: "If the back half of 2025 felt thin, you weren't imagining it. Listings were scarce, buyers were cautious, and good homes traded quietly off-market. May has been the clearest turn we've seen in eighteen months.",
+      text: "If the back half of 2025 felt thin, you weren't imagining it — listings were scarce and good homes traded quietly. 2026 has settled into something steadier: still tight, still rising, but with enough breathing room that buyers can compare, plan and negotiate rather than chase.",
     },
-    { kind: "h2", id: "stock", text: "Stock is finally moving" },
+    { kind: "h2", id: "numbers", text: "The numbers that matter (Noosaville)" },
     {
       kind: "p",
-      text: "New listings across the Noosa shire were up sharply on the same month last year. Vendors who'd been waiting for “certainty” appear to have decided it isn't coming, and have chosen to act. For buyers, that means genuine choice for the first time in a while.",
+      text: "Over the 12 months to early 2026, Noosaville's median house price sits around $2.0 million, up roughly 10.8% on the year, off about 144–148 sales. Houses are taking a median of ~57–65 days to sell. Units sit near $980k, selling faster at ~46 days.",
     },
-    {
-      kind: "chart",
-      overline: "New listings · Noosa shire",
-      caption:
-        "New residential listings per month · Q4 2025 – Q2 2026 · Source: realestate.com.au + Max. internals",
-      series: [
-        { label: "Dec", value: 118, valueLabel: "118" },
-        { label: "Jan", value: 104, valueLabel: "104" },
-        { label: "Feb", value: 142, valueLabel: "142" },
-        { label: "Mar", value: 168, valueLabel: "168" },
-        { label: "Apr", value: 191, valueLabel: "191" },
-        { label: "May", value: 224, valueLabel: "224" },
-      ],
-    },
-    { kind: "h2", id: "enquiry", text: "Buyer enquiry is back" },
     {
       kind: "p",
-      text: "Our own enquiry volumes are tracking at 2024 levels — and crucially, the quality has lifted. More finance-ready buyers, fewer tyre-kickers. Open-home numbers are healthy without the frenzy of the 2021 peak.",
+      text: "Source: Cotality / CoreLogic via propertyvalue.com.au and Your Investment Property, data to late 2025 – early 2026.",
+    },
+    {
+      kind: "p",
+      text: "What those medians don't show is how micro-location-driven Noosaville is — a riverfront home and a home two streets back belong to different markets. The averages orient you; they don't price your home.",
+    },
+    { kind: "h2", id: "supply", text: "Supply is tight, not flooded" },
+    {
+      kind: "p",
+      text: "The Noosa shire is running at roughly 1.3 months of inventory — genuinely tight. The wider Sunshine Coast is more balanced at about 3 months, with regional days-on-market around 31 days.",
+    },
+    {
+      kind: "p",
+      text: "Source: HtAG Analytics (Cotality-derived), Noosa Shire and Sunshine Coast Regional dashboards, April–May 2026.",
+    },
+    {
+      kind: "p",
+      text: "Supply is the structural story here: tight planning rules, high build costs, and a Noosa market where most vendors sell by choice rather than necessity. When quality stock lists, it still draws competition.",
+    },
+    { kind: "h2", id: "tailwind", text: "A balanced market — with a strong tailwind" },
+    {
+      kind: "p",
+      text: "For 2026, SQM Research forecasts regional price growth of 10–15%, well above the 6–10% pencilled in for the capital-city average — though more conservative local analysts put the Coast nearer 3–6%, with prime Noosa at 6–8%. Either way the direction is up. Cotality figures show 90 of 95 Sunshine Coast towns now carry a median house price above $1 million, up from fewer than 20 five years ago.",
+    },
+    {
+      kind: "p",
+      text: "Source: SQM Research and Cotality, reported via Sunshine Coast News / Home Scouts, Feb–Mar 2026.",
     },
     {
       kind: "blockquote",
       text: "This is a balanced market — and balanced markets reward preparation over speed.",
     },
+    {
+      kind: "p",
+      text: "The drivers haven't changed: limited supply, steady interstate migration (the Sunshine Coast draws the single largest share of capital-to-regional movers in the country), and the Brisbane \"ripple\" ahead of 2032.",
+    },
     { kind: "h2", id: "advice", text: "What we'd do" },
     {
       kind: "p",
-      text: "If you're buying, get finance-ready and move on the right home with confidence — the days of lowball offers landing are largely behind us. If you're selling, presentation and pricing matter more than ever now that buyers have alternatives. And if you're watching Noosaville specifically, read our {{link}} before you start.",
+      text: "If you're buying, get finance-ready and move decisively on the right home — the window for lowball offers has largely closed. If you're selling, presentation and pricing matter more than ever now that buyers have alternatives and the time to be choosy. And if Noosaville is your focus, our {{link}} walks through the precincts, the costs and how to buy well.",
       link: { label: "practical buying guide", href: "/noosaville/buying" },
+    },
+    {
+      kind: "p",
+      text: "Market figures are general commentary drawn from third-party data providers at the date of publication and may vary between sources; they aren't financial advice.",
     },
   ],
   related: [],
