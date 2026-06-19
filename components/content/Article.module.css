@@ -57,7 +57,7 @@
 
 /* ── Hero ───────────────────────────────────────────────────────────── */
 .hero {
-  padding: 56px 0 40px;
+  padding: 128px 0 40px; /* 72px clears the fixed header, then 56px breathing room */
 }
 .heroInner {
   max-width: 840px;
@@ -371,7 +371,7 @@
 
 @media (max-width: 767px) {
   .hero {
-    padding: 40px 0 24px;
+    padding: 112px 0 24px; /* 72px header clearance + 40px breathing room */
   }
   .relatedGrid {
     grid-template-columns: 1fr;
