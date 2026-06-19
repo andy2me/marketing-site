@@ -54,7 +54,7 @@ const noosavilleBuying: Guide = {
         },
         {
           kind: "p",
-          text: "It's also a market that doesn't lurch. [[Noosaville's median|/insights/noosaville-supply-story]] has grown steadily rather than spiking, which means fewer nasty surprises for buyers who hold for the medium term.",
+          text: "It's also a market that doesn't lurch. Noosaville's median has grown steadily rather than spiking, which means fewer nasty surprises for buyers who hold for the medium term.",
         },
       ],
     },
@@ -93,7 +93,7 @@ const noosavilleBuying: Guide = {
         },
         {
           kind: "p",
-          text: "We've written a full breakdown of the trade-off — see [[Units vs houses in Noosaville: what holds value|/insights/units-vs-houses-river]] — but the short version: if you'll be here less than five years, the unit math often wins; if you're putting down roots, the land usually does.",
+          text: "The short version: if you'll be here less than five years, the unit math often wins; if you're putting down roots, the land usually does. Body corporate health is what makes or breaks a unit purchase, so read the disclosure carefully before you fall in love with the view.",
         },
       ],
     },
@@ -238,31 +238,6 @@ const noosavilleBuying: Guide = {
       title: "The real cost to buy in Noosaville (2026)",
       read: "7 min",
       href: "/noosaville/buying/cost-to-buy",
-    },
-    {
-      title: "Units vs houses: what holds value",
-      read: "6 min",
-      href: "/noosaville/buying/units-vs-houses",
-    },
-    {
-      title: "How to read a body corporate report",
-      read: "5 min",
-      href: "/noosaville/buying/body-corporate-report",
-    },
-    {
-      title: "First-home buyers: the Noosaville playbook",
-      read: "8 min",
-      href: "/noosaville/buying/first-home-buyers",
-    },
-    {
-      title: "Building & pest — what we actually look for",
-      read: "4 min",
-      href: "/noosaville/buying/building-and-pest",
-    },
-    {
-      title: "Bidding at a Noosaville auction",
-      read: "5 min",
-      href: "/noosaville/buying/auction-bidding",
     },
   ],
   closing: {
@@ -416,26 +391,7 @@ const noosavilleBuyingCostToBuy: Guide = {
   ],
   faqHeading: "Common cost questions.",
   faqEyebrow: "§ Cost questions",
-  related: [
-    {
-      category: "Buying",
-      title: "Units vs houses: what holds value",
-      read: "6 min read",
-      href: "/noosaville/buying/units-vs-houses",
-    },
-    {
-      category: "Buying",
-      title: "First-home buyers: the Noosaville playbook",
-      read: "8 min read",
-      href: "/noosaville/buying/first-home-buyers",
-    },
-    {
-      category: "Buying",
-      title: "How to read a body corporate report",
-      read: "5 min read",
-      href: "/noosaville/buying/body-corporate-report",
-    },
-  ],
+  related: [],
   relatedHeading: "More in Buying in Noosaville",
   parentPillar: {
     label: "Buying in Noosaville",

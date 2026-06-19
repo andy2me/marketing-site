@@ -60,8 +60,8 @@ export const article: Article = {
     {
       kind: "p",
       text: "If you're buying, get finance-ready and move on the right home with confidence — the days of lowball offers landing are largely behind us. If you're selling, presentation and pricing matter more than ever now that buyers have alternatives. And if you're watching Noosaville specifically, read our {{link}} before you start.",
-      link: { label: "practical buying guide", href: "/insights/noosaville-supply-story" },
+      link: { label: "practical buying guide", href: "/noosaville/buying" },
     },
   ],
-  related: ["auction-or-private-treaty", "q1-clearance-rates", "noosaville-supply-story"],
+  related: [],
 };
