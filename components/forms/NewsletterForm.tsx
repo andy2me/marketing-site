@@ -1,12 +1,12 @@
 "use client";
 
-import { DoorstepForm } from "./DoorstepForm";
+import { LeadForm } from "./LeadForm";
 import styles from "./NewsletterForm.module.css";
 
-/** Footer + Insights newsletter signup. Rides the Doorstep seam (formId="newsletter"). */
+/** Footer + Insights newsletter signup (formId="newsletter"). */
 export function NewsletterForm() {
   return (
-    <DoorstepForm formId="newsletter" className={styles.form}>
+    <LeadForm formId="newsletter" className={styles.form}>
       <input
         className={styles.input}
         type="email"
@@ -18,6 +18,6 @@ export function NewsletterForm() {
       <button type="submit" className="btn btn-primary btn-sm" style={{ height: 44 }}>
         Subscribe
       </button>
-    </DoorstepForm>
+    </LeadForm>
   );
 }

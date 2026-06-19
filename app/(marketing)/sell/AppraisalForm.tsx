@@ -1,6 +1,6 @@
 "use client";
 
-import { DoorstepForm } from "@/components/forms/DoorstepForm";
+import { LeadForm } from "@/components/forms/LeadForm";
 import { IconArrowR } from "@/components/icons";
 import s from "./sell.module.css";
 
@@ -54,10 +54,10 @@ function DSelect({
   );
 }
 
-/** Sell appraisal form — dark, on the Doorstep seam (formId="appraisal", §9). */
+/** Sell appraisal form — dark (formId="appraisal", §9). */
 export function AppraisalForm() {
   return (
-    <DoorstepForm formId="appraisal" className={s.form}>
+    <LeadForm formId="appraisal" className={s.form}>
       <div className={s.formGrid}>
         <DField label="First name" name="firstName" placeholder="Sarah" />
         <DField label="Last name" name="lastName" placeholder="Henley" />
@@ -80,6 +80,6 @@ export function AppraisalForm() {
           Request appraisal <IconArrowR />
         </button>
       </div>
-    </DoorstepForm>
+    </LeadForm>
   );
 }

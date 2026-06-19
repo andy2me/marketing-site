@@ -3,7 +3,7 @@
 Connecting live property listings from Rex (code handoff §8).
 
 - **Status:** code seam is built (`lib/rex/`) and revalidate route is wired. **Blocked only on credentials** from Max's Rex admin.
-- **Principle:** the site is **read-only** — it consumes listings, never writes back. Agents keep managing listings in Rex.
+- **Principle:** **listings are read-only** — the site consumes them and never edits them; agents keep managing listings in Rex. The **one** write the site makes is creating **contacts** from website form submissions (see `docs/FORMS-SETUP.md`), which is why the API user needs Contacts → Create.
 - **Owners:** **Max** holds the Rex account · **Andy/onefivethree** coordinates · **Dev** wires it up.
 
 ## Chosen path: Rex CRM API (Wings) ✅

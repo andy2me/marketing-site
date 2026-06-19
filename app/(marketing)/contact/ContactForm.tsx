@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { DoorstepForm } from "@/components/forms/DoorstepForm";
+import { LeadForm } from "@/components/forms/LeadForm";
 import { Overline } from "@/components/ui/Overline";
 import { IconChevron, IconArrowR } from "@/components/icons";
 import s from "./contact.module.css";
@@ -124,7 +124,7 @@ export function ContactForm() {
           </aside>
 
           {/* Form */}
-          <DoorstepForm formId="contact" prefill={{ enquiry }} className={s.formCard}>
+          <LeadForm formId="contact" prefill={{ enquiry }} className={s.formCard}>
             <div className={s.formHead}>
               <h2 className={s.formTitle}>{FORM_HEADING[enquiry]}</h2>
               <div className={s.formStep}>Step 1 of 1 · ~2 min</div>
@@ -221,7 +221,7 @@ export function ContactForm() {
                 Send enquiry <IconArrowR />
               </button>
             </div>
-          </DoorstepForm>
+          </LeadForm>
         </div>
       </div>
     </section>

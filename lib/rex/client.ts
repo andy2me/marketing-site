@@ -49,7 +49,16 @@ type RexEnvelope<T> = { result: T | null; error: { message: string } | null };
 
 type FetchOpts = { tags?: string[]; revalidate?: number };
 
-async function call<T>(method: string, args: Record<string, unknown>, opts: FetchOpts = {}): Promise<T> {
+/**
+ * Authenticated Wings call. Exported so write paths (e.g. lead → contact in
+ * lib/rex/contacts.ts) reuse the same session-token cache + 401-retry as the
+ * read paths below — there is only ever one Rex login for the whole app.
+ */
+export async function rexCall<T>(
+  method: string,
+  args: Record<string, unknown>,
+  opts: FetchOpts = {},
+): Promise<T> {
   const url = `${BASE}/v1/rex/${method}`;
   const body = JSON.stringify(args);
   const buildInit = (token: string): RequestInit => ({
@@ -120,7 +129,7 @@ export async function searchPublishedListings(
   } = {},
   opts: FetchOpts = { tags: ["listings"], revalidate: 600 },
 ): Promise<RexPublishedListing[]> {
-  const result = await call<unknown>("PublishedListings/search", {
+  const result = await rexCall<unknown>("PublishedListings/search", {
     criteria: [...PUBLIC_LISTING_CRITERIA, ...(args.criteria ?? [])],
     result_format: args.resultFormat ?? "website_overrides_applied",
     limit: args.limit ?? 100,
@@ -135,7 +144,7 @@ export async function readPublishedListing(
   opts: FetchOpts = { tags: ["listings", `listing:${id}`], revalidate: 600 },
 ): Promise<RexPublishedListing | null> {
   try {
-    return await call<RexPublishedListing>("PublishedListings/read", {
+    return await rexCall<RexPublishedListing>("PublishedListings/read", {
       id,
       result_format: "website_overrides_applied",
       extra_fields: DEFAULT_EXTRA_FIELDS,

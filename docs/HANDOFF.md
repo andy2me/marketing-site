@@ -28,7 +28,7 @@ The full 8-page site is built on mock data behind swappable seams, deployed live
 - `lib/rex/` — listings (CRM)
 - `lib/wp/` — editorial content (WordPress headless)
 - `lib/reviews/` — **REA Ratings & Reviews** (NEW this session)
-- `components/forms/DoorstepForm` — forms (Doorstep TBC)
+- `components/forms/LeadForm` + `app/api/leads` — forms (live: first-party → Resend email + Rex contact; see `docs/FORMS-SETUP.md`)
 
 **Last session's evolution:** the testimonials section ("Vendor stories") now reads from the REA reviews seam — functional carousel, `4.9 · realestate.com.au`, ready to swap to the REA Ratings & Reviews API when access lands. Per-agent fields baked in for when the team grows.
 

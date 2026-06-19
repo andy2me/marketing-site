@@ -1,6 +1,6 @@
 "use client";
 
-import { DoorstepForm } from "@/components/forms/DoorstepForm";
+import { LeadForm } from "@/components/forms/LeadForm";
 import { IconArrowR } from "@/components/icons";
 import s from "./detail.module.css";
 
@@ -29,10 +29,10 @@ function Field({
   );
 }
 
-/** Agent enquiry form in the sticky panel — rides the Doorstep seam (formId="enquiry"). */
+/** Agent enquiry form in the sticky panel (formId="enquiry"). */
 export function EnquiryForm({ street }: { street: string }) {
   return (
-    <DoorstepForm formId="enquiry" prefill={{ listing: street }} className={s.enqForm}>
+    <LeadForm formId="enquiry" prefill={{ listing: street }} className={s.enqForm}>
       <div className={s.enqTitle}>Make an enquiry</div>
       <div className={s.enqSub}>Typical reply in under 2 hours.</div>
       <div className={s.enqFields}>
@@ -60,6 +60,6 @@ export function EnquiryForm({ street }: { street: string }) {
         </a>
         .
       </div>
-    </DoorstepForm>
+    </LeadForm>
   );
 }
