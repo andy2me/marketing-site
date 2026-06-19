@@ -133,6 +133,15 @@ const truthyBool = (v: RexBoolish): boolean => v === true || v === "1" || v === 
 
 const ensureHttps = (url: string): string => (url.startsWith("//") ? `https:${url}` : url);
 
+/** Rex returns suburb_or_town in ALL CAPS (e.g. "NOOSAVILLE"). Convert to Title Case while
+ *  leaving the state (QLD) and postcode digits untouched downstream. */
+const toTitleCase = (s: string): string =>
+  s.toLowerCase().replace(/(^|[\s-])(\p{L})/gu, (_, sep, ch) => sep + ch.toUpperCase());
+
+/** Drop a trailing ".00" from Rex's price display so $1,075,000.00 → $1,075,000.
+ *  Keeps cents when non-zero (e.g. "$995,000.50" is left alone). */
+const stripZeroCents = (s: string): string => s.replace(/\.00(?!\d)/g, "");
+
 const rexId = (rex: RexPublishedListing): string => String(rex.id ?? rex._id ?? "");
 
 function deriveStreet(addr: RexAddress | undefined): string {
@@ -146,7 +155,8 @@ function deriveStreet(addr: RexAddress | undefined): string {
 
 function deriveSuburb(addr: RexAddress | undefined): string {
   if (!addr) return "";
-  return [addr.suburb_or_town, addr.state_or_region, addr.postcode]
+  const town = addr.suburb_or_town ? toTitleCase(addr.suburb_or_town) : "";
+  return [town, addr.state_or_region, addr.postcode]
     .filter((p): p is string => Boolean(p))
     .join(" ")
     .trim();
@@ -187,9 +197,10 @@ function formatNextAuctionEvent(events: RexEvent[] | undefined): string | undefi
 function derivePriceDisplay(rex: RexPublishedListing, status: ListingStatus): string {
   if (truthyBool(rex.state_hide_price)) return "Contact Agent";
   const display = rex.state_value_price_display?.trim();
-  if (status === "Auction") return formatNextAuctionEvent(rex.events) ?? (display || "Auction");
-  if (status === "Sold") return display ? `Sold · ${display}` : "Sold";
-  return display || "Contact Agent";
+  const clean = display ? stripZeroCents(display) : "";
+  if (status === "Auction") return formatNextAuctionEvent(rex.events) ?? (clean || "Auction");
+  if (status === "Sold") return clean ? `Sold · ${clean}` : "Sold";
+  return clean || "Contact Agent";
 }
 
 function derivePriceValue(rex: RexPublishedListing): number | null {
@@ -314,7 +325,7 @@ export function mapPublishedListingToDetail(rex: RexPublishedListing): Listing |
     .split(/\n\s*\n/)
     .map((p) => p.trim())
     .filter(Boolean);
-  const suburb = rex.address?.suburb_or_town ?? "";
+  const suburb = rex.address?.suburb_or_town ? toTitleCase(rex.address.suburb_or_town) : "";
   const overviewHeading =
     rex.advert_internet?.heading?.trim() ||
     `A considered ${card.type.toLowerCase()} in the heart of ${suburb || "Noosa"}.`;
