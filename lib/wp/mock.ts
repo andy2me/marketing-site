@@ -102,7 +102,7 @@ export async function getHomeContent(): Promise<HomeContent> {
       heading: "Data led. Human centred.",
       cta: { label: "All insights", href: "/insights" },
       articles: [
-        { category: "Market", title: "The state of the Sunshine Coast market in May 2026", date: "12 May 2026", readTime: "6 min", slug: "sunshine-coast-market-may-2026" },
+        { category: "Market", title: "The state of the Sunshine Coast market in May 2026", date: "12 May 2026", readTime: "6 min", slug: "sunshine-coast-market-may-2026", image: "/assets/locations/noosa-heads.jpg", imageAlt: "Noosa Heads coastline and bushland from above — the Sunshine Coast region in 2026." },
       ],
     },
     testimonials: {

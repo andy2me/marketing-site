@@ -59,6 +59,8 @@ export type HomeContent = {
       date: string;
       readTime: string;
       slug: string;
+      image?: string;
+      imageAlt?: string;
     }>;
   };
   testimonials: {
