@@ -20,6 +20,8 @@ export type ArticleAuthor = {
   role: string;
   /** Patch / suburb the author works (shown next to the byline). */
   suburb?: string;
+  /** Optional portrait image — falls back to a plain coloured avatar. */
+  portraitUrl?: string;
 };
 
 /** A single bar in the inline data card. */
