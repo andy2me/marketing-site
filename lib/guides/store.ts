@@ -11,6 +11,10 @@ import { noosavilleSellingBestTimeToSell } from "@/data/guides/noosaville-sellin
 import { noosavilleSellingAuctionVsPrivateSale } from "@/data/guides/noosaville-selling-auction-vs-private-sale";
 import { noosavilleSellingDaysOnMarket } from "@/data/guides/noosaville-selling-days-on-market";
 import { noosavilleSellingPresentationChecklist } from "@/data/guides/noosaville-selling-presentation-checklist";
+import { noosavilleBuyingUnitsVsHouses } from "@/data/guides/noosaville-buying-units-vs-houses";
+import { noosavilleBuyingBuySmart } from "@/data/guides/noosaville-buying-buy-smart";
+import { noosavilleBuyingForFamilies } from "@/data/guides/noosaville-buying-for-families";
+import { noosavilleBuyingBestTimeToBuy } from "@/data/guides/noosaville-buying-best-time-to-buy";
 
 // ── Noosaville · Buying (pillar) ───────────────────────────────────────────
 const noosavilleBuying: Guide = {
@@ -26,6 +30,11 @@ const noosavilleBuying: Guide = {
     h1Em: "practical",
     h1Post: " guide.",
     dek: "What the riverside suburb actually costs, where to look, and how to buy well without overpaying — written by an agent who sells here every week.",
+    image: {
+      src: "/assets/locations/noosaville.jpg",
+      alt: "The Noosa River winding through Noosaville with low-rise homes and bushland.",
+      caption: "Noosaville · the patch we work every day",
+    },
   },
   intro:
     "oosaville is the part of Noosa most locals quietly prefer. It has the river without the Hastings Street crowds, the cafés without the parking battles, and a housing stock that ranges from $800k riverside units to $4M waterfront homes. This guide is the one we'd hand a friend who asked, \"should we buy here — and how?\"",
@@ -93,7 +102,7 @@ const noosavilleBuying: Guide = {
         },
         {
           kind: "p",
-          text: "The short version: if you'll be here less than five years, the unit math often wins; if you're putting down roots, the land usually does. Body corporate health is what makes or breaks a unit purchase, so read the disclosure carefully before you fall in love with the view.",
+          text: "We've written a full breakdown of the trade-off — see [[Units vs houses in Noosaville: what holds value|/noosaville/buying/units-vs-houses]] — but the short version: if you'll be here less than five years, the unit math often wins; if you're putting down roots, the land usually does.",
         },
       ],
     },
@@ -238,6 +247,26 @@ const noosavilleBuying: Guide = {
       title: "The real cost to buy in Noosaville (2026)",
       read: "7 min",
       href: "/noosaville/buying/cost-to-buy",
+    },
+    {
+      title: "Units vs houses in Noosaville: what's the better buy?",
+      read: "6 min",
+      href: "/noosaville/buying/units-vs-houses",
+    },
+    {
+      title: "How to buy smart in a competitive Noosaville market",
+      read: "6 min",
+      href: "/noosaville/buying/buy-smart",
+    },
+    {
+      title: "Is Noosaville the right fit for your family?",
+      read: "5 min",
+      href: "/noosaville/buying/for-families",
+    },
+    {
+      title: "Timing the market: when to buy in Noosaville",
+      read: "5 min",
+      href: "/noosaville/buying/best-time-to-buy",
     },
   ],
   closing: {
@@ -391,7 +420,26 @@ const noosavilleBuyingCostToBuy: Guide = {
   ],
   faqHeading: "Common cost questions.",
   faqEyebrow: "§ Cost questions",
-  related: [],
+  related: [
+    {
+      category: "Buying",
+      title: "Units vs houses in Noosaville",
+      read: "6 min read",
+      href: "/noosaville/buying/units-vs-houses",
+    },
+    {
+      category: "Buying",
+      title: "How to buy smart in a competitive market",
+      read: "6 min read",
+      href: "/noosaville/buying/buy-smart",
+    },
+    {
+      category: "Buying",
+      title: "Timing the market: when to buy",
+      read: "5 min read",
+      href: "/noosaville/buying/best-time-to-buy",
+    },
+  ],
   relatedHeading: "More in Buying in Noosaville",
   parentPillar: {
     label: "Buying in Noosaville",
@@ -429,6 +477,10 @@ const PILLARS: Record<string, Guide> = {
 // Supporting article registry: keyed by "{suburb}/{pillar}/{slug}".
 const SPOKES: Record<string, Guide> = {
   "noosaville/buying/cost-to-buy": noosavilleBuyingCostToBuy,
+  "noosaville/buying/units-vs-houses": noosavilleBuyingUnitsVsHouses,
+  "noosaville/buying/buy-smart": noosavilleBuyingBuySmart,
+  "noosaville/buying/for-families": noosavilleBuyingForFamilies,
+  "noosaville/buying/best-time-to-buy": noosavilleBuyingBestTimeToBuy,
   "noosaville/selling/value-my-home": noosavilleSellingValueMyHome,
   "noosaville/selling/choosing-an-agent": noosavilleSellingChoosingAnAgent,
   "noosaville/selling/best-time-to-sell": noosavilleSellingBestTimeToSell,
