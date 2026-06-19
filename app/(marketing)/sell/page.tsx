@@ -92,26 +92,6 @@ export default async function SellPage() {
                   </Button>
                 </div>
               </div>
-              <div className={s.heroBrand} aria-hidden>
-                <svg
-                  className={s.heroBrandMark}
-                  viewBox="220 215 1041 1012"
-                  preserveAspectRatio="xMidYMid meet"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1251.02 228.126V236.918L1195.36 313.113L1196.82 1217.2H832.077V1208.4L911.179 1132.21L909.714 440.593H900.925L656.295 1042.83H640.182L351.606 453.78H344.282V551.955C344.282 866.992 439.497 1061.87 621.139 1209.87V1217.2H312.056V383.447L230.024 236.918V228.126L546.431 225.196L758.835 673.574H766.159L944.87 228.126H1251.02Z"
-                    fill="currentColor"
-                  />
-                </svg>
-                <div className={s.heroBrandRule}>
-                  <span>Max.</span>
-                  <span>by name</span>
-                  <span>·</span>
-                  <span>maximum by outcome</span>
-                </div>
-                <div className={s.heroBrandFoot}>Est. Noosa</div>
-              </div>
             </div>
           </Container>
         </section>
