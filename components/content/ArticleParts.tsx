@@ -34,7 +34,15 @@ export function Breadcrumb({
 export function Byline({ author }: { author: ArticleAuthor }) {
   return (
     <div className={s.byline}>
-      <span className={s.bylineAvatar} aria-hidden />
+      {author.portraitUrl ? (
+        <img
+          src={author.portraitUrl}
+          alt={`${author.name} portrait`}
+          className={s.bylineAvatar}
+        />
+      ) : (
+        <span className={s.bylineAvatar} aria-hidden />
+      )}
       <div>
         <div className={s.bylineName}>{author.name}</div>
         <div className={s.bylineRole}>

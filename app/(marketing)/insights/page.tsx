@@ -75,7 +75,15 @@ export default async function InsightsPage() {
                 <div className={s.featGrid}>
                   <div className={s.featMedia}>
                     <span className={s.featBadge}>{featured.badge ?? "Editor’s pick"}</span>
-                    <ImageSlot ratio="5/4" style={{ borderRadius: 0, position: "absolute", inset: 0 }} />
+                    {featured.hero.src ? (
+                      <img
+                        src={featured.hero.src}
+                        alt={featured.hero.alt}
+                        className={s.featMediaImg}
+                      />
+                    ) : (
+                      <ImageSlot ratio="5/4" style={{ borderRadius: 0, position: "absolute", inset: 0 }} />
+                    )}
                   </div>
                   <div>
                     <div className={`overline ${s.featCat}`}>
@@ -96,7 +104,15 @@ export default async function InsightsPage() {
                     </h2>
                     <p className={s.featText}>{featured.dek}</p>
                     <div className={s.featByline}>
-                      <span className={s.featAvatar} aria-hidden />
+                      {featured.author.portraitUrl ? (
+                        <img
+                          src={featured.author.portraitUrl}
+                          alt={`${featured.author.name} portrait`}
+                          className={s.featAvatar}
+                        />
+                      ) : (
+                        <span className={s.featAvatar} aria-hidden />
+                      )}
                       <div>
                         <span style={{ color: "var(--color-text-strong)" }}>
                           {featured.author.name}

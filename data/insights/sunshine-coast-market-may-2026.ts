@@ -19,6 +19,7 @@ export const article: Article = {
     name: "Matt Powe",
     role: "Principal",
     suburb: "Noosaville",
+    portraitUrl: "/assets/team/matt-powe.webp",
   },
   hero: {
     src: "/assets/locations/noosa-heads.jpg",

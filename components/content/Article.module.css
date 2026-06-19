@@ -146,6 +146,7 @@
   border-radius: var(--radius-pill);
   background: var(--white-mist-300);
   flex: none;
+  object-fit: cover;
 }
 .bylineName {
   font-size: 15px;
