@@ -489,11 +489,18 @@
   align-items: center;
 }
 .agentAvatar {
+  position: relative;
   width: 56px;
   height: 56px;
   border-radius: var(--radius-pill);
   background: var(--white-mist-300);
+  display: inline-block;
+  overflow: hidden;
   flex: none;
+}
+.agentAvatarImg {
+  object-fit: cover;
+  object-position: center top;
 }
 .agentName {
   font-size: 17px;
