@@ -307,10 +307,13 @@
   overflow: hidden;
   background: #3a1f28;
 }
+.locImage {
+  object-fit: cover;
+}
 .locOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(80, 43, 52, 0.85) 100%);
+  background: linear-gradient(180deg, transparent 40%, rgba(50, 25, 32, 0.92) 100%);
 }
 .locContent {
   position: absolute;

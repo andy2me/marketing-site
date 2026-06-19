@@ -45,7 +45,7 @@ const noosaville: SuburbHub = {
       line: "in Noosaville",
       body:
         "Timing, method and presentation for a Noosaville campaign — and what the local buyer pool actually responds to.",
-      count: "5 guides",
+      count: "6 guides",
       color: "var(--mulberry)",
       accent: "var(--sunrise)",
       href: "/noosaville/selling",

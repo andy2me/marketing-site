@@ -4,6 +4,13 @@
 // land by adding an entry here and nothing else.
 
 import type { Guide } from "./types";
+import { noosavilleSelling } from "@/data/guides/noosaville-selling";
+import { noosavilleSellingValueMyHome } from "@/data/guides/noosaville-selling-value-my-home";
+import { noosavilleSellingChoosingAnAgent } from "@/data/guides/noosaville-selling-choosing-an-agent";
+import { noosavilleSellingBestTimeToSell } from "@/data/guides/noosaville-selling-best-time-to-sell";
+import { noosavilleSellingAuctionVsPrivateSale } from "@/data/guides/noosaville-selling-auction-vs-private-sale";
+import { noosavilleSellingDaysOnMarket } from "@/data/guides/noosaville-selling-days-on-market";
+import { noosavilleSellingPresentationChecklist } from "@/data/guides/noosaville-selling-presentation-checklist";
 
 // ── Noosaville · Buying (pillar) ───────────────────────────────────────────
 const noosavilleBuying: Guide = {
@@ -460,11 +467,18 @@ const noosavilleBuyingCostToBuy: Guide = {
 // Pillar registry: keyed by "{suburb}/{pillar}".
 const PILLARS: Record<string, Guide> = {
   "noosaville/buying": noosavilleBuying,
+  "noosaville/selling": noosavilleSelling,
 };
 
 // Supporting article registry: keyed by "{suburb}/{pillar}/{slug}".
 const SPOKES: Record<string, Guide> = {
   "noosaville/buying/cost-to-buy": noosavilleBuyingCostToBuy,
+  "noosaville/selling/value-my-home": noosavilleSellingValueMyHome,
+  "noosaville/selling/choosing-an-agent": noosavilleSellingChoosingAnAgent,
+  "noosaville/selling/best-time-to-sell": noosavilleSellingBestTimeToSell,
+  "noosaville/selling/auction-vs-private-sale": noosavilleSellingAuctionVsPrivateSale,
+  "noosaville/selling/days-on-market": noosavilleSellingDaysOnMarket,
+  "noosaville/selling/presentation-checklist": noosavilleSellingPresentationChecklist,
 };
 
 export function getPillar(suburb: string, pillar: string): Guide | null {

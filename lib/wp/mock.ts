@@ -78,9 +78,9 @@ export async function getHomeContent(): Promise<HomeContent> {
       heading: "Bred from 20+ years of sales & marketing experience.",
       body: "We're data-led and human-centred — the way we inform our markets and your decisions.",
       pillars: [
-        { n: "01", word: "Knowledge", body: "That builds confidence to act, whether you're selling or buying. Providing clarity is key.", color: "var(--fern)" },
+        { n: "01", word: "Knowledge", body: "Providing clarity that builds confidence to act, whether you're selling or buying.", color: "var(--fern)" },
         { n: "02", word: "Strategy", body: "Considered, holistic and outcome-led. You'll feel peace of mind from go to woe.", color: "var(--mulberry)" },
-        { n: "03", word: "Service", body: "That'll bring upon a smile, delivered by people obsessed with customer experience.", color: "var(--ember)" },
+        { n: "03", word: "Service", body: "Delivered by people obsessed with customer experience that'll bring upon a smile.", color: "var(--ember)" },
       ],
     },
     featured: {
@@ -93,8 +93,8 @@ export async function getHomeContent(): Promise<HomeContent> {
       headingLead: "Agents who know their patch — ",
       headingEmphasis: "intimately",
       cards: [
-        { name: "Noosaville", count: 14, slug: "noosaville" },
-        { name: "Noosa Heads", count: 9, slug: "noosa-heads" },
+        { name: "Noosaville", count: 14, slug: "noosaville", image: "/assets/locations/noosaville.jpg", imageAlt: "Aerial view of Noosaville along the Noosa River" },
+        { name: "Noosa Heads", count: 9, slug: "noosa-heads", image: "/assets/locations/noosa-heads.jpg", imageAlt: "Aerial view of Noosa Heads with lakes and bushland" },
       ],
     },
     insights: {

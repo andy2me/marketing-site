@@ -102,6 +102,8 @@ export type Guide = {
     h1Em: string;             // italic-ember emphasised word
     h1Post: string;           // text after the italic
     dek: string;              // 680px intro paragraph
+    /** Optional banner image rendered under the hero text. */
+    image?: { src: string; alt: string; caption?: string };
   };
   intro?: string;             // optional drop-cap paragraph above the first H2
   toc: GuideTocItem[];

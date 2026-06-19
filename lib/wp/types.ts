@@ -47,7 +47,7 @@ export type HomeContent = {
     overline: string;
     headingLead: string;
     headingEmphasis: string; // italic --sunrise
-    cards: Array<{ name: string; count: number; slug: string }>;
+    cards: Array<{ name: string; count: number; slug: string; image: string; imageAlt: string }>;
   };
   insights: {
     overline: string;
