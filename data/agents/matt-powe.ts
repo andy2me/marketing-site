@@ -11,8 +11,7 @@ export const matt: Agent = {
   phone: "0438 116 191",
   phoneHref: "tel:+61438116191",
   email: "matt@maxproperty.au",
-  headshot:
-    "https://maxproperty.au/wp-content/uploads/2025/08/Matt_Profile_Two-1024x1024.png",
+  headshot: "/assets/team/matt-powe.webp",
   patches: ["Noosaville", "Noosa Heads"],
   patchLine: "Noosaville & Noosa Heads",
   positioning:

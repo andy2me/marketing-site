@@ -11,8 +11,7 @@ export const kirsty: Agent = {
   phone: "0438 116 190",
   phoneHref: "tel:+61438116190",
   email: "kirsty@maxproperty.au",
-  headshot:
-    "https://maxproperty.au/wp-content/uploads/2025/11/Kernot_profile-1024x1021.png",
+  headshot: "/assets/team/kirsty-kernot.png",
   patches: ["Noosaville", "Noosa Heads"],
   patchLine: "Noosa",
   positioning:
