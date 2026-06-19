@@ -103,8 +103,6 @@ export async function getHomeContent(): Promise<HomeContent> {
       cta: { label: "All insights", href: "/insights" },
       articles: [
         { category: "Market", title: "The state of the Sunshine Coast market in May 2026", date: "12 May 2026", readTime: "6 min", slug: "sunshine-coast-market-may-2026" },
-        { category: "Selling", title: "Auction or private treaty? How we'd decide for you", date: "04 May 2026", readTime: "4 min", slug: "auction-or-private-treaty" },
-        { category: "Buying", title: "Inside Noosaville's quiet supply story", date: "28 Apr 2026", readTime: "5 min", slug: "noosaville-supply-story" },
       ],
     },
     testimonials: {

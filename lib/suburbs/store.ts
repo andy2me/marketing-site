@@ -66,22 +66,6 @@ const noosaville: SuburbHub = {
   insights: [
     {
       category: "Market",
-      title: "Inside Noosaville's quiet supply story.",
-      date: "28 Apr 2026",
-      read: "5 min",
-      author: "Matt Powe",
-      slug: "noosaville-supply-story",
-    },
-    {
-      category: "Buying",
-      title: "Units vs houses on the river: what actually holds value.",
-      date: "12 Apr 2026",
-      read: "6 min",
-      author: "Matt Powe",
-      slug: "units-vs-houses-river",
-    },
-    {
-      category: "Market",
       title: "The Sunshine Coast market in May 2026.",
       date: "12 May 2026",
       read: "6 min",
