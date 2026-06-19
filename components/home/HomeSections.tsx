@@ -235,7 +235,24 @@ export function HomeInsights({ insights }: { insights: HomeContent["insights"] }
         <div className={s.insGrid}>
           {insights.articles.map((a, i) => (
             <Link key={a.slug} href={`/insights/${a.slug}`} className={s.insCard}>
-              <ImageSlot ratio={i === 0 ? "5/4" : "4/5"} className={s.insMedia} label="Article image" />
+              {a.image ? (
+                <div
+                  className={s.insMedia}
+                  style={{ aspectRatio: i === 0 ? "5 / 4" : "4 / 5" }}
+                >
+                  <img
+                    src={a.image}
+                    alt={a.imageAlt ?? a.title}
+                    className={s.insMediaImg}
+                  />
+                </div>
+              ) : (
+                <ImageSlot
+                  ratio={i === 0 ? "5/4" : "4/5"}
+                  className={s.insMedia}
+                  label="Article image"
+                />
+              )}
               <div className={s.insBlock}>
                 <div className={`overline ${s.insCat}`}>{a.category}</div>
                 <h3 className={`${s.insTitle} ${i === 0 ? s.insTitleLead : ""}`}>{a.title}</h3>
