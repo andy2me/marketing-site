@@ -33,7 +33,7 @@ const noosaville: SuburbHub = {
       line: "in Noosaville",
       body:
         "What you'll pay, where to look, and how to compete without overpaying. The cornerstone guide for first-timers and upgraders alike.",
-      count: "6 guides",
+      count: "5 guides",
       color: "var(--fern)",
       accent: "var(--lime)",
       href: "/noosaville/buying",
