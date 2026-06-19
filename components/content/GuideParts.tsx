@@ -94,6 +94,20 @@ export function GuideHero({
           </h1>
           <p className={s.heroDek}>{guide.hero.dek}</p>
         </div>
+        {guide.hero.image ? (
+          <figure className={s.heroImage}>
+            <img
+              src={guide.hero.image.src}
+              alt={guide.hero.image.alt}
+              loading="eager"
+            />
+            {guide.hero.image.caption ? (
+              <figcaption className={s.heroImageCaption}>
+                {guide.hero.image.caption}
+              </figcaption>
+            ) : null}
+          </figure>
+        ) : null}
         <div className={s.heroMeta}>
           <div className={s.byline}>
             <div className={s.bylineAvatar} aria-hidden>
