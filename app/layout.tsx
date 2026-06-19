@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { fontVariables } from "@/lib/fonts";
 import "@/styles/tokens.css";
 import "@/styles/globals.css";
@@ -26,6 +27,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-AU" className={fontVariables}>
+      <GoogleTagManager gtmId="GTM-PHTG3D6N" />
       <body>{children}</body>
     </html>
   );
