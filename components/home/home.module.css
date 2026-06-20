@@ -382,6 +382,9 @@
   font-size: 13px;
   color: var(--color-text-secondary);
 }
+.insCta {
+  margin-top: 20px;
+}
 
 /* ── 8. Testimonials ──────────────────────────────────────────────────── */
 .testi {

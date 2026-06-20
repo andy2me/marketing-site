@@ -259,6 +259,11 @@ export function HomeInsights({ insights }: { insights: HomeContent["insights"] }
                 <div className={s.insMeta}>
                   {a.date} · {a.readTime} read
                 </div>
+                {i === 0 ? (
+                  <span className={`btn btn-secondary btn-sm ${s.insCta}`}>
+                    Read now <IconArrowR />
+                  </span>
+                ) : null}
               </div>
             </Link>
           ))}
