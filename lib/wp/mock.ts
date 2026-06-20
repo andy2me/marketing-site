@@ -80,7 +80,7 @@ export async function getHomeContent(): Promise<HomeContent> {
       pillars: [
         { n: "01", word: "Knowledge", body: "Providing clarity that builds confidence to act, whether you're selling or buying.", color: "var(--fern)" },
         { n: "02", word: "Strategy", body: "Considered, holistic and outcome-led. You'll feel peace of mind from go to woe.", color: "var(--mulberry)" },
-        { n: "03", word: "Service", body: "Delivered by people obsessed with customer experience that'll bring upon a smile.", color: "var(--ember)" },
+        { n: "03", word: "Service", body: "A team obsessed with customer experience that'll bring upon a smile.", color: "var(--ember)" },
       ],
     },
     featured: {

@@ -382,6 +382,9 @@
   font-size: 13px;
   color: var(--color-text-secondary);
 }
+.insCta {
+  margin-top: 20px;
+}
 
 /* ── 8. Testimonials ──────────────────────────────────────────────────── */
 .testi {
@@ -437,11 +440,25 @@
   gap: 14px;
 }
 .authorAvatar {
+  position: relative;
   width: 48px;
   height: 48px;
   border-radius: var(--radius-pill);
   background: var(--white-mist-300);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   flex: none;
+}
+.authorAvatarImg {
+  object-fit: cover;
+}
+.authorAvatarInitials {
+  font-family: var(--font-mono), monospace;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
 }
 .authorName {
   font-size: 15px;

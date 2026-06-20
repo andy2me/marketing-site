@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { PropertyCard } from "./PropertyCard";
@@ -175,7 +176,17 @@ export function PropertyDetailView({
               <div className={s.agentHead}>
                 <div className="overline">Your agent</div>
                 <div className={s.agentRow}>
-                  <span className={s.agentAvatar} aria-hidden />
+                  <span className={s.agentAvatar} aria-hidden>
+                    {listing.agent.photo ? (
+                      <Image
+                        src={listing.agent.photo}
+                        alt=""
+                        fill
+                        sizes="56px"
+                        className={s.agentAvatarImg}
+                      />
+                    ) : null}
+                  </span>
                   <div>
                     <div className={s.agentName}>{listing.agent.name}</div>
                     <div className={s.agentMeta}>

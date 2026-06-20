@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { ImageSlot } from "@/components/ui/ImageSlot";
 import { IconArrowUR } from "@/components/icons";
 import { getSiteSettings } from "@/lib/wp/mock";
 import { listAgents } from "@/lib/agents/store";
@@ -152,7 +152,15 @@ export default async function TeamPage() {
                   ))}
                 </div>
               </div>
-              <ImageSlot ratio="4/5" label="team portrait · 4:5" className={s.cultureImg} />
+              <div className={s.cultureImg}>
+                <Image
+                  src="/assets/locations/noosaville.jpg"
+                  alt="Aerial view of Noosaville along the Noosa River"
+                  fill
+                  sizes="(max-width: 1023px) 100vw, 40vw"
+                  className={s.cultureImgEl}
+                />
+              </div>
             </div>
           </Container>
         </section>
