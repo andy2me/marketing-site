@@ -18,6 +18,8 @@ export type Review = {
   quote: string;
   /** Reviewer name (the vendor/buyer) */
   author: string;
+  /** Optional avatar (e.g. Google profile photo URL). When absent, render initials fallback. */
+  avatarUrl?: string;
   /** Star rating for this review (1–5) */
   rating: number;
   date?: string;

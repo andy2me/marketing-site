@@ -1,9 +1,18 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { IconStar } from "@/components/icons";
 import type { RatingSummary, Review } from "@/lib/reviews/types";
 import s from "./home.module.css";
+
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0]?.toUpperCase() ?? "")
+    .join("");
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -53,7 +62,19 @@ export function TestimonialsCarousel({
                   <span className={s.quoteMark}>”</span>
                 </blockquote>
                 <div className={s.author}>
-                  <span className={s.authorAvatar} aria-hidden />
+                  <span className={s.authorAvatar} aria-hidden>
+                    {r.avatarUrl ? (
+                      <Image
+                        src={r.avatarUrl}
+                        alt=""
+                        fill
+                        sizes="48px"
+                        className={s.authorAvatarImg}
+                      />
+                    ) : (
+                      <span className={s.authorAvatarInitials}>{initials(r.author)}</span>
+                    )}
+                  </span>
                   <div>
                     <div className={s.authorName}>{r.author}</div>
                     {r.detail ? <div className={s.authorDetail}>{r.detail}</div> : null}

@@ -7,38 +7,18 @@
 
 import type { RatingSummary, Review } from "./types";
 
-// One agent today (more to come). Numbers are placeholders until the REA API is wired.
+// Featured client testimonial (Brendan Ford, Google review). Brendan has consented to
+// being featured. More reviews will land here once the REA Ratings & Reviews API is wired.
+// TODO(avatarUrl): paste the lh3.googleusercontent.com URL for Brendan's Google profile photo.
 const REVIEWS: Review[] = [
   {
-    id: "henley-hilltop",
+    id: "ford-google",
     quote:
-      "From the first appraisal call to the moment we handed over the keys, Max. felt like an extension of our family. They showed up with a strategy, and they delivered every promise.",
-    author: "Sarah & Tom Henley",
+      "Matt is a brilliant agent, particularly in the high end market. I've known Matt and Kirsty for a number of years and wouldn't hesitate to engage them to sell my home. Couldn't recommend them strongly enough.",
+    author: "Brendan Ford",
+    avatarUrl: "",
     rating: 5,
-    date: "2026-04-18",
-    detail: "Sold · 18 Hilltop Crescent, Noosaville · $2.65M",
-    agentId: "matt-powe",
-    agentName: "Matt Powe",
-  },
-  {
-    id: "okeefe-banksia",
-    quote:
-      "Calm, honest and relentlessly prepared. We had three offers in the first week and sold above our reserve — exactly the outcome they mapped out on day one.",
-    author: "Daniel O'Keefe",
-    rating: 5,
-    date: "2026-03-30",
-    detail: "Sold · 7 Banksia Avenue, Noosa Heads · $2.8M",
-    agentId: "matt-powe",
-    agentName: "Matt Powe",
-  },
-  {
-    id: "nguyen-riverreach",
-    quote:
-      "As first-time sellers we were nervous, but every step was explained and every call returned the same day. We'd recommend the team to anyone in Noosa.",
-    author: "Mai Nguyen",
-    rating: 5,
-    date: "2026-02-11",
-    detail: "Sold · 11 River Reach, Noosaville · $1.27M",
+    detail: "Google review",
     agentId: "matt-powe",
     agentName: "Matt Powe",
   },
