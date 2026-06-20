@@ -650,7 +650,7 @@
 .ctaInner {
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: center;
+  align-items: end;
   gap: 48px;
 }
 .ctaHeading {
