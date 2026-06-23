@@ -58,29 +58,49 @@ export async function POST(req: NextRequest) {
     return Response.json({ ok: false, error: "missing_contact" }, { status: 422 });
   }
 
+  // Outside production we surface per-channel detail in the response so a failed
+  // submission can be diagnosed from the Network tab without server-log access.
+  const debug = process.env.VERCEL_ENV !== "production";
+
   // No delivery configured (local dev without keys): mirror the old stub so the
   // forms stay usable, and surface the lead in the server log.
-  if (!isEmailConfigured() && !isRexConfigured()) {
+  const emailOn = isEmailConfigured();
+  const rexOn = isRexConfigured();
+  if (!emailOn && !rexOn) {
     console.info(`[leads:${formId}] received (no delivery configured)`, lead);
-    return ok();
+    return Response.json({ ok: true, ...(debug ? { note: "no delivery configured" } : {}) });
   }
 
   // Fan out in parallel. Email is the primary, guaranteed channel; Rex is
   // best-effort — a CRM failure must not lose a lead the inbox already has.
   const channels: { name: string; run: Promise<unknown> }[] = [];
-  if (isEmailConfigured()) channels.push({ name: "email", run: sendLeadEmail(lead) });
-  if (isRexConfigured()) channels.push({ name: "rex", run: createRexContact(lead) });
+  if (emailOn) channels.push({ name: "email", run: sendLeadEmail(lead) });
+  if (rexOn) channels.push({ name: "rex", run: createRexContact(lead) });
 
   const results = await Promise.allSettled(channels.map((c) => c.run));
+  const failures: Record<string, string> = {};
   results.forEach((r, i) => {
     if (r.status === "rejected") {
-      console.error(`[leads:${formId}] ${channels[i]!.name} delivery failed:`, r.reason);
+      const name = channels[i]!.name;
+      const msg = r.reason instanceof Error ? r.reason.message : String(r.reason);
+      failures[name] = msg;
+      console.error(`[leads:${formId}] ${name} delivery failed:`, r.reason);
     }
   });
 
+  // Which configured channels never even ran (e.g. env vars missing in this scope).
+  const skipped = { email: !emailOn, rex: !rexOn };
+
   if (!results.some((r) => r.status === "fulfilled")) {
-    return Response.json({ ok: false, error: "delivery_failed" }, { status: 502 });
+    return Response.json(
+      { ok: false, error: "delivery_failed", ...(debug ? { failures, skipped } : {}) },
+      { status: 502 },
+    );
   }
 
-  return ok();
+  // At least one channel succeeded — report partial failures in non-prod.
+  return Response.json({
+    ok: true,
+    ...(debug && Object.keys(failures).length ? { failures, skipped } : {}),
+  });
 }
