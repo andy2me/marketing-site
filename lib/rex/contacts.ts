@@ -10,20 +10,18 @@ import type { Lead } from "@/lib/leads/types";
 // Requires the Rex API user to have Contacts → Create permission (the read-only
 // setup in docs/REX-ADMIN-SETUP.md has it at None — bump it before enabling).
 //
-// NOTE: the exact Wings payload for Contacts/create should be confirmed against
-// https://api-docs.rexsoftware.com. The mapping is isolated in `toRexContact`
-// below so it's a one-function change if a field name differs. Failures here are
-// non-fatal — /api/leads still succeeds on the strength of the email so a lead
-// is never lost to a CRM hiccup.
+// The Wings Contacts/create payload nests name/email/phone under `related`
+// (see toRexContact). Failures here are non-fatal — /api/leads still succeeds on
+// the strength of the email so a lead is never lost to a CRM hiccup.
 
 export { isRexConfigured };
 
 type RexCreateResult = { id?: string | number } | string | number;
 
-// Rex stores a person's name in `first_name` / `last_name`, not a single `name`
-// field — sending `name` is rejected with "A person cannot be saved without a
-// name". Split our combined display name into the two, always populating
-// last_name so the record is valid even for a one-word or email-only lead.
+// Rex's Contacts/create nests the person's name, emails and phones inside
+// `related` sub-arrays (not flat fields) — a contact with no `related.contact_names`
+// entry is rejected with "A person cannot be saved without a name". We always
+// populate name_last so the record is valid even for a one-word or email-only lead.
 function splitName(full: string): { first?: string; last: string } {
   const tokens = full.trim().split(/\s+/).filter(Boolean);
   if (tokens.length > 1) return { first: tokens[0], last: tokens.slice(1).join(" ") };
@@ -32,11 +30,26 @@ function splitName(full: string): { first?: string; last: string } {
 
 function toRexContact(lead: Lead): Record<string, unknown> {
   const { first, last } = splitName(lead.name ?? lead.email ?? lead.phone ?? "Website lead");
+
+  const related: Record<string, unknown> = {
+    contact_names: [{ ...(first ? { name_first: first } : {}), name_last: last }],
+  };
+  if (lead.email) {
+    related.contact_emails = [
+      { email_address: lead.email, email_desc: "work", email_primary: true },
+    ];
+  }
+  if (lead.phone) {
+    related.contact_phones = [
+      { phone_number: lead.phone, phone_type: "mobile", phone_primary: true },
+    ];
+  }
+
   return {
-    ...(first ? { first_name: first } : {}),
-    last_name: last,
-    ...(lead.email ? { email_address: lead.email } : {}),
-    ...(lead.phone ? { phone_number: lead.phone } : {}),
+    type: "person",
+    // Tags the lead source in Rex (matches Rex's enquiry-source vocabulary).
+    marketing_enquiry_source: "Internet",
+    related,
   };
 }
 
