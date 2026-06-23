@@ -45,10 +45,16 @@ function toRexContact(lead: Lead): Record<string, unknown> {
     ];
   }
 
+  // Property address the visitor entered (appraisal/contact "Property address"),
+  // or the listing street on a property-detail enquiry. Lands in the contact's
+  // Location → address in Rex.
+  const address = lead.fields.address ?? lead.listing ?? null;
+
   return {
     type: "person",
     // Tags the lead source in Rex (matches Rex's enquiry-source vocabulary).
     marketing_enquiry_source: "Internet",
+    ...(address ? { address } : {}),
     related,
   };
 }
