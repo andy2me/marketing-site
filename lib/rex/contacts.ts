@@ -20,26 +20,23 @@ export { isRexConfigured };
 
 type RexCreateResult = { id?: string | number } | string | number;
 
-function compose(lead: Lead): string | null {
-  // Fold the enquiry message + captured context into one note so nothing the
-  // visitor told us is dropped, even though Rex's typed contact fields are sparse.
-  const parts: string[] = [];
-  if (lead.message) parts.push(lead.message);
-  if (lead.listing) parts.push(`Listing: ${lead.listing}`);
-  if (lead.agentName) parts.push(`Requested agent: ${lead.agentName}`);
-  if (lead.source) parts.push(`Source: ${lead.source}`);
-  for (const [k, v] of Object.entries(lead.fields)) parts.push(`${k}: ${v}`);
-  const note = parts.join("\n").trim();
-  return note.length ? note : null;
+// Rex stores a person's name in `first_name` / `last_name`, not a single `name`
+// field — sending `name` is rejected with "A person cannot be saved without a
+// name". Split our combined display name into the two, always populating
+// last_name so the record is valid even for a one-word or email-only lead.
+function splitName(full: string): { first?: string; last: string } {
+  const tokens = full.trim().split(/\s+/).filter(Boolean);
+  if (tokens.length > 1) return { first: tokens[0], last: tokens.slice(1).join(" ") };
+  return { last: tokens[0] ?? "Website lead" };
 }
 
 function toRexContact(lead: Lead): Record<string, unknown> {
+  const { first, last } = splitName(lead.name ?? lead.email ?? lead.phone ?? "Website lead");
   return {
-    name: lead.name ?? lead.email ?? lead.phone ?? "Website lead",
+    ...(first ? { first_name: first } : {}),
+    last_name: last,
     ...(lead.email ? { email_address: lead.email } : {}),
     ...(lead.phone ? { phone_number: lead.phone } : {}),
-    // Free-text context; safe to drop if Rex rejects the field (caught below).
-    ...(compose(lead) ? { system_ctime_note: compose(lead) } : {}),
   };
 }
 
