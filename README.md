@@ -8,8 +8,9 @@ architecture spec; section references below (e.g. §8) point to it.
 
 This is the **first build pass**: the stack, design system and shared shell stood up and
 proven against one fully-built reference page (**Home**). The other seven templates are
-routed stubs. Live integrations (Rex, Doorstep, WordPress, brand fonts) are isolated behind
-typed seams with mock data, so wiring them later is a swap, not a rewrite.
+routed stubs. Live integrations (Rex, WordPress, brand fonts) are isolated behind
+typed seams with mock data, so wiring them later is a swap, not a rewrite. Forms are
+wired live: a first-party `/api/leads` route emails the team and creates a Rex contact.
 
 | Area | State |
 |---|---|
@@ -17,7 +18,8 @@ typed seams with mock data, so wiring them later is a swap, not a rewrite.
 | Home (`/`) reference page | ✅ built (mock content) |
 | Sell · Buy · Locations · Insights · Team · Contact · legal | 🔲 routed stubs |
 | `sitemap.ts` · `robots.ts` · `not-found` · `/api/revalidate` | ✅ scaffolded (revalidate is a stub) |
-| Rex listings · WordPress content · Doorstep forms · MapLibre · analytics | ⏳ seams only (mock) |
+| Rex listings · WordPress content · MapLibre · analytics | ⏳ seams only (mock) |
+| Forms → first-party `/api/leads` → Resend email + Rex contact | ✅ built |
 
 ## Stack
 
@@ -48,7 +50,7 @@ app/
   (app)/                # app-like register — /buy, /properties/[slug]
   sitemap.ts robots.ts not-found.tsx api/revalidate/route.ts
 components/  layout/ ui/ property/ forms/ sections/ icons/ home/
-lib/         rex/ (listings) wp/ (content) doorstep/ seo/ — typed seams + mocks
+lib/         rex/ (listings + contacts) wp/ (content) leads/ (forms→email+CRM) seo/
 styles/      tokens.css (ported verbatim) globals.css
 ```
 
@@ -59,9 +61,11 @@ styles/      tokens.css (ported verbatim) globals.css
   `getFeaturedListings`, `getListingBySlug`) stay identical.
 - **Content (WordPress, §7):** `lib/wp/types.ts` + `lib/wp/mock.ts` → replace with WPGraphQL
   queries returning the same shapes.
-- **Forms (Doorstep, §9):** all forms go through `components/forms/DoorstepForm.tsx`
-  (`formId` / `prefill` / `onSubmit`). Implement the confirmed method (embed / iframe / API)
-  in that one component.
+- **Forms (§9):** all forms go through `components/forms/LeadForm.tsx`
+  (`formId` / `prefill` / `onSubmit`), which posts FormData to the same-origin
+  `app/api/leads/route.ts` — first-party, so ad blockers can't break it. The route
+  emails the team (Resend) and creates a Rex contact (`lib/rex/contacts.ts`).
+  See `docs/FORMS-SETUP.md`.
 - **Fonts (§5):** `lib/fonts.ts` wires the prototype substitutes (Instrument Serif / Geist /
   Geist Mono) to `--font-heading` / `--font-body` / `--font-mono`. When the Pangram Pangram
   licence lands, swap to `next/font/local` (PP Migra / PP Neue Montreal) keeping the same
@@ -70,6 +74,7 @@ styles/      tokens.css (ported verbatim) globals.css
 
 ## Blocked on external inputs (code handoff §17)
 
-Rex API access · Doorstep integration method + docs · PP web-font licence · real photography
+Rex API access (+ Contacts→Create for lead writes) · Resend key + verified sender ·
+PP web-font licence · real photography
 · old→new 301 redirect map. `.env.example` lists every variable; none are needed for the
 foundation slice (mock data).

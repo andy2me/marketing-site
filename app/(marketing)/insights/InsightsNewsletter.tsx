@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { DoorstepForm } from "@/components/forms/DoorstepForm";
+import { LeadForm } from "@/components/forms/LeadForm";
 import { IconArrowR } from "@/components/icons";
 import s from "./insights.module.css";
 
 const INTERESTS = ["Market data", "New listings", "Buying tips", "Selling tips", "Investors"];
 
-/** Quarterly-note signup (fern). Interest tags toggle; rides the Doorstep seam (newsletter). */
+/** Quarterly-note signup (fern). Interest tags toggle (formId="newsletter"). */
 export function InsightsNewsletter() {
   const [tags, setTags] = useState<string[]>(["Market data", "New listings"]);
   const toggle = (t: string) =>
@@ -28,7 +28,7 @@ export function InsightsNewsletter() {
             </p>
           </div>
 
-          <DoorstepForm formId="newsletter" className={s.nlForm}>
+          <LeadForm formId="newsletter" className={s.nlForm}>
             <div className={s.nlFields}>
               <label>
                 <div className={s.nlLabel}>Name</div>
@@ -64,7 +64,7 @@ export function InsightsNewsletter() {
                 Subscribe <IconArrowR />
               </button>
             </div>
-          </DoorstepForm>
+          </LeadForm>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { DoorstepForm } from "@/components/forms/DoorstepForm";
+import { LeadForm } from "@/components/forms/LeadForm";
 import {
   IconArrowR,
   IconCheck,
@@ -90,7 +90,7 @@ export function ContactCard({ agent }: { agent: Agent }) {
             <p className={s.contactFormReassure}>
               Honest pricing, in writing — no obligation.
             </p>
-            <DoorstepForm
+            <LeadForm
               formId={`appraisal-agent-${agent.slug}`}
               onSubmit={() => setSent(true)}
               className={s.contactFormFields}
@@ -129,7 +129,7 @@ export function ContactCard({ agent }: { agent: Agent }) {
               <button type="submit" className={`btn btn-primary ${s.contactSubmit}`}>
                 Send to {agent.name.split(" ")[0]} <IconArrowR />
               </button>
-            </DoorstepForm>
+            </LeadForm>
           </div>
         )}
 

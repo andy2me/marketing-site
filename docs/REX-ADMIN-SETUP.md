@@ -43,7 +43,7 @@ Set every permission group below to **Read** only. Untick **Create**, **Edit**, 
 |-------|-----------------|
 | **Listings** | Read |
 | **Properties** | Read |
-| **Contacts** | None (untick everything) |
+| **Contacts** | **Create** (read + create; leave Edit/Delete/Export unticked) — the website writes new leads here. This is the site's only write to Rex. |
 | **Accounts / Companies** | None |
 | **Tasks / Activity** | None |
 | **Reports** | None |
@@ -85,6 +85,7 @@ You don't have to test from your side — Andy/Dev will. But if you want to conf
 
 - Andy adds the credentials to the website's server-side environment variables. They're **never** sent to a browser.
 - The site starts pulling **published** listings only (`listing.publish_to_external = true`) — anything you mark internal/off-market stays invisible.
+- Website form submissions (appraisals, enquiries, contact) create a **new contact** in Rex — the only thing the site writes. No existing records are edited or deleted.
 - Listing edits in Rex flow to the live site within ~10 minutes by default, or **immediately** once we wire the webhook (Step B below).
 
 ## Step B (optional, later) — webhook for instant updates
