@@ -8,6 +8,7 @@ import { Header } from "@/components/layout/Header";
 import { getSiteSettings } from "@/lib/wp/mock";
 import { getActiveListings } from "@/lib/rex";
 import { getHub, getHubSlugs } from "@/lib/suburbs/store";
+import { listCards } from "@/lib/insights/store";
 import { getPillar } from "@/lib/guides/store";
 import { hubBreadcrumbJsonLd, placeJsonLd } from "@/lib/seo/hub";
 import {
@@ -59,13 +60,15 @@ export default async function SuburbHubPage({
   const hub = getHub(suburb);
   if (!hub) notFound();
 
-  const [settings, listings] = await Promise.all([
+  const [settings, listings, insightCards] = await Promise.all([
     getSiteSettings(),
     getActiveListings(),
+    listCards(),
   ]);
   const suburbListings = listings
     .filter((l) => l.suburb.toLowerCase().includes(hub.name.toLowerCase()))
     .slice(0, 3);
+  const latestInsights = insightCards.slice(0, 3);
 
   // Pillars that have a registered guide. Unregistered ones render as a
   // "Coming soon" tile so the Hub doesn't dangle dead links.
@@ -88,7 +91,7 @@ export default async function SuburbHubPage({
           items={suburbListings}
           joinHref={`/contact?enquiry=buy&suburb=${encodeURIComponent(hub.name)}`}
         />
-        <HubInsights suburb={hub.name} items={hub.insights} />
+        <HubInsights suburb={hub.name} items={latestInsights} />
         <HubAgent agent={hub.agent} suburb={hub.name} />
         <HubClosing suburb={hub.name} />
       </main>

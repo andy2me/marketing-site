@@ -67,16 +67,6 @@ const noosaville: SuburbHub = {
       href: "/noosaville/living",
     },
   ],
-  insights: [
-    {
-      category: "Market",
-      title: "The Sunshine Coast market in May 2026.",
-      date: "12 May 2026",
-      read: "6 min",
-      author: "Matt Powe",
-      slug: "sunshine-coast-market-may-2026",
-    },
-  ],
   agent: {
     name: "Matt Powe",
     role: "Principal · Noosaville specialist",
@@ -88,6 +78,10 @@ const noosaville: SuburbHub = {
       { k: "4.9★", v: "Vendor rating" },
     ],
     href: "/team",
+    photo: {
+      src: "/assets/team/matt-powe-large.jpg",
+      alt: "Matt Powe, Principal and Founder of Max Property.",
+    },
   },
 };
 

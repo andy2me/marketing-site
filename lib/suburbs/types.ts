@@ -25,21 +25,13 @@ export type SuburbPillarCard = {
   href: string;       // /noosaville/buying etc.
 };
 
-export type SuburbInsightRef = {
-  category: string;
-  title: string;
-  date: string;
-  read: string;
-  author: string;
-  slug: string;       // /insights/{slug}
-};
-
 export type SuburbAgent = {
   name: string;
   role: string;
   bio: string;
   stats: { k: string; v: string }[];   // 3-stat strip
   href: string;       // profile link target
+  photo?: { src: string; alt: string };
 };
 
 export type SuburbHub = {
@@ -57,6 +49,5 @@ export type SuburbHub = {
   statsBody: string;
   provenance: string;
   pillars: SuburbPillarCard[];
-  insights: SuburbInsightRef[];
   agent: SuburbAgent;
 };

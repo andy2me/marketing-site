@@ -10,10 +10,10 @@ import type { ListingCard } from "@/lib/rex/types";
 import type {
   SuburbAgent,
   SuburbHub,
-  SuburbInsightRef,
   SuburbPillarCard,
   SuburbStat,
 } from "@/lib/suburbs/types";
+import type { ArticleCard } from "@/lib/insights/types";
 import s from "./SuburbHub.module.css";
 
 // ── Hero (fern band) ─────────────────────────────────────────────────────
@@ -245,13 +245,13 @@ export function HubListings({
   );
 }
 
-// ── Journal row (3 insight cards filtered to the suburb) ─────────────────
+// ── Journal row (3 latest insight cards from the journal feed) ───────────
 export function HubInsights({
   suburb,
   items,
 }: {
   suburb: string;
-  items: SuburbInsightRef[];
+  items: ArticleCard[];
 }) {
   return (
     <section className={s.insights}>
@@ -272,16 +272,29 @@ export function HubInsights({
               href={`/insights/${a.slug}`}
               className={s.insightCard}
             >
-              <ImageSlot
-                ratio="5/4"
-                className={s.insightMedia}
-                style={{ borderRadius: 12 }}
-              />
+              {a.heroSrc ? (
+                <div
+                  className={s.insightMedia}
+                  style={{ aspectRatio: "5 / 4", borderRadius: 12, overflow: "hidden" }}
+                >
+                  <img
+                    src={a.heroSrc}
+                    alt={a.heroAlt ?? a.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </div>
+              ) : (
+                <ImageSlot
+                  ratio="5/4"
+                  className={s.insightMedia}
+                  style={{ borderRadius: 12 }}
+                />
+              )}
               <div className={s.insightBlock}>
                 <div className={`overline ${s.insightCat}`}>{a.category}</div>
                 <h3 className={s.insightTitle}>{a.title}</h3>
                 <div className={s.insightMeta}>
-                  {a.author} · {a.date} · {a.read}
+                  {a.author} · {a.date} · {a.readLabel}
                 </div>
               </div>
             </Link>
@@ -298,12 +311,25 @@ export function HubAgent({ agent, suburb }: { agent: SuburbAgent; suburb: string
     <section className={s.agent}>
       <Container>
         <div className={s.agentGrid}>
-          <ImageSlot
-            ratio="4/5"
-            label={`${agent.name} · on Gympie Terrace · 4:5`}
-            className={s.agentMedia}
-            style={{ borderRadius: 16 }}
-          />
+          {agent.photo ? (
+            <div
+              className={s.agentMedia}
+              style={{ aspectRatio: "4 / 5", borderRadius: 16, overflow: "hidden" }}
+            >
+              <img
+                src={agent.photo.src}
+                alt={agent.photo.alt}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
+          ) : (
+            <ImageSlot
+              ratio="4/5"
+              label={`${agent.name} · on Gympie Terrace · 4:5`}
+              className={s.agentMedia}
+              style={{ borderRadius: 16 }}
+            />
+          )}
           <div>
             <div className={`overline ${s.agentOverline}`}>
               § 05 · Who owns this patch
@@ -326,11 +352,14 @@ export function HubAgent({ agent, suburb }: { agent: SuburbAgent; suburb: string
               <Link href="/contact" className="btn btn-primary btn-lg">
                 Talk to {agent.name.split(" ")[0]} <IconArrowR />
               </Link>
-              <Link href={agent.href} className="btn btn-ghost-dark btn-lg">
+              <Link
+                href={agent.href}
+                className="btn btn-ghost-dark btn-lg"
+                aria-label={`View ${agent.name}'s ${suburb} profile`}
+              >
                 View profile
               </Link>
             </div>
-            <span className="sr-only">{suburb}</span>
           </div>
         </div>
       </Container>
