@@ -124,7 +124,17 @@ export function ContactForm() {
           </aside>
 
           {/* Form */}
-          <LeadForm formId="contact" prefill={{ enquiry }} className={s.formCard}>
+          <LeadForm
+            formId="contact"
+            prefill={{ enquiry }}
+            className={s.formCard}
+            onSubmit={(data) => {
+              const qs = new URLSearchParams({ form: "contact", enquiry });
+              if (data.firstName) qs.set("name", data.firstName);
+              if (data.address) qs.set("address", data.address);
+              router.push(`/thank-you?${qs.toString()}`);
+            }}
+          >
             <div className={s.formHead}>
               <h2 className={s.formTitle}>{FORM_HEADING[enquiry]}</h2>
               <div className={s.formStep}>Step 1 of 1 · ~2 min</div>

@@ -1,0 +1,431 @@
+/* /thank-you — post-conversion confirmation page.
+ * Lifted from design_handoff_thank_you/ThankYou.jsx; tokens via styles/tokens.css. */
+
+.headerBand {
+  position: relative;
+  height: 72px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-page);
+}
+
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+.hero {
+  padding: 96px 0 56px;
+}
+.heroGrid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 64px;
+  align-items: center;
+}
+.heroH1 {
+  margin-top: 24px;
+  font-family: var(--font-heading), serif;
+  font-size: clamp(52px, 6.4vw, 104px);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  color: var(--color-text-strong);
+}
+.heroH1Em {
+  font-style: italic;
+  color: var(--color-action);
+}
+.heroIntro {
+  margin-top: 28px;
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 540px;
+}
+.heroIntroStrong {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+.heroCtas {
+  margin-top: 32px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* The steaming coffee mark + "on the house" stamp */
+.markWrap {
+  display: grid;
+  place-items: center;
+}
+.mark {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: grid;
+  place-items: center;
+}
+.markBg {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--color-bg-banding);
+}
+.markRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-strong);
+}
+.markSvg {
+  position: relative;
+}
+.steamPath {
+  transform-origin: center bottom;
+  animation: ty-steam 3.2s ease-in-out infinite;
+}
+@keyframes ty-steam {
+  0% { opacity: 0; transform: translateY(4px) scaleY(0.7); }
+  25% { opacity: 0.7; }
+  60% { opacity: 0.35; }
+  100% { opacity: 0; transform: translateY(-16px) scaleY(1.15); }
+}
+.stamp {
+  position: absolute;
+  bottom: 8px;
+  right: -6px;
+  background: var(--color-action);
+  color: #fff;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border: 2px solid #fff;
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  animation: ty-stamp-in 600ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes ty-stamp-in {
+  0% { opacity: 0; transform: rotate(-6deg) scale(1.25); }
+  100% { opacity: 1; transform: rotate(-6deg) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .steamPath { animation: none; opacity: 0.4; }
+}
+
+/* ── Coffee voucher ───────────────────────────────────────────────────── */
+.voucherSec {
+  padding: 40px 0 96px;
+}
+.voucher {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64% 36%;
+  background: var(--color-bg-inverse);
+  color: #f4ede5;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.notch {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-bg-page);
+  left: calc(64% - 14px);
+}
+.notchTop { top: -14px; }
+.notchBottom { bottom: -14px; }
+.voucherMain {
+  padding: 48px 52px;
+  position: relative;
+}
+.voucherOverline {
+  color: var(--sunrise);
+}
+.voucherH2 {
+  margin-top: 20px;
+  font-family: var(--font-heading), serif;
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #f4ede5;
+}
+.voucherDot { color: var(--sunrise); }
+.voucherBody {
+  margin-top: 22px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(244, 237, 229, 0.78);
+  max-width: 440px;
+}
+.voucherBodyStrong {
+  color: #f4ede5;
+  font-weight: 500;
+}
+.voucherMeta {
+  margin-top: 32px;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.voucherMetaLabel {
+  color: rgba(244, 237, 229, 0.5);
+  font-size: 11px;
+}
+.voucherMetaValue {
+  margin-top: 8px;
+  font-size: 15px;
+  color: #f4ede5;
+  line-height: 1.5;
+}
+.voucherStub {
+  position: relative;
+  padding: 48px 40px;
+  border-left: 2px dashed rgba(244, 237, 229, 0.28);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.codeChip {
+  margin-top: 16px;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: rgba(244, 237, 229, 0.06);
+  border: 1px solid rgba(244, 237, 229, 0.18);
+}
+.codeChipCode {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 26px;
+  letter-spacing: 0.14em;
+  color: var(--sunrise);
+  font-weight: 500;
+}
+.codeChipSub {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: rgba(244, 237, 229, 0.6);
+  margin-top: 4px;
+}
+.walletBtn {
+  margin-top: 20px;
+  background: var(--sunrise);
+  color: var(--white-mist-900);
+  font-weight: 600;
+}
+.stubFine {
+  margin-top: 14px;
+  font-size: 12px;
+  color: rgba(244, 237, 229, 0.5);
+  line-height: 1.5;
+}
+
+/* ── What happens next ─────────────────────────────────────────────────── */
+.nextSec {
+  padding: 96px 0;
+  background: var(--color-bg-banding);
+}
+.nextGrid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+  align-items: start;
+}
+.nextH2 {
+  margin-top: 24px;
+  font-family: var(--font-heading), serif;
+  font-size: clamp(36px, 3.6vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.agentChip {
+  margin-top: 32px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 18px 22px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+.agentChipAvatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.agentChipName {
+  font-size: 16px;
+  color: var(--color-text-strong);
+  font-weight: 500;
+}
+.agentChipRole {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+.agentChipCall {
+  margin-left: auto;
+}
+.step {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--color-border);
+  align-items: start;
+}
+.stepFirst {
+  border-top: 1px solid var(--color-border-strong);
+}
+.stepIdx {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 14px;
+  color: var(--color-action);
+  padding-top: 4px;
+}
+.stepTitle {
+  font-family: var(--font-heading), serif;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.stepTitleAvatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+.stepBody {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 540px;
+}
+.stepWhen {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  padding-top: 6px;
+}
+
+/* ── While you wait ────────────────────────────────────────────────────── */
+.waitSec {
+  padding: 96px 0;
+}
+.waitHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.waitH2 {
+  margin-top: 20px;
+  font-family: var(--font-heading), serif;
+  font-size: clamp(32px, 3.2vw, 46px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--color-text-strong);
+}
+.waitGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.waitCard {
+  display: block;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+.waitCard:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.waitCardImg {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #d5cfc7;
+}
+.waitCardImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.waitCardBody {
+  padding: 24px 24px 26px;
+}
+.waitCardTag {
+  color: var(--color-action);
+}
+.waitCardTitle {
+  margin-top: 12px;
+  font-family: var(--font-heading), serif;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-text-strong);
+}
+.waitCardBlurb {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.waitCardCta {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--color-action);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Mobile (basic stacks — handoff is desktop-only) ──────────────────── */
+@media (max-width: 880px) {
+  .heroGrid,
+  .nextGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .waitGrid {
+    grid-template-columns: 1fr;
+  }
+  .voucher {
+    grid-template-columns: 1fr;
+  }
+  /* Horizontal perforation when the voucher stacks. */
+  .voucherStub {
+    border-left: none;
+    border-top: 2px dashed rgba(244, 237, 229, 0.28);
+  }
+  .notch { left: auto; }
+  .notchTop { top: calc(48% - 14px); left: -14px; }
+  .notchBottom { top: calc(48% - 14px); right: -14px; left: auto; }
+  .voucherH2 { font-size: 40px; }
+  .voucherMain { padding: 36px 28px; }
+  .voucherStub { padding: 36px 28px; }
+  .hero { padding: 64px 0 32px; }
+  .voucherSec { padding: 24px 0 64px; }
+  .nextSec { padding: 64px 0; }
+  .waitSec { padding: 64px 0; }
+  .markWrap { justify-content: flex-start; }
+}
