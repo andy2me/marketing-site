@@ -21,17 +21,32 @@ export function Footer({ settings }: { settings: SiteSettings }) {
             <p className={styles.tagline}>{footer.tagline}</p>
             <div className={styles.social}>
               {social.instagram && (
-                <a href={social.instagram} aria-label="Instagram">
+                <a
+                  href={social.instagram}
+                  aria-label="Instagram"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <IconInstagram />
                 </a>
               )}
               {social.facebook && (
-                <a href={social.facebook} aria-label="Facebook">
+                <a
+                  href={social.facebook}
+                  aria-label="Facebook"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <IconFacebook />
                 </a>
               )}
               {social.youtube && (
-                <a href={social.youtube} aria-label="YouTube">
+                <a
+                  href={social.youtube}
+                  aria-label="YouTube"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <IconYouTube />
                 </a>
               )}
