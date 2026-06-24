@@ -38,10 +38,11 @@ export function EnquiryForm({ street }: { street: string }) {
       formId="enquiry"
       prefill={{ listing: street }}
       className={s.enqForm}
-      onSubmit={(data) => {
+      onSubmit={(data, result) => {
         const qs = new URLSearchParams({ form: "enquiry", address: street });
         const first = (data.name ?? "").split(/\s+/)[0];
         if (first) qs.set("name", first);
+        if (result?.voucher) qs.set("code", result.voucher);
         router.push(`/thank-you?${qs.toString()}`);
       }}
     >

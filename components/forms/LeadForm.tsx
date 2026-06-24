@@ -9,8 +9,14 @@ export type LeadFormProps = {
    *  is never asked for context we already know. Rendered as hidden inputs. */
   prefill?: Record<string, string>;
   /** Called after a successful submit — lets a parent swap in its own success UI
-   *  (e.g. the agent card). When omitted, LeadForm shows `successMessage`. */
-  onSubmit?: (data: Record<string, string>) => void | Promise<void>;
+   *  (e.g. the agent card). When omitted, LeadForm shows `successMessage`.
+   *  `result.voucher` carries the server-issued coffee code, when one was
+   *  minted for this lead kind; forms threading the user to /thank-you append
+   *  it as `?code=…` so the page can render the real code. */
+  onSubmit?: (
+    data: Record<string, string>,
+    result?: { voucher?: string },
+  ) => void | Promise<void>;
   className?: string;
   successMessage?: string;
   children: ReactNode;
@@ -50,9 +56,9 @@ export function LeadForm({
     setStatus("submitting");
     try {
       const res = await fetch(ENDPOINT, { method: "POST", body: fd });
-      const json = (await res.json().catch(() => ({}))) as { ok?: boolean };
+      const json = (await res.json().catch(() => ({}))) as { ok?: boolean; voucher?: string };
       if (!res.ok || !json.ok) throw new Error(`submit failed (${res.status})`);
-      await onSubmit?.(data);
+      await onSubmit?.(data, { voucher: json.voucher });
       formEl.reset();
       setStatus("success");
     } catch (err) {

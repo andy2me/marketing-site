@@ -4,10 +4,14 @@ import {
   isEmailConfigured,
   sendLeadEmail,
   sendLeadMagnetAssetEmail,
+  sendVoucherEmail,
 } from "@/lib/leads/email";
 import { getLeadMagnetAsset } from "@/lib/leadmagnets/registry";
 import { clientIp, rateLimit } from "@/lib/leads/rate-limit";
-import { leadHasContactPoint, normaliseLead } from "@/lib/leads/types";
+import { routeAgent } from "@/lib/leads/route-agent";
+import { type Lead, leadHasContactPoint, normaliseLead } from "@/lib/leads/types";
+import { generateVoucherCode } from "@/lib/leads/voucher";
+import { getAgent } from "@/lib/agents/store";
 import { createRexContact, isRexConfigured } from "@/lib/rex/contacts";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
@@ -69,13 +73,22 @@ export async function POST(req: NextRequest) {
   // submission can be diagnosed from the Network tab without server-log access.
   const debug = process.env.VERCEL_ENV !== "production";
 
+  // Coffee voucher — issued for the lead kinds that land on /thank-you. The
+  // page reads the code from `?code=…`; we also email it to the submitter and
+  // include it in the team notification so Matt can verify it at the counter.
+  const voucher = shouldIssueVoucher(lead) ? generateVoucherCode() : null;
+
   // No delivery configured (local dev without keys): mirror the old stub so the
   // forms stay usable, and surface the lead in the server log.
   const emailOn = isEmailConfigured();
   const rexOn = isRexConfigured();
   if (!emailOn && !rexOn) {
     console.info(`[leads:${formId}] received (no delivery configured)`, lead);
-    return Response.json({ ok: true, ...(debug ? { note: "no delivery configured" } : {}) });
+    return Response.json({
+      ok: true,
+      ...(voucher ? { voucher } : {}),
+      ...(debug ? { note: "no delivery configured" } : {}),
+    });
   }
 
   // Fan out in parallel. Email is the primary, guaranteed channel; Rex is
@@ -83,8 +96,22 @@ export async function POST(req: NextRequest) {
   // Lead-magnet submissions additionally trigger an asset email to the
   // submitter with a link to the auto-generated PDF.
   const channels: { name: string; run: Promise<unknown> }[] = [];
-  if (emailOn) channels.push({ name: "email", run: sendLeadEmail(lead) });
+  if (emailOn) channels.push({ name: "email", run: sendLeadEmail(lead, { voucher: voucher ?? undefined }) });
   if (rexOn) channels.push({ name: "rex", run: createRexContact(lead) });
+  if (emailOn && voucher && lead.email) {
+    const routed = routeAgent(formId, lead.fields.enquiry ?? null);
+    const agent = await getAgent(routed.slug).catch(() => null);
+    const agentFirstName = agent ? agent.name.split(/\s+/)[0] ?? null : null;
+    channels.push({
+      name: "voucher-email",
+      run: sendVoucherEmail({
+        to: lead.email,
+        name: lead.name,
+        code: voucher,
+        agentFirstName,
+      }),
+    });
+  }
   if (emailOn && lead.kind === "leadmagnet" && lead.email) {
     const assetId = formId.startsWith("leadmagnet-")
       ? formId.slice("leadmagnet-".length)
@@ -130,6 +157,19 @@ export async function POST(req: NextRequest) {
   // At least one channel succeeded — report partial failures in non-prod.
   return Response.json({
     ok: true,
+    ...(voucher ? { voucher } : {}),
     ...(debug && Object.keys(failures).length ? { failures, skipped } : {}),
   });
+}
+
+// Which lead kinds land on /thank-you and therefore deserve a voucher. The
+// newsletter signup and gated lead-magnet downloads have their own success
+// paths (inline confirmation, asset email) and never see the thank-you page.
+function shouldIssueVoucher(lead: Lead): boolean {
+  return (
+    lead.kind === "contact" ||
+    lead.kind === "appraisal" ||
+    lead.kind === "enquiry" ||
+    lead.kind === "agent-appraisal"
+  );
 }

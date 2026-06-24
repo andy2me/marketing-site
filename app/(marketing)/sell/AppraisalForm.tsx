@@ -62,10 +62,11 @@ export function AppraisalForm() {
     <LeadForm
       formId="appraisal"
       className={s.form}
-      onSubmit={(data) => {
+      onSubmit={(data, result) => {
         const qs = new URLSearchParams({ form: "appraisal" });
         if (data.firstName) qs.set("name", data.firstName);
         if (data.address) qs.set("address", data.address);
+        if (result?.voucher) qs.set("code", result.voucher);
         router.push(`/thank-you?${qs.toString()}`);
       }}
     >

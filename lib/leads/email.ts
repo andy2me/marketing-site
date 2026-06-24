@@ -38,7 +38,7 @@ function row(label: string, value: string | null): string {
   return value ? `${label}: ${value}\n` : "";
 }
 
-function bodyFor(lead: Lead): { text: string; html: string } {
+function bodyFor(lead: Lead, opts: { voucher?: string } = {}): { text: string; html: string } {
   const lines = [
     row("Type", KIND_LABEL[lead.kind]),
     row("Name", lead.name),
@@ -47,6 +47,7 @@ function bodyFor(lead: Lead): { text: string; html: string } {
     row("Listing", lead.listing),
     row("Agent", lead.agentName),
     row("Source", lead.source),
+    row("Voucher", opts.voucher ?? null),
     row("Message", lead.message),
   ].join("");
 
@@ -69,12 +70,12 @@ function escapeHtml(s: string): string {
 }
 
 /** Send the lead-notification email. Throws on failure so the caller can decide. */
-export async function sendLeadEmail(lead: Lead): Promise<void> {
+export async function sendLeadEmail(lead: Lead, opts: { voucher?: string } = {}): Promise<void> {
   if (!isEmailConfigured()) {
     throw new Error("Email not configured: set RESEND_API_KEY, LEADS_EMAIL_TO, LEADS_EMAIL_FROM");
   }
 
-  const { text, html } = bodyFor(lead);
+  const { text, html } = bodyFor(lead, opts);
   const res = await fetch(RESEND_ENDPOINT, {
     method: "POST",
     headers: {
@@ -160,5 +161,89 @@ export async function sendLeadMagnetAssetEmail({
   if (!res.ok) {
     const detail = await res.text().catch(() => `HTTP ${res.status}`);
     throw new Error(`Resend asset send failed: ${detail}`);
+  }
+}
+
+/** Send the coffee-voucher confirmation email to the submitter. The /thank-you
+ *  page promises "We've also emailed this to you" — this delivers on it. Throws
+ *  on failure; the caller treats it as best-effort so a Resend hiccup never
+ *  blocks the primary lead notification. */
+export async function sendVoucherEmail({
+  to,
+  name,
+  code,
+  agentFirstName,
+}: {
+  to: string;
+  name: string | null;
+  code: string;
+  agentFirstName: string | null;
+}): Promise<void> {
+  if (!isEmailConfigured()) {
+    throw new Error("Email not configured: set RESEND_API_KEY, LEADS_EMAIL_FROM");
+  }
+
+  const greeting = name ? `Thanks, ${name.split(/\s+/)[0]}.` : "Thanks for getting in touch.";
+  const agentLine = agentFirstName
+    ? `${agentFirstName} has your details and will be in touch shortly.`
+    : "We have your details and will be in touch shortly.";
+  const safeCode = escapeHtml(code);
+  const safeGreeting = escapeHtml(greeting);
+  const safeAgentLine = escapeHtml(agentLine);
+
+  const subject = "Your Max. Property coffee, on us";
+  const text = [
+    greeting,
+    "",
+    agentLine,
+    "",
+    "And because waiting is the worst part — the first coffee's on us.",
+    "",
+    `Your code: ${code}`,
+    "",
+    "Pop into Vault Espresso on Gibson Rd, Noosaville, show the barista this code, and the next one's our shout.",
+    "Open Mon–Sun · 6am–2pm · Valid 30 days.",
+    "",
+    "— Max. Property, Noosaville",
+  ].join("\n");
+
+  const html = `
+    <div style="font:15px/1.55 -apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#1a120c;max-width:560px">
+      <p style="margin:0 0 12px;font-size:20px;font-weight:500">${safeGreeting}</p>
+      <p>${safeAgentLine}</p>
+      <p>And because waiting is the worst part — the first coffee&rsquo;s on us.</p>
+      <div style="margin:24px 0;padding:24px;background:#1a120c;border-radius:12px;text-align:center">
+        <div style="font:11px/1.4 ui-monospace,monospace;letter-spacing:0.12em;color:rgba(244,237,229,0.6);text-transform:uppercase">Show this at the counter</div>
+        <div style="margin-top:10px;font:500 28px/1 ui-monospace,monospace;letter-spacing:0.18em;color:#e8a16a">${safeCode}</div>
+        <div style="margin-top:10px;font:12px/1.4 ui-monospace,monospace;letter-spacing:0.12em;color:rgba(244,237,229,0.6);text-transform:uppercase">One flat white</div>
+      </div>
+      <p style="color:#564c44">
+        Pop into <strong style="color:#1a120c">Vault Espresso</strong> on Gibson Rd, Noosaville,
+        show the barista this code, and the next one&rsquo;s our shout.
+      </p>
+      <p style="color:#564c44;font-size:13px">Open Mon–Sun · 6am–2pm · Valid 30 days.</p>
+      <p style="color:#564c44;margin-top:32px">— Max. Property, Noosaville</p>
+    </div>
+  `;
+
+  const res = await fetch(RESEND_ENDPOINT, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: FROM,
+      to: [to],
+      subject,
+      text,
+      html,
+    }),
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    const detail = await res.text().catch(() => `HTTP ${res.status}`);
+    throw new Error(`Resend voucher send failed: ${detail}`);
   }
 }
