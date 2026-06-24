@@ -1,8 +1,8 @@
 <svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Editorial mark for the Queensland auctions piece — a redacted price line." preserveAspectRatio="xMidYMid slice">
-  <rect width="1600" height="900" fill="#f4ede5"/>
+  <rect width="1600" height="900" fill="#d8ccc0"/>
 
   <!-- Mono tick column (left baseline) -->
-  <g stroke="#755c4f" stroke-width="1.5" opacity="0.35" stroke-linecap="round">
+  <g stroke="#564c44" stroke-width="1.5" opacity="0.55" stroke-linecap="round">
     <line x1="220" y1="290" x2="220" y2="660"/>
     <line x1="220" y1="290" x2="260" y2="290"/>
     <line x1="220" y1="360" x2="250" y2="360"/>
@@ -13,7 +13,7 @@
   </g>
 
   <!-- Faded "comparable" bars -->
-  <g fill="#755c4f" opacity="0.24">
+  <g fill="#564c44" opacity="0.4">
     <rect x="380" y="293" width="520" height="14" rx="2"/>
     <rect x="380" y="363" width="660" height="14" rx="2"/>
     <rect x="380" y="503" width="780" height="14" rx="2"/>
@@ -34,5 +34,5 @@
   </g>
 
   <!-- Subtle baseline -->
-  <line x1="220" y1="780" x2="1380" y2="780" stroke="#755c4f" stroke-width="1" opacity="0.25"/>
+  <line x1="220" y1="780" x2="1380" y2="780" stroke="#564c44" stroke-width="1" opacity="0.4"/>
 </svg>

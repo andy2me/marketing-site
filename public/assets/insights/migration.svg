@@ -1,19 +1,19 @@
 <svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Editorial mark for the migration piece — arrows converging on a coastline." preserveAspectRatio="xMidYMid slice">
-  <rect width="1600" height="900" fill="#f4ede5"/>
+  <rect width="1600" height="900" fill="#d8ccc0"/>
 
   <!-- Sea waves (subtle) -->
   <path d="M 100 720 Q 200 700 300 720 T 500 720 T 700 720 T 900 720 T 1100 720 T 1300 720 T 1500 720"
-        fill="none" stroke="#755c4f" stroke-width="2" opacity="0.4"/>
+        fill="none" stroke="#564c44" stroke-width="2" opacity="0.55"/>
   <path d="M 100 760 Q 200 740 300 760 T 500 760 T 700 760 T 900 760 T 1100 760 T 1300 760 T 1500 760"
-        fill="none" stroke="#755c4f" stroke-width="2" opacity="0.28"/>
+        fill="none" stroke="#564c44" stroke-width="2" opacity="0.4"/>
   <path d="M 100 800 Q 200 780 300 800 T 500 800 T 700 800 T 900 800 T 1100 800 T 1300 800 T 1500 800"
-        fill="none" stroke="#755c4f" stroke-width="2" opacity="0.18"/>
+        fill="none" stroke="#564c44" stroke-width="2" opacity="0.28"/>
 
   <!-- Coast horizon -->
   <line x1="100" y1="660" x2="1500" y2="660" stroke="#1a120c" stroke-width="2" opacity="0.55"/>
 
   <!-- Convergence target -->
-  <circle cx="800" cy="660" r="60" fill="none" stroke="#9d4d2a" stroke-width="1.5" opacity="0.35"/>
+  <circle cx="800" cy="660" r="60" fill="none" stroke="#9d4d2a" stroke-width="1.5" opacity="0.55"/>
   <circle cx="800" cy="660" r="28" fill="#9d4d2a"/>
 
   <!-- Flow lines converging on the target (dashed, like migration paths) -->
@@ -31,7 +31,7 @@
   <line x1="1080" y1="120" x2="822" y2="638" stroke="#9d4d2a" stroke-width="2.5" stroke-linecap="round"/>
 
   <!-- Mono tick caption mark -->
-  <g stroke="#755c4f" stroke-width="1.5" opacity="0.5">
+  <g stroke="#564c44" stroke-width="1.5" opacity="0.65">
     <line x1="220" y1="850" x2="320" y2="850"/>
   </g>
 </svg>
