@@ -124,7 +124,21 @@ export function RelatedRail({
         <div className={s.relatedGrid}>
           {items.map((a) => (
             <Link key={a.slug} href={`/insights/${a.slug}`} className={s.relatedCard}>
-              <ImageSlot ratio="5/4" className={s.relatedMedia} />
+              <div className={s.relatedMedia}>
+                {a.heroSrc ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={a.heroSrc}
+                    alt={a.heroAlt ?? ""}
+                    className={s.relatedMediaImg}
+                  />
+                ) : (
+                  <ImageSlot
+                    ratio="5/4"
+                    style={{ position: "absolute", inset: 0, borderRadius: 0 }}
+                  />
+                )}
+              </div>
               <div className={s.relatedBlock}>
                 <div className={`overline ${s.relatedCat}`}>{a.category}</div>
                 <h3 className={s.relatedTitle}>{a.title}</h3>

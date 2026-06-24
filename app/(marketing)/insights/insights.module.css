@@ -185,6 +185,14 @@
   border-radius: 12px;
   overflow: hidden;
 }
+.cardMediaImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .cardBlock {
   margin-top: 18px;
 }

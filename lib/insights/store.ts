@@ -35,6 +35,8 @@ const CARDS: ArticleCard[] = ALL_ARTICLES.map((a) => ({
   date: a.date,
   readLabel: `${a.readMinutes} min read`,
   author: a.author.name,
+  heroSrc: a.hero.src,
+  heroAlt: a.hero.alt,
 }));
 
 /** Full article (with body) — null when the slug isn't fully written yet. */

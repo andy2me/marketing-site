@@ -117,4 +117,7 @@ export type ArticleCard = {
   date: string;
   readLabel: string;
   author: string;
+  /** Hero src to surface on the index/related rail card — falls back to ImageSlot when omitted. */
+  heroSrc?: string;
+  heroAlt?: string;
 };
