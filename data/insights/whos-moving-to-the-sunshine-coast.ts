@@ -22,8 +22,8 @@ export const article: Article = {
     portraitUrl: "/assets/team/matt-powe.webp",
   },
   hero: {
-    src: "/assets/locations/noosaville.jpg",
-    alt: "Noosaville on the Sunshine Coast — a region people are still moving to in 2026.",
+    src: "/assets/insights/migration.svg",
+    alt: "Editorial mark — flow lines converging on a single point on a coastline.",
     caption: "Sunshine Coast migration · Jun 2026 · Max. Property",
   },
   body: [

@@ -20,7 +20,8 @@ export const article: Article = {
     portraitUrl: "/assets/team/matt-powe.webp",
   },
   hero: {
-    alt: "A Sunshine Coast home — what the listing photos can and can't show you.",
+    src: "/assets/insights/listing.svg",
+    alt: "Editorial mark — a photo frame with a horizon that runs past its edge.",
     caption: "Listings versus reality · Jun 2026 · Max. Property",
   },
   body: [

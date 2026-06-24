@@ -1,0 +1,38 @@
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Editorial mark for the Queensland auctions piece — a redacted price line." preserveAspectRatio="xMidYMid slice">
+  <rect width="1600" height="900" fill="#f4ede5"/>
+
+  <!-- Mono tick column (left baseline) -->
+  <g stroke="#755c4f" stroke-width="1.5" opacity="0.35" stroke-linecap="round">
+    <line x1="220" y1="290" x2="220" y2="660"/>
+    <line x1="220" y1="290" x2="260" y2="290"/>
+    <line x1="220" y1="360" x2="250" y2="360"/>
+    <line x1="220" y1="430" x2="260" y2="430"/>
+    <line x1="220" y1="500" x2="250" y2="500"/>
+    <line x1="220" y1="570" x2="260" y2="570"/>
+    <line x1="220" y1="640" x2="250" y2="640"/>
+  </g>
+
+  <!-- Faded "comparable" bars -->
+  <g fill="#755c4f" opacity="0.24">
+    <rect x="380" y="293" width="520" height="14" rx="2"/>
+    <rect x="380" y="363" width="660" height="14" rx="2"/>
+    <rect x="380" y="503" width="780" height="14" rx="2"/>
+    <rect x="380" y="573" width="700" height="14" rx="2"/>
+    <rect x="380" y="643" width="600" height="14" rx="2"/>
+  </g>
+
+  <!-- Redaction bar — the missing price guide -->
+  <rect x="380" y="420" width="860" height="36" fill="#1a120c"/>
+
+  <!-- Strike dot -->
+  <circle cx="1300" cy="438" r="22" fill="#9d4d2a"/>
+
+  <!-- Empty bracket pair (top right) -->
+  <g stroke="#1a120c" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 1280 180 L 1240 180 L 1240 260 L 1280 260"/>
+    <path d="M 1340 180 L 1380 180 L 1380 260 L 1340 260"/>
+  </g>
+
+  <!-- Subtle baseline -->
+  <line x1="220" y1="780" x2="1380" y2="780" stroke="#755c4f" stroke-width="1" opacity="0.25"/>
+</svg>

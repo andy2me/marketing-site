@@ -1,0 +1,32 @@
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Editorial mark for the listing piece — a photo frame with a horizon extending past its edge." preserveAspectRatio="xMidYMid slice">
+  <rect width="1600" height="900" fill="#f4ede5"/>
+
+  <!-- Photo frame -->
+  <rect x="220" y="220" width="640" height="460" fill="#ffffff" stroke="#755c4f" stroke-width="3"/>
+
+  <!-- Sun inside the frame -->
+  <circle cx="500" cy="450" r="80" fill="#9d4d2a"/>
+
+  <!-- Hill silhouette inside the frame -->
+  <path d="M 250 540 Q 380 470 510 540 T 770 540 L 830 540 L 830 650 L 250 650 Z" fill="#364025" opacity="0.85"/>
+
+  <!-- Horizon line inside frame -->
+  <line x1="240" y1="540" x2="830" y2="540" stroke="#1a120c" stroke-width="2" opacity="0.5"/>
+
+  <!-- Horizon CONTINUES past the frame edge — what the listing doesn't show -->
+  <line x1="880" y1="540" x2="1080" y2="540" stroke="#1a120c" stroke-width="2" stroke-dasharray="3 8"/>
+  <line x1="1100" y1="540" x2="1380" y2="540" stroke="#1a120c" stroke-width="2" stroke-dasharray="2 12" opacity="0.55"/>
+
+  <!-- A second, smaller sun OUTSIDE the frame -->
+  <circle cx="1240" cy="500" r="34" fill="#9d4d2a" opacity="0.6"/>
+
+  <!-- A tree beyond the frame — context the photo can't carry -->
+  <line x1="1380" y1="540" x2="1380" y2="410" stroke="#364025" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="1380" cy="398" r="26" fill="#364025"/>
+
+  <!-- Caption tick (mono feel) bottom-left -->
+  <g stroke="#755c4f" stroke-width="1.5" opacity="0.45">
+    <line x1="240" y1="760" x2="320" y2="760"/>
+    <line x1="340" y1="760" x2="400" y2="760"/>
+  </g>
+</svg>
