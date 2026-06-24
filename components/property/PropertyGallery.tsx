@@ -54,6 +54,9 @@ export function PropertyGallery({
   const [index, setIndex] = useState(0);
   const dialogRef = useRef<HTMLDivElement>(null);
 
+  const [floorplanOpen, setFloorplanOpen] = useState(false);
+  const floorplanDialogRef = useRef<HTMLDivElement>(null);
+
   const openAt = (i: number) => {
     setIndex(i);
     setOpen(true);
@@ -61,6 +64,7 @@ export function PropertyGallery({
   const close = useCallback(() => setOpen(false), []);
   const prev = useCallback(() => setIndex((i) => (i - 1 + frames) % frames), [frames]);
   const next = useCallback(() => setIndex((i) => (i + 1) % frames), [frames]);
+  const closeFloorplan = useCallback(() => setFloorplanOpen(false), []);
 
   // Keyboard control + body scroll lock while open.
   useEffect(() => {
@@ -93,6 +97,22 @@ export function PropertyGallery({
       document.body.style.overflow = prevOverflow;
     };
   }, [open, close, prev, next]);
+
+  // Floorplan modal: Esc to close + body scroll lock while open.
+  useEffect(() => {
+    if (!floorplanOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeFloorplan();
+    };
+    document.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    floorplanDialogRef.current?.focus();
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [floorplanOpen, closeFloorplan]);
 
   const cell = (i: number, extra?: React.ReactNode) => (
     <button type="button" className={s.galleryCell} onClick={() => openAt(i)} aria-label={`Open photo ${i + 1}`}>
@@ -141,14 +161,13 @@ export function PropertyGallery({
               </a>
             )}
             {floorplan && (
-              <a
-                href={floorplan}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
                 className={s.pill}
+                onClick={() => setFloorplanOpen(true)}
               >
                 Floorplan
-              </a>
+              </button>
             )}
           </div>
         )}
@@ -199,6 +218,38 @@ export function PropertyGallery({
             <button type="button" className={s.lightboxNav} onClick={next} aria-label="Next photo">
               <IconArrowR size={20} />
             </button>
+          </div>
+        </div>
+      )}
+
+      {floorplanOpen && floorplan && (
+        <div
+          ref={floorplanDialogRef}
+          className={s.lightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Floorplan"
+          tabIndex={-1}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) closeFloorplan();
+          }}
+        >
+          <div className={s.lightboxBar}>
+            <span className={s.lightboxCount}>Floorplan</span>
+            <button
+              type="button"
+              className={s.lightboxClose}
+              onClick={closeFloorplan}
+              aria-label="Close floorplan"
+            >
+              <IconClose size={18} />
+            </button>
+          </div>
+          <div className={s.lightboxStage}>
+            <div className={s.lightboxImageWrap}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={floorplan} alt="Floorplan" className={s.lightboxImage} />
+            </div>
           </div>
         </div>
       )}
