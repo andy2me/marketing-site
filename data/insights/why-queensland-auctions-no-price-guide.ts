@@ -21,7 +21,8 @@ export const article: Article = {
     portraitUrl: "/assets/team/matt-powe.webp",
   },
   hero: {
-    alt: "Noosa Heads from above — Sunshine Coast auction territory.",
+    src: "/assets/insights/auction.svg",
+    alt: "Editorial mark — a redacted price line, in place of an auction guide.",
     caption: "On Queensland auctions · Jun 2026 · Max. Property",
   },
   body: [
