@@ -258,6 +258,25 @@
   letter-spacing: -0.01em;
   color: var(--color-text-strong);
 }
+.ul {
+  margin: 0 0 24px;
+  padding-left: 24px;
+  list-style: disc;
+}
+.li {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  margin: 0 0 12px;
+  padding-left: 4px;
+}
+.li::marker {
+  color: var(--color-action);
+}
+.liLead {
+  color: var(--color-text-strong);
+  font-weight: 600;
+}
 
 /* ── Chart data card ────────────────────────────────────────────────── */
 .chart {

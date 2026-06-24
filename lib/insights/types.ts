@@ -59,7 +59,20 @@ export type HeadingBlock = {
   text: string;
 };
 
-export type Block = ParagraphBlock | HeadingBlock | BlockquoteBlock | ChartBlock;
+/** Bulleted list item — `lead` renders as a bold prefix before `text`. */
+export type ListItem = { lead?: string; text: string };
+
+export type ListBlock = {
+  kind: "ul";
+  items: ListItem[];
+};
+
+export type Block =
+  | ParagraphBlock
+  | HeadingBlock
+  | BlockquoteBlock
+  | ChartBlock
+  | ListBlock;
 
 export type RelatedRef = {
   slug: string;
