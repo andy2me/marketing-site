@@ -1,14 +1,15 @@
 // Normalised lead shape. Every site form (contact, appraisal, newsletter,
-// property enquiry, per-agent appraisal) posts to /api/leads as FormData; we
-// collapse them into one `Lead` here so the email + Rex paths don't each have to
-// know every form's field names.
+// property enquiry, per-agent appraisal, gated lead-magnet PDF) posts to
+// /api/leads as FormData; we collapse them into one `Lead` here so the email
+// + Rex paths don't each have to know every form's field names.
 
 export type LeadKind =
   | "contact"
   | "appraisal"
   | "newsletter"
   | "enquiry"
-  | "agent-appraisal";
+  | "agent-appraisal"
+  | "leadmagnet";
 
 export type Lead = {
   kind: LeadKind;
@@ -50,6 +51,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function kindFromFormId(formId: string): LeadKind {
   if (formId.startsWith("appraisal-agent-")) return "agent-appraisal";
+  if (formId.startsWith("leadmagnet")) return "leadmagnet";
   if (formId === "appraisal") return "appraisal";
   if (formId === "newsletter") return "newsletter";
   if (formId === "enquiry") return "enquiry";

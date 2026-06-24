@@ -125,6 +125,8 @@ export const noosavilleSellingPresentationChecklist: Guide = {
           title: "The Noosaville presentation checklist (PDF)",
           body: "The full room-by-room checklist as a printable PDF, plus a quick view on which items are worth it for your specific home — and which aren't.",
           action: "Download the checklist",
+          assetId: "noosaville-presentation-checklist",
+          cover: { kind: "checklist" },
         },
         {
           kind: "cta",
