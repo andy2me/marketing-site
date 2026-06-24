@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -163,7 +164,7 @@ export default async function SellPage() {
                 </p>
               ) : (
                 recentSold.map((p) => (
-                  <article key={p.id} className={s.soldCard}>
+                  <Link key={p.id} href={`/properties/${p.slug}`} className={s.soldCard}>
                     <div className={s.soldMedia}>
                       {p.image ? (
                         <Image
@@ -187,7 +188,7 @@ export default async function SellPage() {
                         <span>{p.type}</span>
                       </div>
                     </div>
-                  </article>
+                  </Link>
                 ))
               )}
             </div>

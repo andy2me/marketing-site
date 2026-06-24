@@ -148,18 +148,33 @@
   gap: 24px;
 }
 .soldCard {
+  display: block;
   background: var(--color-bg-surface);
   border: 1px solid var(--color-border);
   border-radius: 12px;
   overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow 320ms,
+    transform 320ms;
+}
+.soldCard:hover {
+  box-shadow: var(--shadow-md);
+}
+.soldCard:hover .soldImg {
+  transform: scale(1.03);
 }
 .soldMedia {
   position: relative;
   aspect-ratio: 4 / 3;
   background: var(--white-mist-200);
+  overflow: hidden;
 }
 .soldImg {
   object-fit: cover;
+  transition: transform 320ms;
 }
 .soldEmpty {
   grid-column: 1 / -1;
