@@ -48,7 +48,8 @@ export type SuburbHub = {
   postcode: string;   // "4566"
   hero: {
     intro: string;
-    imageLabel: string;   // alt/label for ImageSlot
+    imageLabel: string;   // alt/label for ImageSlot fallback
+    image?: { src: string; alt: string };
   };
   stats: SuburbStat[];
   statsHeadline: string;        // h2, with emphasis already split out
