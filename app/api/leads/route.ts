@@ -1,9 +1,16 @@
 import type { NextRequest } from "next/server";
 
-import { isEmailConfigured, sendLeadEmail } from "@/lib/leads/email";
+import {
+  isEmailConfigured,
+  sendLeadEmail,
+  sendLeadMagnetAssetEmail,
+} from "@/lib/leads/email";
+import { getLeadMagnetAsset } from "@/lib/leadmagnets/registry";
 import { clientIp, rateLimit } from "@/lib/leads/rate-limit";
 import { leadHasContactPoint, normaliseLead } from "@/lib/leads/types";
 import { createRexContact, isRexConfigured } from "@/lib/rex/contacts";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 
 // First-party lead intake (code handoff §9). Every site form posts here as
 // FormData over same-origin fetch — no third-party script or iframe, so ad
@@ -73,9 +80,31 @@ export async function POST(req: NextRequest) {
 
   // Fan out in parallel. Email is the primary, guaranteed channel; Rex is
   // best-effort — a CRM failure must not lose a lead the inbox already has.
+  // Lead-magnet submissions additionally trigger an asset email to the
+  // submitter with a link to the auto-generated PDF.
   const channels: { name: string; run: Promise<unknown> }[] = [];
   if (emailOn) channels.push({ name: "email", run: sendLeadEmail(lead) });
   if (rexOn) channels.push({ name: "rex", run: createRexContact(lead) });
+  if (emailOn && lead.kind === "leadmagnet" && lead.email) {
+    const assetId = formId.startsWith("leadmagnet-")
+      ? formId.slice("leadmagnet-".length)
+      : null;
+    const asset = assetId ? getLeadMagnetAsset(assetId) : null;
+    if (asset) {
+      channels.push({
+        name: "asset-email",
+        run: sendLeadMagnetAssetEmail({
+          to: lead.email,
+          assetTitle: asset.title,
+          downloadUrl: `${SITE_URL}/api/leadmagnets/${asset.assetId}`,
+        }),
+      });
+    } else {
+      console.warn(
+        `[leads:${formId}] no asset registered for "${assetId}" — submitter won't get the PDF`,
+      );
+    }
+  }
 
   const results = await Promise.allSettled(channels.map((c) => c.run));
   const failures: Record<string, string> = {};
