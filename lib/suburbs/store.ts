@@ -13,7 +13,7 @@ const noosaville: SuburbHub = {
       "River-side rhythm — cafés, kayaks and classic Queenslanders. The Noosa River's quieter, more liveable shoulder, and one of the Coast's most resilient markets.",
     imageLabel: "Noosa River foreshore · Gympie Tce · 4:5",
     image: {
-      src: "/assets/locations/noosaville-hero.jpg",
+      src: "/assets/locations/noosaville-hero-v2.jpg",
       alt: "Golden-hour aerial of Noosaville — yachts moored on the Noosa River, the foreshore at Gympie Terrace, and the hinterland on the horizon.",
     },
   },
