@@ -128,10 +128,11 @@ export function ContactForm() {
             formId="contact"
             prefill={{ enquiry }}
             className={s.formCard}
-            onSubmit={(data) => {
+            onSubmit={(data, result) => {
               const qs = new URLSearchParams({ form: "contact", enquiry });
               if (data.firstName) qs.set("name", data.firstName);
               if (data.address) qs.set("address", data.address);
+              if (result?.voucher) qs.set("code", result.voucher);
               router.push(`/thank-you?${qs.toString()}`);
             }}
           >

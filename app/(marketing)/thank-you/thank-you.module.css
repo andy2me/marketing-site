@@ -210,12 +210,6 @@
   color: rgba(244, 237, 229, 0.6);
   margin-top: 4px;
 }
-.walletBtn {
-  margin-top: 20px;
-  background: var(--sunrise);
-  color: var(--white-mist-900);
-  font-weight: 600;
-}
 .stubFine {
   margin-top: 14px;
   font-size: 12px;

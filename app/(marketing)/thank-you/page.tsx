@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Container } from "@/components/ui/Container";
 import { Overline } from "@/components/ui/Overline";
-import { IconArrowR, IconArrowUR, IconPhone } from "@/components/icons";
+import { IconArrowR, IconPhone } from "@/components/icons";
 import { getAgent } from "@/lib/agents/store";
 import { getSiteSettings } from "@/lib/wp/mock";
 import { routeAgent } from "@/lib/leads/route-agent";
@@ -146,6 +146,7 @@ export default async function ThankYouPage({
   const enquiry = first(sp.enquiry);
   const name = firstName(first(sp.name));
   const address = first(sp.address);
+  const voucherCode = first(sp.code);
 
   const routed = routeAgent(form, enquiry);
   const agent = (await getAgent(routed.slug)) ?? (await getAgent("matt-powe"));
@@ -154,12 +155,6 @@ export default async function ThankYouPage({
 
   const agentFirst = agent ? agent.name.split(" ")[0] : "the team";
   const heading = name ? `Thanks, ${name}.` : "Thanks for getting in touch.";
-
-  // TODO(voucher): generate a unique code server-side per lead (handoff §
-  // "Dynamic content & integration notes"). Today shows a deterministic
-  // placeholder so the design reads correctly.
-  const voucherCode = "MAX·BREW";
-  const voucherSubCode = "NO. 0042 · ONE FLAT WHITE";
 
   return (
     <>
@@ -251,16 +246,13 @@ export default async function ThankYouPage({
               <div className={s.voucherStub}>
                 <Overline className={s.voucherMetaLabel}>Show this at the counter</Overline>
                 <div className={s.codeChip}>
-                  <div className={s.codeChipCode}>{voucherCode}</div>
-                  <div className={s.codeChipSub}>{voucherSubCode}</div>
+                  <div className={s.codeChipCode}>{voucherCode ?? "ONE FLAT WHITE"}</div>
+                  <div className={s.codeChipSub}>
+                    {voucherCode ? "ONE FLAT WHITE" : "Check your email for your code"}
+                  </div>
                 </div>
-                {/* TODO(wallet): swap href for a real .pkpass URL once the
-                    Apple Wallet / Google Wallet passes are generated. */}
-                <a href="#" className={`btn btn-sm ${s.walletBtn}`}>
-                  Add to Apple Wallet <IconArrowUR />
-                </a>
                 <div className={s.stubFine}>
-                  We&rsquo;ve also emailed this to you, so it&rsquo;s always in your pocket.
+                  We&rsquo;ve also emailed this to you, so you can find it later.
                 </div>
               </div>
             </div>
