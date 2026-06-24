@@ -10,24 +10,32 @@
 
 import type { Article, ArticleCard } from "./types";
 import { article as sunshineCoastMay2026 } from "@/data/insights/sunshine-coast-market-may-2026";
+import { article as whyQldAuctionsNoPriceGuide } from "@/data/insights/why-queensland-auctions-no-price-guide";
+import { article as whatTheListingDoesntTellYou } from "@/data/insights/what-the-listing-doesnt-tell-you";
+import { article as whosMovingToTheSunshineCoast } from "@/data/insights/whos-moving-to-the-sunshine-coast";
 
-const ARTICLES: Record<string, Article> = {
-  [sunshineCoastMay2026.slug]: sunshineCoastMay2026,
-};
-
-// Editorial calendar — live articles only. Stub placeholders were removed so
-// the journal index, related rails and home page rail surface real content.
-// Matt Powe is the single canonical author across the cluster (handoff §9.3).
-const CARDS: ArticleCard[] = [
-  {
-    slug: sunshineCoastMay2026.slug,
-    category: sunshineCoastMay2026.category,
-    title: sunshineCoastMay2026.title,
-    date: sunshineCoastMay2026.date,
-    readLabel: `${sunshineCoastMay2026.readMinutes} min read`,
-    author: sunshineCoastMay2026.author.name,
-  },
+// Newest first — drives the /insights browser order and the featured pick fallback.
+const ALL_ARTICLES: Article[] = [
+  whyQldAuctionsNoPriceGuide,
+  whatTheListingDoesntTellYou,
+  whosMovingToTheSunshineCoast,
+  sunshineCoastMay2026,
 ];
+
+const ARTICLES: Record<string, Article> = Object.fromEntries(
+  ALL_ARTICLES.map((a) => [a.slug, a]),
+);
+
+// Editorial calendar — live articles only. Matt Powe is the single canonical author
+// across the cluster (handoff §9.3).
+const CARDS: ArticleCard[] = ALL_ARTICLES.map((a) => ({
+  slug: a.slug,
+  category: a.category,
+  title: a.title,
+  date: a.date,
+  readLabel: `${a.readMinutes} min read`,
+  author: a.author.name,
+}));
 
 /** Full article (with body) — null when the slug isn't fully written yet. */
 export async function getArticle(slug: string): Promise<Article | null> {

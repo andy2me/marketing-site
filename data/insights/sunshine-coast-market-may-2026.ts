@@ -85,5 +85,9 @@ export const article: Article = {
       text: "Market figures are general commentary drawn from third-party data providers at the date of publication and may vary between sources; they aren't financial advice.",
     },
   ],
-  related: [],
+  related: [
+    "whos-moving-to-the-sunshine-coast",
+    "why-queensland-auctions-no-price-guide",
+    "what-the-listing-doesnt-tell-you",
+  ],
 };

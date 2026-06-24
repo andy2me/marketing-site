@@ -61,6 +61,18 @@ export function ArticleBody({ body }: { body: Block[] }) {
                 <div className={s.chartCaption}>{block.caption}</div>
               </div>
             );
+          case "ul":
+            return (
+              <ul key={i} className={s.ul}>
+                {block.items.map((it, j) => (
+                  <li key={j} className={s.li}>
+                    {it.lead ? <strong className={s.liLead}>{it.lead}</strong> : null}
+                    {it.lead ? " " : ""}
+                    {it.text}
+                  </li>
+                ))}
+              </ul>
+            );
           default:
             return null;
         }
