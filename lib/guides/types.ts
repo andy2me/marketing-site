@@ -41,6 +41,15 @@ export type GuideBodyLeadMagnet = {
   title: string;
   body: string;
   action: string;       // button label e.g. "Download the checklist"
+  /** Stable identifier for the asset — joined to the formId so the inbox/CRM
+   *  can tell lead-magnet downloads apart. Slug shape, e.g. "presentation-checklist". */
+  assetId?: string;
+  /** Optional cover graphic; when omitted the card renders the striped placeholder. */
+  cover?:
+    | { kind: "image"; src: string; alt: string }
+    | { kind: "checklist" };
+  /** Optional inline confirmation shown in place of the form post-submit. */
+  successMessage?: string;
 };
 
 export type GuideBodyBlock =

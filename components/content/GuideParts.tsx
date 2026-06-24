@@ -18,6 +18,8 @@ import type {
 } from "@/lib/guides/types";
 import { FAQAccordion } from "./FAQAccordion";
 import { StickyToC, MobileToC } from "./StickyToC";
+import { LeadMagnetChecklistCover } from "./LeadMagnetCover";
+import { LeadMagnetForm } from "@/components/forms/LeadMagnetForm";
 import s from "./Guide.module.css";
 
 // ── Inline-link renderer ────────────────────────────────────────────────
@@ -246,42 +248,64 @@ function BodyBlock({ block }: { block: GuideBodyBlock }) {
 }
 
 // ── Lead-magnet card (email-gated PDF; supporting articles) ────────────
+function slugifyTitle(t: string): string {
+  return t
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "")
+    .slice(0, 64);
+}
+
 function LeadMagnet({
   block,
 }: {
   block: Extract<GuideBodyBlock, { kind: "leadmagnet" }>;
 }) {
+  const assetId = block.assetId ?? slugifyTitle(block.title);
   return (
     <aside className={s.leadMagnet}>
-      <div className={s.leadMagnetCover} aria-hidden>
-        <div className={s.leadMagnetCoverLabel}>
-          PDF
-          <br />
-          cover
-        </div>
-      </div>
+      <LeadMagnetCover cover={block.cover} />
       <div>
         <div className={`overline ${s.leadMagnetEyebrow}`}>
           {block.eyebrow ?? "Free download"}
         </div>
         <h3 className={s.leadMagnetTitle}>{block.title}</h3>
         <p className={s.leadMagnetBody}>{block.body}</p>
-        <form className={s.leadMagnetForm} aria-label={block.title}>
-          <input
-            type="email"
-            placeholder="you@email.com"
-            className={s.leadMagnetInput}
-            aria-label="Email address"
-          />
-          <button
-            type="submit"
-            className={`btn btn-primary ${s.leadMagnetBtn}`}
-          >
-            {block.action}
-          </button>
-        </form>
+        <LeadMagnetForm
+          assetId={assetId}
+          assetTitle={block.title}
+          action={block.action}
+          successMessage={block.successMessage}
+        />
       </div>
     </aside>
+  );
+}
+
+function LeadMagnetCover({
+  cover,
+}: {
+  cover: Extract<GuideBodyBlock, { kind: "leadmagnet" }>["cover"];
+}) {
+  if (cover?.kind === "checklist") return <LeadMagnetChecklistCover />;
+  if (cover?.kind === "image") {
+    return (
+      <div className={s.leadMagnetCover} aria-hidden>
+        {/* Plain <img> — these are small decorative covers, not LCP. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={cover.src} alt={cover.alt} />
+      </div>
+    );
+  }
+  // Fallback: striped placeholder.
+  return (
+    <div className={s.leadMagnetCover} aria-hidden>
+      <div className={s.leadMagnetCoverLabel}>
+        PDF
+        <br />
+        cover
+      </div>
+    </div>
   );
 }
 
