@@ -14,7 +14,7 @@ const noosaville: SuburbHub = {
     imageLabel: "Noosa River foreshore · Gympie Tce · 4:5",
     image: {
       src: "/assets/locations/noosaville-hero.jpg",
-      alt: "Aerial of the Noosa River foreshore at Noosaville — Gympie Terrace, the river, moored boats and the hinterland beyond.",
+      alt: "Golden-hour aerial of Noosaville — yachts moored on the Noosa River, the foreshore at Gympie Terrace, and the hinterland on the horizon.",
     },
   },
   statsHeadline: "A market that holds its nerve.",
