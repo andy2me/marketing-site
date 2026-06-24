@@ -8,7 +8,7 @@
   <circle cx="500" cy="450" r="80" fill="#9d4d2a"/>
 
   <!-- Hill silhouette inside the frame -->
-  <path d="M 250 540 Q 380 470 510 540 T 770 540 L 830 540 L 830 650 L 250 650 Z" fill="#364025" opacity="0.85"/>
+  <path d="M 250 540 Q 380 470 510 540 T 770 540 L 830 540 L 830 650 L 250 650 Z" fill="#364025" opacity="0.5"/>
 
   <!-- Horizon line inside frame -->
   <line x1="240" y1="540" x2="830" y2="540" stroke="#1a120c" stroke-width="2" opacity="0.5"/>

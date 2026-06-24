@@ -22,7 +22,7 @@
   </g>
 
   <!-- Redaction bar — the missing price guide -->
-  <rect x="380" y="420" width="860" height="36" fill="#1a120c"/>
+  <rect x="380" y="420" width="860" height="36" fill="#1a120c" opacity="0.65"/>
 
   <!-- Strike dot -->
   <circle cx="1300" cy="438" r="22" fill="#9d4d2a"/>
