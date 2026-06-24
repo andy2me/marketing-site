@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { IconArrowR } from "@/components/icons";
 import s from "./detail.module.css";
@@ -31,8 +32,19 @@ function Field({
 
 /** Agent enquiry form in the sticky panel (formId="enquiry"). */
 export function EnquiryForm({ street }: { street: string }) {
+  const router = useRouter();
   return (
-    <LeadForm formId="enquiry" prefill={{ listing: street }} className={s.enqForm}>
+    <LeadForm
+      formId="enquiry"
+      prefill={{ listing: street }}
+      className={s.enqForm}
+      onSubmit={(data) => {
+        const qs = new URLSearchParams({ form: "enquiry", address: street });
+        const first = (data.name ?? "").split(/\s+/)[0];
+        if (first) qs.set("name", first);
+        router.push(`/thank-you?${qs.toString()}`);
+      }}
+    >
       <div className={s.enqTitle}>Make an enquiry</div>
       <div className={s.enqSub}>Typical reply in under 2 hours.</div>
       <div className={s.enqFields}>

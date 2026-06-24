@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { IconArrowR } from "@/components/icons";
 import s from "./sell.module.css";
@@ -56,8 +57,18 @@ function DSelect({
 
 /** Sell appraisal form — dark (formId="appraisal", §9). */
 export function AppraisalForm() {
+  const router = useRouter();
   return (
-    <LeadForm formId="appraisal" className={s.form}>
+    <LeadForm
+      formId="appraisal"
+      className={s.form}
+      onSubmit={(data) => {
+        const qs = new URLSearchParams({ form: "appraisal" });
+        if (data.firstName) qs.set("name", data.firstName);
+        if (data.address) qs.set("address", data.address);
+        router.push(`/thank-you?${qs.toString()}`);
+      }}
+    >
       <div className={s.formGrid}>
         <DField label="First name" name="firstName" placeholder="Sarah" />
         <DField label="Last name" name="lastName" placeholder="Henley" />
