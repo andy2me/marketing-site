@@ -20,7 +20,6 @@ export const article: Article = {
     portraitUrl: "/assets/team/matt-powe.webp",
   },
   hero: {
-    src: "/assets/property/5-arinya-street-wurtulla/hero.webp",
     alt: "A Sunshine Coast home — what the listing photos can and can't show you.",
     caption: "Listings versus reality · Jun 2026 · Max. Property",
   },

@@ -36,6 +36,8 @@ export default async function InsightsPage() {
       read: c.readLabel.replace(/\s*read$/, ""),
       author: c.author,
       slug: c.slug,
+      heroSrc: c.heroSrc,
+      heroAlt: c.heroAlt,
     }));
 
   return (

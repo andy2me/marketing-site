@@ -13,6 +13,8 @@ export type Article = {
   read: string;
   author: string;
   slug: string;
+  heroSrc?: string;
+  heroAlt?: string;
 };
 
 const PAGE = 6;
@@ -71,7 +73,21 @@ export function InsightsBrowser({ articles }: { articles: Article[] }) {
               <div className={s.gridCols}>
                 {shown.map((a) => (
                   <Link key={a.slug} href={`/insights/${a.slug}`} className={s.card}>
-                    <ImageSlot ratio="5/4" className={s.cardMedia} />
+                    <div className={s.cardMedia}>
+                      {a.heroSrc ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={a.heroSrc}
+                          alt={a.heroAlt ?? ""}
+                          className={s.cardMediaImg}
+                        />
+                      ) : (
+                        <ImageSlot
+                          ratio="5/4"
+                          style={{ position: "absolute", inset: 0, borderRadius: 0 }}
+                        />
+                      )}
+                    </div>
                     <div className={s.cardBlock}>
                       <div className={`overline ${s.cardCat}`}>{a.cat}</div>
                       <h3 className={s.cardTitle}>{a.title}</h3>
