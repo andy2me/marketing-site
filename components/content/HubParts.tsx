@@ -51,12 +51,22 @@ export function HubHero({ hub }: { hub: SuburbHub }) {
             </div>
           </div>
           <div>
-            <ImageSlot
-              ratio="4/5"
-              label={hub.hero.imageLabel}
-              className={s.heroMedia}
-              style={{ borderRadius: 16 }}
-            />
+            {hub.hero.image ? (
+              <div className={s.heroMedia} style={{ aspectRatio: "4 / 5", borderRadius: 16, overflow: "hidden" }}>
+                <img
+                  src={hub.hero.image.src}
+                  alt={hub.hero.image.alt}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              </div>
+            ) : (
+              <ImageSlot
+                ratio="4/5"
+                label={hub.hero.imageLabel}
+                className={s.heroMedia}
+                style={{ borderRadius: 16 }}
+              />
+            )}
           </div>
         </div>
       </Container>
