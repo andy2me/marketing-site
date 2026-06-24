@@ -22,9 +22,9 @@ export const article: Article = {
     portraitUrl: "/assets/team/matt-powe.webp",
   },
   hero: {
-    src: "/assets/locations/noosa-heads.jpg",
-    alt: "Noosa Heads coastline and bushland from above — the Sunshine Coast region in 2026.",
-    caption: "The Sunshine Coast · May 2026 · Max. Property",
+    src: "/assets/insights/market.svg",
+    alt: "Editorial mark — a rising trend curve over a calm horizon, with an ember marker at the latest reading.",
+    caption: "Sunshine Coast market · May 2026 · Max. Property",
   },
   body: [
     {
