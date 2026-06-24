@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // pdfkit loads its standard PDF fonts (Helvetica, Times etc.) as `.afm`
+  // files via `fs` at runtime; Next's bundler rewrites those paths and the
+  // server bundle 500s with ENOENT. Opt out of bundling and let Node `require`
+  // it natively — the auto-traced node_modules copy then resolves correctly.
+  serverExternalPackages: ["pdfkit"],
   async redirects() {
     return [
       { source: "/contact-us", destination: "/contact", permanent: true },
