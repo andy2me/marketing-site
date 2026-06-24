@@ -23,6 +23,7 @@
 }
 
 /* ── Hero ───────────────────────────────────────────────────────────── */
+/* Top padding must stay ≥72px to clear the fixed header (Header.module.css). */
 .hero {
   padding: 96px 0 56px;
   border-bottom: 1px solid var(--color-border);
@@ -642,7 +643,7 @@
 /* ── Supporting variant ─────────────────────────────────────────────── */
 /* Lighter hero (smaller H1, narrower dek). */
 .heroSupporting {
-  padding: 64px 0 48px;
+  padding: 88px 0 48px;
 }
 .heroSupporting .heroBody {
   max-width: 760px;
@@ -925,10 +926,10 @@
 
 @media (max-width: 767px) {
   .hero {
-    padding: 64px 0 40px;
+    padding: 88px 0 40px;
   }
   .heroSupporting {
-    padding: 48px 0 32px;
+    padding: 80px 0 32px;
   }
   .body {
     padding: 48px 0;
