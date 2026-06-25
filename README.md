@@ -19,7 +19,7 @@ wired live: a first-party `/api/leads` route emails the team and creates a Rex c
 | Sell · Buy · Locations · Insights · Team · Contact · legal | 🔲 routed stubs |
 | `sitemap.ts` · `robots.ts` · `not-found` · `/api/revalidate` | ✅ scaffolded (revalidate is a stub) |
 | Rex listings · WordPress content · MapLibre · analytics | ⏳ seams only (mock) |
-| Forms → first-party `/api/leads` → Resend email + Rex contact | ✅ built |
+| Forms → first-party `/api/leads` → Resend email + Rex contact/lead | ✅ built |
 
 ## Stack
 
@@ -64,8 +64,9 @@ styles/      tokens.css (ported verbatim) globals.css
 - **Forms (§9):** all forms go through `components/forms/LeadForm.tsx`
   (`formId` / `prefill` / `onSubmit`), which posts FormData to the same-origin
   `app/api/leads/route.ts` — first-party, so ad blockers can't break it. The route
-  emails the team (Resend) and creates a Rex contact (`lib/rex/contacts.ts`).
-  See `docs/FORMS-SETUP.md`.
+  emails the team (Resend) and writes to Rex via `submitLeadToRex` (`lib/rex/leads.ts`):
+  find-or-create contact, then create a lead carrying the listing/property association
+  for property-page enquiries. See `docs/FORMS-SETUP.md`.
 - **Fonts (§5):** `lib/fonts.ts` wires the prototype substitutes (Instrument Serif / Geist /
   Geist Mono) to `--font-heading` / `--font-body` / `--font-mono`. When the Pangram Pangram
   licence lands, swap to `next/font/local` (PP Migra / PP Neue Montreal) keeping the same
