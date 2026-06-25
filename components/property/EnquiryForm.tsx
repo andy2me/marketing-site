@@ -31,12 +31,26 @@ function Field({
 }
 
 /** Agent enquiry form in the sticky panel (formId="enquiry"). */
-export function EnquiryForm({ street }: { street: string }) {
+export function EnquiryForm({
+  street,
+  listingId,
+  propertyId,
+}: {
+  street: string;
+  /** Rex listing id — required to associate the lead with the campaign in Rex. */
+  listingId: string;
+  /** Rex property id — paired with listingId on the lead so it shows on the property stream. */
+  propertyId: string | null;
+}) {
   const router = useRouter();
   return (
     <LeadForm
       formId="enquiry"
-      prefill={{ listing: street }}
+      prefill={{
+        listing: street,
+        listingId,
+        ...(propertyId ? { propertyId } : {}),
+      }}
       className={s.enqForm}
       onSubmit={(data, result) => {
         const qs = new URLSearchParams({ form: "enquiry", address: street });

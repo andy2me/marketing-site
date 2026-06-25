@@ -20,6 +20,10 @@ export type Inspection = { day: string; date: string; time: string; type: string
 /** Shape needed for cards (index, featured grids, similar). */
 export type ListingCard = {
   id: string;
+  /** Rex's separate `property_id`. Distinct from `id` (the listing id) — the
+   *  property is the bricks-and-mortar record; the listing is the campaign on it.
+   *  Both are required to associate a website enquiry with the campaign in Rex. */
+  propertyId: string | null;
   slug: string;
   /** Primary photo from Rex (typically gallery[0]). null/undefined → render placeholder. */
   image?: string | null;

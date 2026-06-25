@@ -14,7 +14,7 @@ const AGENTS = {
   mae: { id: "mae-robinson", name: "Mae Robinson", photo: null },
 } as const;
 
-const CARDS: ListingCard[] = [
+const RAW_CARDS: Omit<ListingCard, "propertyId">[] = [
   {
     id: "24-hilltop", slug: "24-hilltop", status: "For Sale", price: "$2,450,000", priceValue: 2450000,
     street: "24 Hilltop Crescent", suburb: "Noosaville QLD 4566", type: "House",
@@ -70,6 +70,8 @@ const CARDS: ListingCard[] = [
     coords: { lat: -26.3941, lng: 153.0805 },
   },
 ];
+
+const CARDS: ListingCard[] = RAW_CARDS.map((c) => ({ ...c, propertyId: null }));
 
 const suburbName = (suburb: string) => suburb.replace(/\s+QLD.*$/, "");
 

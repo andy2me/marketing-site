@@ -21,6 +21,10 @@ export type Lead = {
   message: string | null;
   /** Property street address this lead is about, when known (never re-asked). */
   listing: string | null;
+  /** Rex listing id (set on property-page enquiries) — used to associate the lead with the campaign in Rex. */
+  listingId: string | null;
+  /** Rex property id (set alongside listingId on property-page enquiries). */
+  propertyId: string | null;
   agentId: string | null;
   agentName: string | null;
   /** Page the form was submitted from (referer path) — for routing/triage. */
@@ -43,6 +47,8 @@ const CORE_KEYS = new Set([
   "message",
   "notes",
   "listing",
+  "listingId",
+  "propertyId",
   "agentId",
   "agentName",
 ]);
@@ -108,6 +114,8 @@ export function normaliseLead(
     phone,
     message,
     listing: get("listing"),
+    listingId: get("listingId"),
+    propertyId: get("propertyId"),
     agentId: get("agentId"),
     agentName: get("agentName"),
     source: extras.source ?? null,
