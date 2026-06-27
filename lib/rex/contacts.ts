@@ -113,12 +113,16 @@ export async function findOrCreateContact(lead: Lead): Promise<string | null> {
     throw new Error("Rex not configured: set REX_USERNAME and REX_PASSWORD");
   }
 
+  // Rex Wings search criteria are namespaced — `contact.email_address`, not
+  // bare `email_address`. The bare name is rejected with "is not a permissible
+  // or valid search field for Contacts" and we'd fall through to create, which
+  // then trips Rex's de-dup ("You do not have rights to duplicate new records").
   if (lead.email) {
-    const byEmail = await searchContactBy("email_address", lead.email);
+    const byEmail = await searchContactBy("contact.email_address", lead.email);
     if (byEmail) return byEmail;
   }
   if (lead.phone) {
-    const byPhone = await searchContactBy("phone_number", lead.phone);
+    const byPhone = await searchContactBy("contact.phone_number", lead.phone);
     if (byPhone) return byPhone;
   }
   return createRexContact(lead);
