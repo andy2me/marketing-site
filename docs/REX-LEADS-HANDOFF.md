@@ -87,10 +87,20 @@ Two equivalent fixes — pick whichever your Rex tier exposes:
    permissions tab (wording varies by Rex version — may also be called
    "Manage lead assignees" or live under Leads → Edit).
 
-Until this is in place, leave `REX_LEAD_ASSIGNEE_ID` unset in Vercel — leads
-ship unassigned (still tagged `website` + `website-<form>`, source set, all
-the rest), and the team picks them up from the queue. Once the permission's
-in place, set `REX_LEAD_ASSIGNEE_ID` to Matt's user id and redeploy.
+**Important — don't leave the assignee blank.** We tried that and Rex
+silently rolls back the lead create: the API user can't read back a lead
+it just created if the lead has no assignee, and Rex's create flow treats
+that read failure as a fatal error. The lead id is allocated but no row
+persists.
+
+Workaround until the permission's in place: set `REX_LEAD_ASSIGNEE_ID` to
+**the API user's own id** (currently `76863` — "API Max Marketing Site").
+Leads ship assigned to the API user; Matt sees them in the Leads stream
+under that assignee and reassigns manually to himself.
+
+Once Matt grants the API user "Assign leads to others", switch
+`REX_LEAD_ASSIGNEE_ID` to Matt's id (`49298`) and redeploy — leads will
+arrive pre-assigned to him.
 
 ---
 
