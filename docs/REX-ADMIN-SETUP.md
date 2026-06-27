@@ -43,7 +43,8 @@ Set every permission group below to **Read** only. Untick **Create**, **Edit**, 
 |-------|-----------------|
 | **Listings** | Read |
 | **Properties** | Read |
-| **Contacts** | **Create** (read + create; leave Edit/Delete/Export unticked) — the website writes new leads here. This is the site's only write to Rex. |
+| **Contacts** | **Read + Create** — the website find-or-creates a contact per submission. |
+| **Leads** | **Read + Create** — the website also writes an enquiry to the Leads log so submissions appear in the stream, get assigned, and carry the listing association. See [`docs/REX-LEADS-HANDOFF.md`](./REX-LEADS-HANDOFF.md). |
 | **Accounts / Companies** | None |
 | **Tasks / Activity** | None |
 | **Reports** | None |
@@ -85,7 +86,7 @@ You don't have to test from your side — Andy/Dev will. But if you want to conf
 
 - Andy adds the credentials to the website's server-side environment variables. They're **never** sent to a browser.
 - The site starts pulling **published** listings only (`listing.publish_to_external = true`) — anything you mark internal/off-market stays invisible.
-- Website form submissions (appraisals, enquiries, contact) create a **new contact** in Rex — the only thing the site writes. No existing records are edited or deleted.
+- Website form submissions (appraisals, enquiries, contact, newsletter, lead-magnet) find-or-create a **contact** in Rex and create a **lead** referencing it — that lead is what appears in the Leads stream, is assigned to Matt, and (for property-page enquiries) is associated to the listing. No existing records are edited or deleted.
 - Listing edits in Rex flow to the live site within ~10 minutes by default, or **immediately** once we wire the webhook (Step B below).
 
 ## Step B (optional, later) — webhook for instant updates

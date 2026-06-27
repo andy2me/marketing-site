@@ -204,7 +204,11 @@ export function PropertyDetailView({
                   </a>
                 </div>
               </div>
-              <EnquiryForm street={listing.street} />
+              <EnquiryForm
+                street={listing.street}
+                listingId={listing.id}
+                propertyId={listing.propertyId}
+              />
             </div>
 
             <div className={s.appraisalCard}>

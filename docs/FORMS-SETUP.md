@@ -19,7 +19,10 @@ LeadForm (client)                app/api/leads/route.ts (server)
   + hidden context  ───────────▶    ├─ honeypot + fill-time trap
   + honeypot + _ts                  ├─ normalise → Lead
                                     ├─ Resend email to the team   (primary)
-                                    └─ Rex Contacts/create        (best-effort)
+                                    └─ submitLeadToRex            (best-effort)
+                                         ├─ find-or-create contact
+                                         └─ Leads/create (lead_type, source,
+                                            assignee, tags, listing/property)
 ```
 
 - **`components/forms/LeadForm.tsx`** — the single client seam. Stable props
@@ -29,7 +32,9 @@ LeadForm (client)                app/api/leads/route.ts (server)
 - **`app/api/leads/route.ts`** — the intake. Validates, de-spams, normalises, and
   fans out to the two channels.
 - **`lib/leads/`** — `types.ts` (normalisation), `email.ts` (Resend), `rate-limit.ts`.
-- **`lib/rex/contacts.ts`** — lead → Rex contact, reusing the listings auth/token.
+- **`lib/rex/contacts.ts`** — `findOrCreateContact` (search by email, then phone, before creating), reusing the listings auth/token.
+- **`lib/rex/leads.ts`** — `submitLeadToRex` orchestrator (contact → lead), and `createRexLead` for the lead-create itself.
+- **`lib/rex/lead-config.ts`** — tenant-scoped ids (lead_type slugs, lead_source id, assignee id) plus tag conventions. Populated from the live tenant via `pnpm rex:lookup`.
 
 Email is the **primary, guaranteed** channel; Rex is **best-effort** — a CRM
 failure is logged but never loses a lead the inbox already has. If neither channel
@@ -75,15 +80,28 @@ Server-only env vars (never `NEXT_PUBLIC_*`). See `.env.example`.
    free tier.
 
 ### Rex
-The lead → contact write reuses the listings credentials, but the Rex API user is
-provisioned read-only with **Contacts = None**. Bump it to **Contacts → Create**
-(see `docs/REX-ADMIN-SETUP.md`). Until then, email still works and the Rex push
-just logs an error.
+The lead write reuses the listings credentials, plus two extra permissions on
+the API user: **Contacts → Read + Create** and **Leads → Read + Create** (see
+[`docs/REX-ADMIN-SETUP.md`](./REX-ADMIN-SETUP.md) for the table, and
+[`docs/REX-LEADS-HANDOFF.md`](./REX-LEADS-HANDOFF.md) for the admin walkthrough).
+Until both are in place — and until `lib/rex/lead-config.ts` is populated
+with the tenant's real lead_type / lead_source / assignee ids — `submitLeadToRex`
+skips the lead step and logs a reason; the contact still writes and the email
+channel still succeeds.
 
-> The exact Wings payload for `Contacts/create` should be confirmed against
-> <https://api-docs.rexsoftware.com>. The mapping is isolated in
-> `lib/rex/contacts.ts → toRexContact()` so any field-name change is a
-> one-function edit.
+To populate `lib/rex/lead-config.ts`, run:
+
+```bash
+pnpm rex:lookup > docs/REX-LOOKUP.md
+```
+
+That hits the live tenant and dumps every lead type, source and admin user it
+sees, so the right ids can be dropped in. The script is `scripts/rex-lookup.mjs`.
+
+> Wings payloads are documented at <https://api-docs.rexsoftware.com>. The
+> mappings are isolated in `lib/rex/contacts.ts → toRexContact()` and
+> `lib/rex/leads.ts → buildLeadPayload()` so any field rename is a one-function
+> edit.
 
 ## Adding or changing a form
 

@@ -12,7 +12,8 @@ import { routeAgent } from "@/lib/leads/route-agent";
 import { type Lead, leadHasContactPoint, normaliseLead } from "@/lib/leads/types";
 import { generateVoucherCode } from "@/lib/leads/voucher";
 import { getAgent } from "@/lib/agents/store";
-import { createRexContact, isRexConfigured } from "@/lib/rex/contacts";
+import { isRexConfigured } from "@/lib/rex/contacts";
+import { submitLeadToRex } from "@/lib/rex/leads";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 
@@ -97,7 +98,17 @@ export async function POST(req: NextRequest) {
   // submitter with a link to the auto-generated PDF.
   const channels: { name: string; run: Promise<unknown> }[] = [];
   if (emailOn) channels.push({ name: "email", run: sendLeadEmail(lead, { voucher: voucher ?? undefined }) });
-  if (rexOn) channels.push({ name: "rex", run: createRexContact(lead) });
+  if (rexOn) {
+    channels.push({
+      name: "rex",
+      run: submitLeadToRex(lead).then((outcome) => {
+        if (outcome.skippedLead) {
+          console.warn(`[leads:${formId}] rex lead skipped: ${outcome.skippedLead}`);
+        }
+        return outcome;
+      }),
+    });
+  }
   if (emailOn && voucher && lead.email) {
     const routed = routeAgent(formId, lead.fields.enquiry ?? null);
     const agent = await getAgent(routed.slug).catch(() => null);

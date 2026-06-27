@@ -300,6 +300,7 @@ export function mapPublishedListingToCard(rex: RexPublishedListing): ListingCard
   const attrs = rex.attributes;
   return {
     id: rexId(rex),
+    propertyId: rex.property_id != null && rex.property_id !== "" ? String(rex.property_id) : null,
     slug: deriveSlug(rex),
     image: deriveImage(rex),
     status,
