@@ -41,6 +41,13 @@ yarn-error.log*
 # vercel
 .vercel
 
+# claude code launch + workspace (local-only)
+/.claude/
+
+# rex-lookup output may contain customer PII from existing leads — regenerate via `pnpm rex:lookup`
+/docs/REX-LOOKUP.md
+/docs/REX-LOOKUP.stderr
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

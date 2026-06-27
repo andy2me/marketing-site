@@ -25,36 +25,41 @@ export function isUnconfigured(value: string | number | null | undefined): boole
   return typeof value === "string" && value.startsWith("TODO_REX_LOOKUP_");
 }
 
+// Lead-type slugs are a Rex-system enum (sourced from a remote "lead_type"
+// list per Leads/describeModel). Max Property's tenant exposes two values —
+// no `appraisal_request` or buyer-specific slug — so appraisal, contact,
+// newsletter and lead-magnet submissions all map to `general`, and only the
+// property-page enquiry uses `listing_enquiry`. The per-form Rex tag
+// (website-appraisal, website-leadmagnet, etc) still distinguishes them in
+// the Leads stream filters. Sourced via `pnpm rex:lookup` 2026-06-27.
+
+const LEAD_TYPE_LISTING_ENQUIRY = "listing_enquiry";
+const LEAD_TYPE_GENERAL = "general";
+
 /** Formal mapping of formId / LeadKind → lead_type slug. Per-formId entries
- *  win over LeadKind defaults, so the contact form's "buy" branch can route to
- *  a different lead_type from its "sell" branch without a new LeadKind. */
+ *  win over LeadKind defaults, so a specific form can route differently
+ *  without a new LeadKind. */
 export const LEAD_TYPE_BY_FORM_ID: Record<string, LeadTypeId> = {
-  // Sell appraisal (free appraisal CTA on /sell)
-  appraisal: TODO("LEAD_TYPE_APPRAISAL"),
-  // Property-detail enquiry (variant A — listing+property associated)
-  enquiry: TODO("LEAD_TYPE_BUYER_ENQUIRY"),
-  // Newsletter signup (footer + insights page)
-  newsletter: TODO("LEAD_TYPE_NEWSLETTER"),
+  // Property-detail enquiry (variant A — listing+property associated).
+  enquiry: LEAD_TYPE_LISTING_ENQUIRY,
 };
 
 /** Defaults applied when no per-formId entry matches. */
 export const LEAD_TYPE_BY_KIND: Record<LeadKind, LeadTypeId> = {
-  appraisal: TODO("LEAD_TYPE_APPRAISAL"),
-  "agent-appraisal": TODO("LEAD_TYPE_APPRAISAL"),
-  enquiry: TODO("LEAD_TYPE_BUYER_ENQUIRY"),
-  contact: TODO("LEAD_TYPE_GENERAL_ENQUIRY"),
-  newsletter: TODO("LEAD_TYPE_NEWSLETTER"),
-  leadmagnet: TODO("LEAD_TYPE_LEADMAGNET"),
+  appraisal: LEAD_TYPE_GENERAL,
+  "agent-appraisal": LEAD_TYPE_GENERAL,
+  enquiry: LEAD_TYPE_LISTING_ENQUIRY,
+  contact: LEAD_TYPE_GENERAL,
+  newsletter: LEAD_TYPE_GENERAL,
+  leadmagnet: LEAD_TYPE_GENERAL,
 };
 
-/** Contact form (formId="contact") splits by `enquiry` dropdown — sell, buy,
- *  media, careers, general. Sell-side routes to the appraisal lead_type;
- *  everything else inherits the general default. */
-export const LEAD_TYPE_BY_CONTACT_ENQUIRY: Record<string, LeadTypeId | undefined> = {
-  sell: TODO("LEAD_TYPE_APPRAISAL"),
-  buy: TODO("LEAD_TYPE_BUYER_ENQUIRY"),
-  // media / careers / general fall through to LEAD_TYPE_BY_KIND.contact
-};
+/** Contact form (formId="contact") subtype overrides. All five values
+ *  (sell/buy/media/careers/general) currently route to LEAD_TYPE_BY_KIND.contact
+ *  = `general`, since this tenant doesn't carry buyer/seller-specific
+ *  lead_types. Kept as an explicit empty map so adding a tenant-specific slug
+ *  later is a one-line change. */
+export const LEAD_TYPE_BY_CONTACT_ENQUIRY: Record<string, LeadTypeId | undefined> = {};
 
 /** Rex `lead_source.id` for "Website" submissions. Numeric in Rex's standard
  *  lead-source table. Pulled from env so admins can swap it without a deploy. */
