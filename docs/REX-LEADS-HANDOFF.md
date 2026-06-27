@@ -57,7 +57,7 @@ the user id Matt's account uses.
 |---|---|
 | **Lead source: "Website"** | Settings → **Lead sources**. If a "Website" entry exists, send Andy its **id**. If not, please **add one** (label: "Website"; active: yes) and send the new id. |
 | **Lead types** | Settings → **Lead types**. Send Andy the full list (id + label) so we can map each form to the right type — at minimum confirm the slugs for "Appraisal request", "Buyer enquiry" and "General enquiry". If those names don't exist, tell us what you call them. |
-| **Assignee (Matt)** | Matt's user id in **Settings → Users & security** (the URL when you open his profile contains it, or it's visible on the user list). All website leads default to assigning to Matt unless we agree otherwise. |
+| **Assignee (Matt)** | Matt's user id in **Settings → Users & security** (the URL when you open his profile contains it, or it's visible on the user list). All website leads default to assigning to Matt unless we agree otherwise. _Optional — see the assignee-permission note below._ |
 
 Andy can also pull these automatically by running `pnpm rex:lookup` once
 permissions are in place — that emits a Markdown report of every lead type,
@@ -66,6 +66,31 @@ permission change above and Andy will pull the rest.
 
 Send the values (or "I added a Website lead source — re-run the lookup") to
 **andy@onefivethree.co**.
+
+---
+
+## Optional follow-up — assignee permission
+
+For website leads to **arrive pre-assigned to Matt** (instead of landing
+unassigned in the Leads queue for someone to action), the API user needs the
+Rex permission to assign leads to other users. Without it, Rex rejects the
+lead with:
+
+> _You do not have the rights required to assign this lead to anyone but
+> yourself or another team member._
+
+Two equivalent fixes — pick whichever your Rex tier exposes:
+
+1. **Add the API user to Matt's team** in Rex (Settings → Users & security →
+   Teams). Rex allows assignment to anyone in the same team.
+2. **Grant the API user the "Assign leads to other users" privilege** on its
+   permissions tab (wording varies by Rex version — may also be called
+   "Manage lead assignees" or live under Leads → Edit).
+
+Until this is in place, leave `REX_LEAD_ASSIGNEE_ID` unset in Vercel — leads
+ship unassigned (still tagged `website` + `website-<form>`, source set, all
+the rest), and the team picks them up from the queue. Once the permission's
+in place, set `REX_LEAD_ASSIGNEE_ID` to Matt's user id and redeploy.
 
 ---
 

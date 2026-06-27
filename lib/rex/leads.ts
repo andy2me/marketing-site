@@ -95,7 +95,9 @@ function buildLeadPayload(args: {
     contact: { id: contactId },
     lead_type: { id: leadTypeId },
     lead_source: { id: LEAD_SOURCE_ID },
-    assignee: { id: LEAD_ASSIGNEE_ID },
+    // Assignee is optional — only set when the API user has the Rex permission
+    // to assign leads to others. See lib/rex/lead-config.ts and the handoff doc.
+    ...(LEAD_ASSIGNEE_ID ? { assignee: { id: LEAD_ASSIGNEE_ID } } : {}),
     tags: buildTags(lead),
     ...associations,
   };
@@ -136,9 +138,8 @@ export async function submitLeadToRex(lead: Lead): Promise<SubmitOutcome> {
   if (isUnconfigured(LEAD_SOURCE_ID)) {
     return { contactId, leadId: null, skippedLead: "lead_source unconfigured" };
   }
-  if (isUnconfigured(LEAD_ASSIGNEE_ID)) {
-    return { contactId, leadId: null, skippedLead: "assignee unconfigured" };
-  }
+  // Assignee is intentionally optional — see LEAD_ASSIGNEE_ID in lead-config.ts.
+  // No early-return on a missing assignee; the lead simply ships unassigned.
 
   if (!contactId) {
     // findOrCreateContact returned null — Rex accepted the call but gave no id.

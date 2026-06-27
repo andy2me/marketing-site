@@ -67,9 +67,15 @@ export const LEAD_SOURCE_ID: string =
   process.env.REX_LEAD_SOURCE_ID ?? TODO("LEAD_SOURCE_WEBSITE");
 
 /** Rex `assignee.id` (admin user id) every website lead routes to. Matt today.
- *  Pulled from env to avoid a redeploy when routing changes. */
-export const LEAD_ASSIGNEE_ID: string =
-  process.env.REX_LEAD_ASSIGNEE_ID ?? TODO("LEAD_ASSIGNEE_MATT");
+ *  Pulled from env to avoid a redeploy when routing changes.
+ *
+ *  Optional — leave unset to let Rex auto-assign (lead lands unassigned in the
+ *  Leads queue and the team picks it up). Setting an explicit assignee requires
+ *  the API user to have the Rex permission "Assign leads to others"; without
+ *  that permission Rex rejects Leads/create with "You do not have the rights
+ *  required to assign this lead to anyone but yourself or another team member."
+ *  See docs/REX-LEADS-HANDOFF.md for the permission fix. */
+export const LEAD_ASSIGNEE_ID: string | null = process.env.REX_LEAD_ASSIGNEE_ID || null;
 
 /** Tag every website-originated lead gets, so they're filterable as a group
  *  in Rex regardless of lead_type. */
