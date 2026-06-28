@@ -40,6 +40,7 @@ import {
   UnitHero,
   UnitSidePanel,
 } from "@/components/unit/UnitParts";
+import { BuyerInterestProvider } from "@/components/buyer-interest/BuyerInterestProvider";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 
@@ -138,53 +139,58 @@ export default async function UnitProfilePage({
     <>
       <Header current="Locations" nav={settings.nav} />
 
-      <main
-        className="mp"
-        style={{ background: "var(--color-bg-page)", minHeight: "100vh" }}
+      <BuyerInterestProvider
+        entity={{
+          complexSlug: profile.slug,
+          complexName: profile.name,
+          unitNumber: dwelling.number,
+        }}
       >
-        <UnitBreadcrumb profile={profile} unit={dwelling} />
-        <UnitHero profile={profile} unit={dwelling} status={status} />
-        {detail?.gallery && <UnitGallery unit={dwelling} />}
+        <main style={{ background: "var(--color-bg-page)", minHeight: "100vh" }}>
+          <UnitBreadcrumb profile={profile} unit={dwelling} />
+          <UnitHero profile={profile} unit={dwelling} status={status} />
+          {detail?.gallery && <UnitGallery unit={dwelling} />}
 
-        <section
-          className="container"
-          style={{ paddingTop: 56, paddingBottom: 96 }}
-        >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 380px",
-              gap: 72,
-              alignItems: "start",
-            }}
+          <section
+            className="container"
+            style={{ paddingTop: 56, paddingBottom: 96 }}
           >
-            <div style={{ minWidth: 0 }}>
-              {detail?.commentary ? (
-                <UnitAuthoredCommentary
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 380px",
+                gap: 72,
+                alignItems: "start",
+              }}
+            >
+              <div style={{ minWidth: 0 }}>
+                {detail?.commentary ? (
+                  <UnitAuthoredCommentary
+                    unitNumber={dwelling.number}
+                    detail={detail}
+                  />
+                ) : (
+                  <CommentaryPending unitNumber={dwelling.number} />
+                )}
+                {result && <ResultPanel result={result} unit={dwelling} />}
+                <EventTimeline
+                  profile={profile}
                   unitNumber={dwelling.number}
-                  detail={detail}
+                  history={history}
                 />
-              ) : (
-                <CommentaryPending unitNumber={dwelling.number} />
-              )}
-              {result && <ResultPanel result={result} unit={dwelling} />}
-              <EventTimeline
-                profile={profile}
-                unitNumber={dwelling.number}
-                history={history}
+                <InheritedContext profile={profile} />
+                <Comparables profile={profile} numbers={comparables} />
+              </div>
+              <UnitSidePanel
+                unit={dwelling}
+                detail={detail}
+                status={status}
+                recent={recent}
               />
-              <InheritedContext profile={profile} />
-              <Comparables profile={profile} numbers={comparables} />
             </div>
-            <UnitSidePanel
-              unit={dwelling}
-              detail={detail}
-              status={status}
-              recent={recent}
-            />
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
+      </BuyerInterestProvider>
     </>
   );
 }

@@ -6,6 +6,7 @@
 
 import Link from "next/link";
 import { IconArrowR, IconPin } from "@/components/icons";
+import { BuyerInterestButton } from "@/components/buyer-interest/BuyerInterestButton";
 import type { ComplexProfile } from "@/lib/complexes/types";
 import {
   Attribution,
@@ -110,10 +111,10 @@ export function ComplexHero({ profile }: { profile: ComplexProfile }) {
               flexWrap: "wrap",
             }}
           >
-            <a href="#buyer-interest" className="btn btn-primary btn-lg">
+            <BuyerInterestButton type="complex" className="btn btn-primary btn-lg">
               I&rsquo;d like to buy in {profile.name}
               <IconArrowR />
-            </a>
+            </BuyerInterestButton>
             <a href="#units" className="btn btn-secondary btn-lg">
               Browse all {profile.stats.totalUnits} units
             </a>
@@ -357,13 +358,13 @@ export function ComplexBuyerInterestBand({
             rarely lasts.
           </p>
         </div>
-        <a
-          href="#register-interest"
+        <BuyerInterestButton
+          type="complex"
           className="btn btn-primary btn-lg"
           style={{ whiteSpace: "nowrap" }}
         >
           Register interest <IconArrowR />
-        </a>
+        </BuyerInterestButton>
       </div>
     </section>
   );

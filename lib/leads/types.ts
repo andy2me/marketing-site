@@ -9,7 +9,13 @@ export type LeadKind =
   | "newsletter"
   | "enquiry"
   | "agent-appraisal"
-  | "leadmagnet";
+  | "leadmagnet"
+  // Property-profiles pilot — buyer interest registration (handoff
+  // §"Buyer interest registration"). `complex-interest` = "I'd like to buy
+  // in <building>"; `unit-interest` = "I'd like to buy this unit". Both
+  // fire the identity event to Horace on submit (lib/horace/track in M9).
+  | "complex-interest"
+  | "unit-interest";
 
 export type Lead = {
   kind: LeadKind;
@@ -55,6 +61,8 @@ function kindFromFormId(formId: string): LeadKind {
   if (formId === "appraisal") return "appraisal";
   if (formId === "newsletter") return "newsletter";
   if (formId === "enquiry") return "enquiry";
+  if (formId === "complex-interest") return "complex-interest";
+  if (formId === "unit-interest") return "unit-interest";
   return "contact";
 }
 

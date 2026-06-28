@@ -7,6 +7,7 @@
 
 import Link from "next/link";
 import { IconArrowR, IconPin } from "@/components/icons";
+import { BuyerInterestButton } from "@/components/buyer-interest/BuyerInterestButton";
 import {
   EVENT_PREFIX,
   EVENT_VERB,
@@ -898,13 +899,14 @@ export function UnitSidePanel({
               ? "On the market now. Register and Matt will keep you close to it."
               : "Off market now — but owners move. Tell Matt you want it and he'll call if it changes hands."}
           </p>
-          <a
-            href="#register-interest"
+          <BuyerInterestButton
+            type="unit"
+            unitNumber={unit.number}
             className="btn btn-primary"
             style={{ width: "100%", marginTop: 16 }}
           >
             I&rsquo;d like to buy this unit <IconArrowR />
-          </a>
+          </BuyerInterestButton>
           <p
             style={{
               marginTop: 12,

@@ -29,6 +29,7 @@ import {
 } from "@/components/complex/ComplexParts";
 import { LatestReportBlock } from "@/components/complex/ReportLinks";
 import { UnitsSection } from "@/components/complex/UnitsSection";
+import { BuyerInterestProvider } from "@/components/buyer-interest/BuyerInterestProvider";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 
@@ -76,25 +77,29 @@ export default async function ComplexProfilePage({
     <>
       <Header current="Locations" nav={settings.nav} />
 
-      <main
-        className="mp"
-        style={{ background: "var(--color-bg-page)", minHeight: "100vh" }}
+      <BuyerInterestProvider
+        entity={{
+          complexSlug: profile.slug,
+          complexName: profile.name,
+        }}
       >
-        <ComplexBreadcrumb profile={profile} />
-        <ComplexHero profile={profile} />
-        <ComplexStats profile={profile} />
-        <ComplexCommentary profile={profile} />
-        <LatestReportBlock report={getLatestReport(profile)} />
-        <ComplexActivityFeed profile={profile} />
-        <UnitsSection
-          units={profile.units}
-          rows={stackPlanRows(profile)}
-          unitHrefBase={`/property/${profile.suburbSlug}/${profile.slug}/`}
-          totalUnits={profile.stats.totalUnits}
-        />
-        <ComplexBuyerInterestBand profile={profile} />
-        <ComplexAboutData />
-      </main>
+        <main style={{ background: "var(--color-bg-page)", minHeight: "100vh" }}>
+          <ComplexBreadcrumb profile={profile} />
+          <ComplexHero profile={profile} />
+          <ComplexStats profile={profile} />
+          <ComplexCommentary profile={profile} />
+          <LatestReportBlock report={getLatestReport(profile)} />
+          <ComplexActivityFeed profile={profile} />
+          <UnitsSection
+            units={profile.units}
+            rows={stackPlanRows(profile)}
+            unitHrefBase={`/property/${profile.suburbSlug}/${profile.slug}/`}
+            totalUnits={profile.stats.totalUnits}
+          />
+          <ComplexBuyerInterestBand profile={profile} />
+          <ComplexAboutData />
+        </main>
+      </BuyerInterestProvider>
     </>
   );
 }

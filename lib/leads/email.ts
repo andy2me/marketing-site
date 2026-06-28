@@ -26,6 +26,8 @@ const KIND_LABEL: Record<Lead["kind"], string> = {
   enquiry: "Property enquiry",
   "agent-appraisal": "Agent appraisal request",
   leadmagnet: "Lead-magnet download",
+  "complex-interest": "Buyer interest — building",
+  "unit-interest": "Buyer interest — unit",
 };
 
 function subjectFor(lead: Lead): string {

@@ -1,0 +1,88 @@
+"use client";
+
+// Buyer-interest provider + modal portal.
+//
+// Wraps the property-profile pages and renders the modal at the body root so
+// it sits above every other surface. The trigger buttons (BuyerInterestButton)
+// consume this context to open the modal with the right entity payload.
+//
+// `useBuyerInterest()` is consumer-only — calling it outside the Provider
+// throws so we catch missing-wiring at runtime rather than silently failing.
+
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
+import { BuyerInterestModal } from "./BuyerInterestModal";
+
+export type BuyerInterestEntity = {
+  complexSlug: string;
+  complexName: string;
+  /** Provide on a unit profile so the button defaults to a unit-level registration. */
+  unitNumber?: number;
+};
+
+export type BuyerInterestRequest = {
+  type: "complex" | "unit";
+  /** Only required on type="unit". */
+  unitNumber?: number;
+};
+
+type BuyerInterestState = (BuyerInterestRequest & { open: true }) | { open: false };
+
+type Ctx = {
+  state: BuyerInterestState;
+  open: (req: BuyerInterestRequest) => void;
+  close: () => void;
+  entity: BuyerInterestEntity;
+};
+
+const BuyerInterestCtx = createContext<Ctx | null>(null);
+
+export function BuyerInterestProvider({
+  entity,
+  children,
+}: {
+  entity: BuyerInterestEntity;
+  children: ReactNode;
+}) {
+  const [state, setState] = useState<BuyerInterestState>({ open: false });
+
+  const open = useCallback(
+    (req: BuyerInterestRequest) => setState({ ...req, open: true }),
+    [],
+  );
+  const close = useCallback(() => setState({ open: false }), []);
+
+  const value = useMemo<Ctx>(
+    () => ({ state, open, close, entity }),
+    [state, open, close, entity],
+  );
+
+  return (
+    <BuyerInterestCtx.Provider value={value}>
+      {children}
+      <BuyerInterestModal
+        open={state.open}
+        type={state.open ? state.type : "complex"}
+        unitNumber={state.open ? state.unitNumber : undefined}
+        entity={entity}
+        onClose={close}
+      />
+    </BuyerInterestCtx.Provider>
+  );
+}
+
+export function useBuyerInterest(): Ctx {
+  const ctx = useContext(BuyerInterestCtx);
+  if (!ctx) {
+    throw new Error(
+      "useBuyerInterest must be used inside <BuyerInterestProvider>",
+    );
+  }
+  return ctx;
+}
