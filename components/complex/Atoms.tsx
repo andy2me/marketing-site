@@ -372,9 +372,9 @@ export function EventCard({
 }
 
 // ── MattCommentary ────────────────────────────────────────────────────────
-// The editorial centerpiece. Byline + ember rule + serif lead paragraph + body.
-// Variants beyond "editorial" (note, card) exist in the prototype as Tweaks —
-// not shipping per the design README.
+// "Note" treatment from the design handoff — soft-linen panel with a portrait
+// byline at the top and body paragraphs below. Distinct from the prototype's
+// "editorial" and "card" variants; this is the one we ship.
 export function MattCommentary({
   author,
   role,
@@ -386,59 +386,87 @@ export function MattCommentary({
   updated: string;
   paragraphs: ReadonlyArray<string>;
 }) {
-  const [lead, ...rest] = paragraphs;
   return (
-    <div style={{ display: "grid", gap: 24, maxWidth: 760 }}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 14,
-          fontSize: 13,
-          color: "var(--color-text-secondary)",
-        }}
-      >
-        <span style={{ color: "var(--color-text-strong)", fontWeight: 500 }}>
-          {author}
-        </span>
-        <span style={{ opacity: 0.6 }}>·</span>
-        <span>{role}</span>
-        <span style={{ opacity: 0.6 }}>·</span>
-        <span>{updated}</span>
+    <div
+      style={{
+        position: "relative",
+        padding: "32px 36px",
+        borderRadius: 16,
+        background: "var(--soft-linen-500)",
+        border: "1px solid var(--soft-linen-300)",
+        maxWidth: 760,
+      }}
+    >
+      <Byline author={author} role={role} updated={updated} />
+      <div style={{ marginTop: 20, display: "grid", gap: 16 }}>
+        {paragraphs.map((p, i) => (
+          <p
+            key={i}
+            style={{
+              fontSize: 17,
+              lineHeight: 1.62,
+              color: "var(--color-text-primary)",
+            }}
+          >
+            {p}
+          </p>
+        ))}
       </div>
-      <hr
-        style={{
-          width: 56,
-          height: 2,
-          background: "var(--ember)",
-          border: 0,
-        }}
-      />
-      {lead && (
-        <p
+    </div>
+  );
+}
+
+// Byline + portrait used at the top of the note panel.
+function Byline({
+  author,
+  role,
+  updated,
+}: {
+  author: string;
+  role: string;
+  updated: string;
+}) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
+      <PortraitAvatar size={48} />
+      <div>
+        <div
           style={{
-            fontFamily: "var(--font-heading)",
-            fontSize: "clamp(22px, 2.2vw, 28px)",
-            lineHeight: 1.32,
-            letterSpacing: "-0.005em",
+            fontSize: 15,
             color: "var(--color-text-strong)",
+            fontFamily: "var(--font-heading)",
           }}
         >
-          {lead}
-        </p>
-      )}
-      {rest.map((p, i) => (
-        <p
-          key={i}
-          style={{
-            fontSize: 17,
-            lineHeight: 1.65,
-            color: "var(--color-text-primary)",
-          }}
-        >
-          {p}
-        </p>
-      ))}
+          {author}
+        </div>
+        <div style={{ fontSize: 12.5, color: "var(--color-text-secondary)" }}>
+          {role} · {updated}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Placeholder portrait — initials on a clay/mulberry gradient until a real
+// headshot lands. Matches the prototype's PortraitAvatar.
+function PortraitAvatar({ size = 48 }: { size?: number }) {
+  return (
+    <div
+      aria-hidden
+      style={{
+        width: size,
+        height: size,
+        borderRadius: 999,
+        flexShrink: 0,
+        background: "linear-gradient(135deg, var(--clay), var(--mulberry))",
+        color: "#fff",
+        display: "grid",
+        placeItems: "center",
+        fontFamily: "var(--font-heading)",
+        fontSize: size * 0.42,
+      }}
+    >
+      M
     </div>
   );
 }
