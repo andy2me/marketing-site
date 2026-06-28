@@ -1,18 +1,27 @@
 // Complex profile — /property/{suburb}/{complex}/.
 //
-// M2 scaffolding: routing + breadcrumb + H1 only. Hero, stats, commentary,
-// recent-activity, units section, latest-report block and the buyer-interest
-// CTA land in M3-M6.
+// Recipe (top → bottom):
+//   ProfileNav (Header) → Breadcrumb → Hero (with MapEmbed) → Stats band →
+//   Matt's commentary → [LatestReportBlock — M6] → Activity feed →
+//   [Units section — M5] → Buyer-interest band → About this data.
 //
 // `dynamicParams: false` so unknown suburb/complex slugs hard-404 rather than
 // re-rendering on every miss.
 
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { getSiteSettings } from "@/lib/wp/mock";
 import { getComplexBySlug, getComplexSlugs } from "@/lib/complexes/store";
+import {
+  ComplexAboutData,
+  ComplexActivityFeed,
+  ComplexBreadcrumb,
+  ComplexBuyerInterestBand,
+  ComplexCommentary,
+  ComplexHero,
+  ComplexStats,
+} from "@/components/complex/ComplexParts";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 
@@ -60,83 +69,19 @@ export default async function ComplexProfilePage({
     <>
       <Header current="Locations" nav={settings.nav} />
 
-      <main className="mp">
-        <div className="container" style={{ paddingTop: 24 }}>
-          <nav
-            aria-label="Breadcrumb"
-            style={{ fontSize: 13, color: "var(--color-text-secondary)" }}
-          >
-            <Link href="/">Property</Link>
-            {" › "}
-            <Link href={`/${profile.suburbSlug}`}>{profile.suburbName}</Link>
-            {" › "}
-            <span style={{ color: "var(--color-text-primary)" }}>
-              {profile.name}
-            </span>
-          </nav>
-
-          <section style={{ padding: "48px 0 24px" }}>
-            <p
-              style={{
-                fontSize: 12,
-                fontFamily: "var(--font-mono)",
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                color: "var(--color-text-secondary)",
-              }}
-            >
-              Property profile · {profile.suburbName}
-            </p>
-            <h1
-              style={{
-                marginTop: 16,
-                fontSize: "clamp(48px, 5.4vw, 76px)",
-                lineHeight: 0.98,
-                fontFamily: "var(--font-heading)",
-                letterSpacing: "-0.02em",
-                color: "var(--color-text-strong)",
-              }}
-            >
-              {profile.name}
-            </h1>
-            <p
-              style={{
-                marginTop: 16,
-                fontSize: 18,
-                color: "var(--color-text-secondary)",
-              }}
-            >
-              {profile.street}, {profile.suburbName} {profile.state}{" "}
-              {profile.suburbPostcode}
-            </p>
-            <p
-              style={{
-                marginTop: 20,
-                fontSize: 17,
-                maxWidth: 540,
-                lineHeight: 1.55,
-              }}
-            >
-              {profile.intro}
-            </p>
-          </section>
-
-          <p
-            style={{
-              padding: "12px 16px",
-              marginBottom: 48,
-              borderRadius: 8,
-              background: "var(--soft-linen-500)",
-              fontSize: 13,
-              fontFamily: "var(--font-mono)",
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            M2 scaffolding · hero map, stats, commentary, recent activity,
-            units section, latest-report block and the buyer-interest CTA land
-            in M3–M6.
-          </p>
-        </div>
+      <main
+        className="mp"
+        style={{ background: "var(--color-bg-page)", minHeight: "100vh" }}
+      >
+        <ComplexBreadcrumb profile={profile} />
+        <ComplexHero profile={profile} />
+        <ComplexStats profile={profile} />
+        <ComplexCommentary profile={profile} />
+        {/* M6 slots LatestReportBlock here, between commentary and the feed. */}
+        <ComplexActivityFeed profile={profile} />
+        {/* M5 slots the Units section (stack / cards / table) here. */}
+        <ComplexBuyerInterestBand profile={profile} />
+        <ComplexAboutData />
       </main>
     </>
   );
