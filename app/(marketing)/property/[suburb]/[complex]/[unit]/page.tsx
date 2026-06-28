@@ -1,23 +1,45 @@
 // Unit profile — /property/{suburb}/{complex}/unit-{n}/.
 //
-// M2 scaffolding: routing + breadcrumb + H1 + status badge. UnitHero, gallery
-// (Matt's only), CommentaryPending, ResultPanel, EventTimeline (with
-// ReportBacklink), InheritedContext, ComparableCard and the sticky side panel
-// land in M3-M7.
+// Recipe:
+//   ProfileNav → Breadcrumb → UnitHero → [UnitGallery — own only] →
+//   { UnitAuthoredCommentary | CommentaryPending } → [ResultPanel — if event] →
+//   EventTimeline (with ReportBacklink beneath cited rows) →
+//   InheritedContext → Comparables.  Right rail: UnitSidePanel (sticky).
 //
-// The `[unit]` segment captures the full slug (`unit-12`, `unit-12a`). Parsing
-// lives in lib/complexes/derive.unitNumberFromSlug; unknown shapes 404.
+// Authored Unit 12 path uses the full UnitDetail; every other unit renders
+// honestly from its ComplexUnit + events feed.
 
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { getSiteSettings } from "@/lib/wp/mock";
 import {
+  comparablesFor,
+  eventsForUnit,
   getComplexBySlug,
   getUnitBySlug,
+  getUnitDetail,
   getUnitSlugs,
 } from "@/lib/complexes/store";
+import { EVENT_VERB } from "@/lib/complexes/derive";
+import type {
+  EventStatus,
+  EventType,
+  UnitResult,
+} from "@/lib/complexes/types";
+import {
+  Comparables,
+  CommentaryPending,
+  EventTimeline,
+  type TimelineEvent,
+  InheritedContext,
+  ResultPanel,
+  UnitAuthoredCommentary,
+  UnitBreadcrumb,
+  UnitGallery,
+  UnitHero,
+  UnitSidePanel,
+} from "@/components/unit/UnitParts";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 
@@ -52,6 +74,27 @@ export async function generateMetadata({
   };
 }
 
+// Build the "result" panel from the live event when no authored result exists.
+function deriveResult(
+  recent: ReturnType<typeof eventsForUnit>[number] | undefined,
+): UnitResult | null {
+  if (!recent) return null;
+  const over =
+    recent.type === "sold"
+      ? "The result"
+      : recent.type === "rented"
+        ? "Current lease"
+        : "Current listing";
+  return {
+    kind: recent.type as EventType,
+    over,
+    label: `${EVENT_VERB[recent.type as EventType]} · ${recent.date}`,
+    price: recent.price,
+    agency: recent.agency,
+    stats: null,
+  };
+}
+
 export default async function UnitProfilePage({
   params,
 }: {
@@ -63,97 +106,84 @@ export default async function UnitProfilePage({
   const dwelling = getUnitBySlug(profile, unit);
   if (!dwelling) notFound();
 
+  const detail = getUnitDetail(profile, dwelling.number);
+  const events = eventsForUnit(profile, dwelling.number);
+  const recent = events[0] ?? null;
+  const status: EventStatus = detail?.statusBadge ?? dwelling.status;
+  const result = detail?.result ?? deriveResult(events[0]);
+  const comparables =
+    detail?.comparables ?? comparablesFor(profile, dwelling.number);
+
+  // Combined history: prefer the authored history (Unit 12), otherwise the
+  // derived event feed. Both shapes flatten to `TimelineEvent`.
+  const history: TimelineEvent[] = detail?.history
+    ? detail.history.map((e) => ({
+        type: e.type,
+        price: e.price,
+        date: e.date,
+        agency: e.agency,
+        featuredIn: e.featuredIn,
+      }))
+    : events.map((e) => ({
+        type: e.type,
+        price: e.price,
+        date: e.date,
+        agency: e.agency,
+        featuredIn: e.featuredIn,
+      }));
+
   const settings = await getSiteSettings();
 
   return (
     <>
       <Header current="Locations" nav={settings.nav} />
 
-      <main className="mp">
-        <div className="container" style={{ paddingTop: 24 }}>
-          <nav
-            aria-label="Breadcrumb"
-            style={{ fontSize: 13, color: "var(--color-text-secondary)" }}
-          >
-            <Link href="/">Property</Link>
-            {" › "}
-            <Link href={`/${profile.suburbSlug}`}>{profile.suburbName}</Link>
-            {" › "}
-            <Link href={`/property/${profile.suburbSlug}/${profile.slug}`}>
-              {profile.name}
-            </Link>
-            {" › "}
-            <span style={{ color: "var(--color-text-primary)" }}>
-              Unit {dwelling.number}
-            </span>
-          </nav>
+      <main
+        className="mp"
+        style={{ background: "var(--color-bg-page)", minHeight: "100vh" }}
+      >
+        <UnitBreadcrumb profile={profile} unit={dwelling} />
+        <UnitHero profile={profile} unit={dwelling} status={status} />
+        {detail?.gallery && <UnitGallery unit={dwelling} />}
 
-          <section style={{ padding: "32px 0 24px" }}>
-            <span
-              style={{
-                display: "inline-block",
-                padding: "6px 12px",
-                borderRadius: 999,
-                background: "var(--soft-linen-500)",
-                fontSize: 12,
-                fontFamily: "var(--font-mono)",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "var(--color-text-secondary)",
-              }}
-            >
-              {dwelling.status}
-            </span>
-            <h1
-              style={{
-                marginTop: 16,
-                fontSize: "clamp(44px, 5vw, 68px)",
-                lineHeight: 0.98,
-                fontFamily: "var(--font-heading)",
-                letterSpacing: "-0.02em",
-                color: "var(--color-text-strong)",
-              }}
-            >
-              Unit {dwelling.number}, {profile.name}
-            </h1>
-            <p
-              style={{
-                marginTop: 14,
-                fontSize: 17,
-                color: "var(--color-text-secondary)",
-              }}
-            >
-              {profile.street}, {profile.suburbName} {profile.state}{" "}
-              {profile.suburbPostcode}
-            </p>
-            <p
-              style={{
-                marginTop: 16,
-                fontSize: 16,
-                color: "var(--color-text-primary)",
-              }}
-            >
-              {dwelling.beds} bed · {dwelling.baths} bath · {dwelling.car} car ·{" "}
-              {dwelling.area} · {dwelling.aspect}
-            </p>
-          </section>
-
-          <p
+        <section
+          className="container"
+          style={{ paddingTop: 56, paddingBottom: 96 }}
+        >
+          <div
             style={{
-              padding: "12px 16px",
-              marginBottom: 48,
-              borderRadius: 8,
-              background: "var(--soft-linen-500)",
-              fontSize: 13,
-              fontFamily: "var(--font-mono)",
-              color: "var(--color-text-secondary)",
+              display: "grid",
+              gridTemplateColumns: "1fr 380px",
+              gap: 72,
+              alignItems: "start",
             }}
           >
-            M2 scaffolding · Matt&rsquo;s read (or commentary-pending),
-            result panel, event timeline with report back-links, comparables
-            and the sticky side panel land in M3–M7.
-          </p>
-        </div>
+            <div style={{ minWidth: 0 }}>
+              {detail?.commentary ? (
+                <UnitAuthoredCommentary
+                  unitNumber={dwelling.number}
+                  detail={detail}
+                />
+              ) : (
+                <CommentaryPending unitNumber={dwelling.number} />
+              )}
+              {result && <ResultPanel result={result} unit={dwelling} />}
+              <EventTimeline
+                profile={profile}
+                unitNumber={dwelling.number}
+                history={history}
+              />
+              <InheritedContext profile={profile} />
+              <Comparables profile={profile} numbers={comparables} />
+            </div>
+            <UnitSidePanel
+              unit={dwelling}
+              detail={detail}
+              status={status}
+              recent={recent}
+            />
+          </div>
+        </section>
       </main>
     </>
   );
