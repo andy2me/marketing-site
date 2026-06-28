@@ -15,6 +15,7 @@ import { getSiteSettings } from "@/lib/wp/mock";
 import {
   getComplexBySlug,
   getComplexSlugs,
+  getLatestReport,
   stackPlanRows,
 } from "@/lib/complexes/store";
 import {
@@ -26,6 +27,7 @@ import {
   ComplexHero,
   ComplexStats,
 } from "@/components/complex/ComplexParts";
+import { LatestReportBlock } from "@/components/complex/ReportLinks";
 import { UnitsSection } from "@/components/complex/UnitsSection";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
@@ -82,7 +84,7 @@ export default async function ComplexProfilePage({
         <ComplexHero profile={profile} />
         <ComplexStats profile={profile} />
         <ComplexCommentary profile={profile} />
-        {/* M6 slots LatestReportBlock here, between commentary and the feed. */}
+        <LatestReportBlock report={getLatestReport(profile)} />
         <ComplexActivityFeed profile={profile} />
         <UnitsSection
           units={profile.units}
