@@ -41,6 +41,10 @@ import {
   UnitSidePanel,
 } from "@/components/unit/UnitParts";
 import { BuyerInterestProvider } from "@/components/buyer-interest/BuyerInterestProvider";
+import {
+  ScrollDepthTracker,
+  UnitPageView,
+} from "@/components/property/ProfileTrackers";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 
@@ -147,6 +151,13 @@ export default async function UnitProfilePage({
         }}
       >
         <main style={{ background: "var(--color-bg-page)", minHeight: "100vh" }}>
+          <UnitPageView
+            complexId={profile.id}
+            unitId={dwelling.id}
+            currentStatus={status}
+            hasCommentary={Boolean(detail?.commentary)}
+          />
+          <ScrollDepthTracker />
           <UnitBreadcrumb profile={profile} unit={dwelling} />
           <UnitHero profile={profile} unit={dwelling} status={status} />
           {detail?.gallery && <UnitGallery unit={dwelling} />}

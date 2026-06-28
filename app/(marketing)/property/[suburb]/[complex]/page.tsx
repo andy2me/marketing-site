@@ -30,6 +30,10 @@ import {
 import { LatestReportBlock } from "@/components/complex/ReportLinks";
 import { UnitsSection } from "@/components/complex/UnitsSection";
 import { BuyerInterestProvider } from "@/components/buyer-interest/BuyerInterestProvider";
+import {
+  ComplexPageView,
+  ScrollDepthTracker,
+} from "@/components/property/ProfileTrackers";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 
@@ -84,6 +88,12 @@ export default async function ComplexProfilePage({
         }}
       >
         <main style={{ background: "var(--color-bg-page)", minHeight: "100vh" }}>
+          <ComplexPageView
+            complexId={profile.id}
+            totalUnits={profile.stats.totalUnits}
+            recentEventsCount={profile.events.length}
+          />
+          <ScrollDepthTracker />
           <ComplexBreadcrumb profile={profile} />
           <ComplexHero profile={profile} />
           <ComplexStats profile={profile} />

@@ -17,6 +17,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { track } from "@/lib/horace/track";
 import { BuyerInterestModal } from "./BuyerInterestModal";
 
 export type BuyerInterestEntity = {
@@ -53,8 +54,18 @@ export function BuyerInterestProvider({
   const [state, setState] = useState<BuyerInterestState>({ open: false });
 
   const open = useCallback(
-    (req: BuyerInterestRequest) => setState({ ...req, open: true }),
-    [],
+    (req: BuyerInterestRequest) => {
+      setState({ ...req, open: true });
+      if (req.type === "unit" && req.unitNumber !== undefined) {
+        track.unitBuyerInterestOpened({
+          complexId: entity.complexSlug,
+          unitId: `unit-${req.unitNumber}`,
+        });
+      } else {
+        track.complexBuyerInterestOpened({ complexId: entity.complexSlug });
+      }
+    },
+    [entity.complexSlug],
   );
   const close = useCallback(() => setState({ open: false }), []);
 

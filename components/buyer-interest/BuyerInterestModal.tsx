@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { IconArrowR, IconClose, IconEnvelope, IconPin } from "@/components/icons";
 import { LeadForm } from "@/components/forms/LeadForm";
+import { track } from "@/lib/horace/track";
 import type { BuyerInterestEntity } from "./BuyerInterestProvider";
 
 const FIELD_INPUT: React.CSSProperties = {
@@ -186,6 +187,36 @@ export function BuyerInterestModal({
             onSubmit={(data) => {
               const v = data["email"];
               if (typeof v === "string") setEmail(v);
+              const hasBudget = Boolean(
+                data["budget_range"] && data["budget_range"] !== "No preference",
+              );
+              const hasTimeframe = Boolean(
+                data["timeframe"] && data["timeframe"] !== "Just watching",
+              );
+              const entityId = isUnit
+                ? `${entity.complexSlug}/unit-${unitNumber}`
+                : entity.complexSlug;
+              if (isUnit && unitNumber !== undefined) {
+                track.unitBuyerInterestSubmitted({
+                  complexId: entity.complexSlug,
+                  unitId: `unit-${unitNumber}`,
+                  hasBudget,
+                  hasTimeframe,
+                });
+              } else {
+                track.complexBuyerInterestSubmitted({
+                  complexId: entity.complexSlug,
+                  hasBudget,
+                  hasTimeframe,
+                });
+              }
+              // Identity stitch — strongest signal Horace has on this visitor.
+              track.identityRegistered({
+                entityType: isUnit ? "unit" : "complex",
+                entityId,
+                registrationType: isUnit ? "unit" : "complex",
+                email: typeof v === "string" ? v : "",
+              });
               setStep("verify");
             }}
           >
