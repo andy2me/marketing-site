@@ -221,3 +221,31 @@ export function IconChevronRight({ size = 12, ...p }: IconProps) {
     </svg>
   );
 }
+// Report block (LatestReportBlock) — document with corner-fold and two text lines.
+export function IconReport({ size = 20, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} {...svgProps(size, p)}>
+      <path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z" />
+      <path d="M14 3v5h5" />
+      <path d="M8.5 13h7M8.5 17h5" />
+    </svg>
+  );
+}
+// Report back-link (ReportBacklink) — same shape, no text lines, smaller default.
+export function IconReport2({ size = 13, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} {...svgProps(size, p)}>
+      <path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z" />
+      <path d="M14 3v5h5" />
+    </svg>
+  );
+}
+// Envelope — used by the buyer-interest verify step in M8.
+export function IconEnvelope({ size = 26, ...p }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} {...svgProps(size, p)}>
+      <path d="M3 7l9 6 9-6" />
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+    </svg>
+  );
+}
