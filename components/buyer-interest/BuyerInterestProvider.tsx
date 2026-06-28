@@ -77,13 +77,17 @@ export function BuyerInterestProvider({
   return (
     <BuyerInterestCtx.Provider value={value}>
       {children}
-      <BuyerInterestModal
-        open={state.open}
-        type={state.open ? state.type : "complex"}
-        unitNumber={state.open ? state.unitNumber : undefined}
-        entity={entity}
-        onClose={close}
-      />
+      {/* Conditional mount — gives every open() a fresh modal with default
+          step/email state. Avoids resetting via useEffect (cascading-render
+          smell flagged by react-hooks/set-state-in-effect). */}
+      {state.open && (
+        <BuyerInterestModal
+          type={state.type}
+          unitNumber={state.unitNumber}
+          entity={entity}
+          onClose={close}
+        />
+      )}
     </BuyerInterestCtx.Provider>
   );
 }

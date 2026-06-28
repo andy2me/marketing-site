@@ -31,14 +31,14 @@ const FIELD_INPUT: React.CSSProperties = {
   width: "100%",
 };
 
+// The Provider mounts this component on open() and unmounts on close, so the
+// state below starts fresh per registration (handoff §State Management).
 export function BuyerInterestModal({
-  open,
   type,
   unitNumber,
   entity,
   onClose,
 }: {
-  open: boolean;
   type: "complex" | "unit";
   unitNumber?: number;
   entity: BuyerInterestEntity;
@@ -47,17 +47,8 @@ export function BuyerInterestModal({
   const [step, setStep] = useState<"form" | "verify">("form");
   const [email, setEmail] = useState("");
 
-  // Reset to step "form" each time the modal opens (handoff §State Management).
+  // Lock body scroll while mounted, close on Escape.
   useEffect(() => {
-    if (open) {
-      setStep("form");
-      setEmail("");
-    }
-  }, [open]);
-
-  // Lock body scroll while open, close on Escape.
-  useEffect(() => {
-    if (!open) return;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
@@ -68,9 +59,8 @@ export function BuyerInterestModal({
       document.body.style.overflow = prevOverflow;
       window.removeEventListener("keydown", onKey);
     };
-  }, [open, onClose]);
+  }, [onClose]);
 
-  if (!open) return null;
   if (typeof document === "undefined") return null;
 
   const isUnit = type === "unit";

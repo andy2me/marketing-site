@@ -9,7 +9,6 @@ import { IconArrowR, IconPin } from "@/components/icons";
 import { BuyerInterestButton } from "@/components/buyer-interest/BuyerInterestButton";
 import type { ComplexProfile } from "@/lib/complexes/types";
 import {
-  Attribution,
   Crumbs,
   EventCard,
   MapEmbed,
