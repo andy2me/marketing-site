@@ -45,6 +45,10 @@ import {
   ScrollDepthTracker,
   UnitPageView,
 } from "@/components/property/ProfileTrackers";
+import {
+  apartmentJsonLd,
+  propertyBreadcrumbJsonLd,
+} from "@/lib/seo/complex";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 
@@ -141,6 +145,22 @@ export default async function UnitProfilePage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            apartmentJsonLd(profile, dwelling, detail, SITE_URL),
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            propertyBreadcrumbJsonLd(SITE_URL, profile, dwelling),
+          ),
+        }}
+      />
       <Header current="Locations" nav={settings.nav} />
 
       <BuyerInterestProvider
