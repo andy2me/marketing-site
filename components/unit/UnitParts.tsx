@@ -31,6 +31,8 @@ import {
 import { ReportBacklink } from "../complex/ReportLinks";
 
 // ── UnitBreadcrumb ────────────────────────────────────────────────────────
+// 96px top padding clears the 72px fixed Header — see ComplexBreadcrumb for
+// the rationale.
 export function UnitBreadcrumb({
   profile,
   unit,
@@ -39,7 +41,7 @@ export function UnitBreadcrumb({
   unit: ComplexUnit;
 }) {
   return (
-    <div className="container" style={{ paddingTop: 24 }}>
+    <div className="container" style={{ paddingTop: 96 }}>
       <Crumbs
         items={[
           ["Property", false, "/"],

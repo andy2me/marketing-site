@@ -17,9 +17,13 @@ import {
 } from "./Atoms";
 
 // ── ComplexBreadcrumb ─────────────────────────────────────────────────────
+// 96px top padding clears the 72px fixed Header (same pattern as the other
+// non-hero marketing pages: insights / team / contact use padding-top: 96 on
+// their first section). The prototype's `padding-top: 24` assumed no fixed
+// header — it doesn't apply in the real codebase.
 export function ComplexBreadcrumb({ profile }: { profile: ComplexProfile }) {
   return (
-    <div className="container" style={{ paddingTop: 24 }}>
+    <div className="container" style={{ paddingTop: 96 }}>
       <Crumbs
         items={[
           ["Property", false, "/"],
