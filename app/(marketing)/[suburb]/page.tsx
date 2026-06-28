@@ -20,6 +20,7 @@ import {
   HubPillars,
   HubStats,
 } from "@/components/content/HubParts";
+import { FeaturedComplex } from "@/components/complex/FeaturedComplex";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 
@@ -91,6 +92,7 @@ export default async function SuburbHubPage({
           items={suburbListings}
           joinHref={`/contact?enquiry=buy&suburb=${encodeURIComponent(hub.name)}`}
         />
+        <FeaturedComplex suburbSlug={hub.slug} />
         <HubInsights suburb={hub.name} items={latestInsights} />
         <HubAgent agent={hub.agent} suburb={hub.name} />
         <HubClosing suburb={hub.name} />
