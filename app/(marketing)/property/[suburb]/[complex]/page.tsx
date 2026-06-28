@@ -12,7 +12,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { getSiteSettings } from "@/lib/wp/mock";
-import { getComplexBySlug, getComplexSlugs } from "@/lib/complexes/store";
+import {
+  getComplexBySlug,
+  getComplexSlugs,
+  stackPlanRows,
+} from "@/lib/complexes/store";
 import {
   ComplexAboutData,
   ComplexActivityFeed,
@@ -22,6 +26,7 @@ import {
   ComplexHero,
   ComplexStats,
 } from "@/components/complex/ComplexParts";
+import { UnitsSection } from "@/components/complex/UnitsSection";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://maxproperty.au";
 
@@ -79,7 +84,12 @@ export default async function ComplexProfilePage({
         <ComplexCommentary profile={profile} />
         {/* M6 slots LatestReportBlock here, between commentary and the feed. */}
         <ComplexActivityFeed profile={profile} />
-        {/* M5 slots the Units section (stack / cards / table) here. */}
+        <UnitsSection
+          units={profile.units}
+          rows={stackPlanRows(profile)}
+          unitHrefBase={`/property/${profile.suburbSlug}/${profile.slug}/`}
+          totalUnits={profile.stats.totalUnits}
+        />
         <ComplexBuyerInterestBand profile={profile} />
         <ComplexAboutData />
       </main>
